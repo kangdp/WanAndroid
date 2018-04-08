@@ -77,10 +77,7 @@ public class RomUtils {
 
     //Android Api 23以上
     private static boolean isAndroidMOrAbove() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return true;
-        }
-        return false;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
 
     /**

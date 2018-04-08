@@ -93,7 +93,6 @@ public class LMRecyclerView extends RecyclerView {
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
         }
-
         /**
          * 滑动监听
          * @param recyclerView

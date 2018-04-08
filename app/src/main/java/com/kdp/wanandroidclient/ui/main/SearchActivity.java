@@ -42,7 +42,6 @@ import java.util.Random;
  */
 
 public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchContract.ISearchView, ArticleBean> implements SearchContract.ISearchView, OnArticleListItemClickListener {
-
     private SearchView mSearchView;
     private SearchView.SearchAutoComplete searchAutoComplete;
     private View mHeaderView;
