@@ -4,7 +4,11 @@
 简介
 ----
 该项目是根据鸿洋的**wanandroid**开发的一款个人App,一个致力于分享各种Android干货的平台。
-另外如果有什么问题，可以在[https://github.com/hongyangAndroid/xueandroid](https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2FhongyangAndroid%2Fwanandroid)项目中以`issu`的形式提出好的建议。                                     
+如果您有任何好的建议，可以在[https://github.com/hongyangAndroid/xueandroid](https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2FhongyangAndroid%2Fwanandroid)项目中以`issu`的形式提出好的建议。      
+
+Apk
+----
+[1.0.0](https://www.pgyer.com/SDIx)
 
 接口
 ----
