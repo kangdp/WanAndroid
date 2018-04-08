@@ -35,7 +35,7 @@ public class LauncherActivity extends BasePresenterActivity<LogonPresenter, Logo
     private void autoLogin() {
         if (UserInfoManager.isLogin()) {
             //自动登录
-            UserBean userBean = UserInfoManager.getUserInfo();
+            userBean = UserInfoManager.getUserInfo();
             if (userBean != null)
                 mPresenter.login();
         }
@@ -47,9 +47,11 @@ public class LauncherActivity extends BasePresenterActivity<LogonPresenter, Logo
 
     private static class DelayRunnable implements Runnable {
         private WeakReference<LauncherActivity> mWeakReference;
+
         DelayRunnable(LauncherActivity instance) {
             mWeakReference = new WeakReference<>(instance);
         }
+
         @Override
         public void run() {
             LauncherActivity instance = mWeakReference.get();
@@ -57,19 +59,23 @@ public class LauncherActivity extends BasePresenterActivity<LogonPresenter, Logo
             instance.autoLogin();
         }
     }
+
     private void startToActivity(Class<?> cla) {
         Intent intent = new Intent(this, cla);
         startActivity(intent);
         finish();
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_splash;
     }
+
     @Override
     protected LogonPresenter createPresenter() {
         return new LogonPresenter();
     }
+
     @Override
     public String getUserName() {
         return userBean.getUsername();
