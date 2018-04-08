@@ -3,7 +3,7 @@
 ========
 简介
 ----
->>该项目是根据鸿洋的**wanandroid**开发的一款个人App,一个致力于分享各种Android干货的平台。App界面是以Material Design风格为主，使用Java语言编写，纯属练手之作，不喜勿喷！另外如果有什么问题，可以在[https://github.com/hongyangAndroid/xueandroid](https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2FhongyangAndroid%2Fwanandroid)项目中以`issu`的形式提出好的建议。                                     
+该项目是根据鸿洋的**wanandroid**开发的一款个人App,一个致力于分享各种Android干货的平台。App界面是以Material Design风格为主，使用Java语言编写，纯属练手之作，不喜勿喷！另外如果有什么问题，可以在[https://github.com/hongyangAndroid/xueandroid](https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2FhongyangAndroid%2Fwanandroid)项目中以`issu`的形式提出好的建议。                                     
 
 接口
 ----
