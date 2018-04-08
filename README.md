@@ -61,9 +61,10 @@
 
 ![搜索](https://upload-images.jianshu.io/upload_images/2349677-c879a22289a55f1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
- LICENSE
---------
-    Copyright [2018] [name of copyright kangdongpu]
+LICENSE
+=======
+    
+    Copyright 2018 kangdongpu
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
