@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    //自定义menu布局来同时显示icon和title
+    使用actionLayout标签来引入你自定义的layout
+    <!--<item-->
+    <!--android:id="@+id/menu_share"-->
+    <!--android:title="搜索"-->
+    <!--app:actionLayout="@layout/menu_action_share"-->
+    <!--app:showAsAction="never" />-->
+
+    <item
+        android:id="@+id/menu_search"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:title="搜索"
+        app:showAsAction="always" />
+
+
+</menu>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/bottom_tab" />
+
+            <LinearLayout
+                android:id="@+id/bottom_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/white">
+
+
+                <Button
+                    android:id="@+id/btn_main"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:drawablePadding="2dp"
+                    android:drawableTop="@drawable/main_tab_selsctor"
+                    android:padding="5dp"
+                    android:text="@string/home"
+                    android:textColor="@color/tab_text_color" />
+
+                <Button
+                    android:id="@+id/btn_system"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:drawablePadding="2dp"
+                    android:drawableTop="@drawable/system_tab_selsctor"
+                    android:padding="5dp"
+                    android:text="@string/system"
+                    android:textColor="@color/tab_text_color" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navigation_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/header_layout"
+            app:menu="@menu/navigation_menu" />
+
+    </android.support.v4.widget.DrawerLayout>
+</FrameLayout>

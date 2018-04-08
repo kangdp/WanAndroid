@@ -1,0 +1,57 @@
+
+# 玩Android
+## 简介
+ 该项目是根据鸿洋的**wanandroid**开发的一款个人App,一个致力于分享各种Android干货的平台。App界面是以Material Design风格为主，使用Java语言编写，纯属练手之作，不喜勿喷！另外如果有什么问题，可以在[https://github.com/hongyangAndroid/xueandroid](https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2FhongyangAndroid%2Fwanandroid)项目中以`issu`的形式提出好的建议。                                     
+
+## 接口
+[玩Android](http://www.wanandroid.com/blog/show/2)
+
+## 技术框架(rxjava2+retrofit+mvp)
+- [Rxjava2](https://github.com/amitshekhariitbhu/RxJava2-Android-Samples)
+
+- [Retrofit 网络框架](http://square.github.io/retrofit/)
+
+- [Agentweb](https://github.com/Justson/AgentWeb)
+
+- [Glide](https://github.com/bumptech/glide)
+
+- [CardView](https://developer.android.com/reference/android/support/v7/widget/CardView.html)
+
+- [Flowlayout(鸿洋大佬的)](https://github.com/hongyangAndroid/FlowLayout)
+
+## 版本迭代
+### V1.0
+- 首页
+- 知识体系
+- 登录、注册
+- 收藏
+- 搜索
+- 分享
+
+## 功能
+### 登录和注册
+- 登录
+- 注册
+### 首页相关
+- 首页文章列表
+- 首页banner
+### 体系
+- 知识体系
+- 知识体系下的文章
+### 收藏
+- 收藏文章列表
+- 收藏站内文章
+- 取消收藏(文章列表和我的收藏页面)
+
+## 部分截图
+![首页](https://upload-images.jianshu.io/upload_images/2349677-f4632873ede066da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) 
+
+![知识体系](https://upload-images.jianshu.io/upload_images/2349677-7d5899cdb679d27f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![体系文章](https://upload-images.jianshu.io/upload_images/2349677-c561dbd064d1c908.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![我的收藏](https://upload-images.jianshu.io/upload_images/2349677-fc18a5cb0f4f1ee1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![搜索](https://upload-images.jianshu.io/upload_images/2349677-c879a22289a55f1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+

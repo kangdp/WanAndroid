@@ -1,0 +1,65 @@
+<resources>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="searchViewStyle">@style/SearchViewStyle</item>
+    </style>
+
+    <style name="AppTheme.Start">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="AppTheme.Logon">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <!--定义Toolbar样式-->
+    <style name="ToolBarStyle" parent="@style/ThemeOverlay.AppCompat">
+        <!--toolbar 标题和溢出菜单按钮字体的颜色-->
+        <!--<item name="android:textColorPrimary">@android:color/white</item>-->
+        <!--系统图标的颜色-->
+        <item name="android:textColorSecondary">@color/white</item>
+        <!--actionbar 按下效果-->
+        <!--<item name="android:actionBarItemBackground">@drawable/action_bar_bg_selector</item>-->
+        <!--自定义溢出的menu样式-->
+        <item name="actionOverflowMenuStyle">@style/overflowMenuStyle</item>
+        <!--弹出菜单字体颜色-->
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+    <!--定义SearchView样式-->
+    <style name="SearchViewStyle" parent="Base.Widget.AppCompat.SearchView">
+        <item name="searchHintIcon">@null</item>
+    </style>
+
+
+    <!--溢出菜单样式-->
+    <style name="overflowMenuStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:dropDownWidth">wrap_content</item>
+        <!--设置不覆盖锚点-->
+        <item name="overlapAnchor">false</item>
+        <!--popmenu背景色-->
+        <item name="android:popupBackground">@color/white</item>
+        <!--偏移量-->
+        <item name="android:dropDownVerticalOffset">-4dp</item>
+        <item name="android:dropDownHorizontalOffset">0dp</item>
+        <!--menu菜单按下效果-->.
+        <!--<item name="android:selectableItemBackground">@drawable/menu_bg_selector</item>-->
+    </style>
+
+
+    //定义ProgressBar大小
+
+    <style name="LoadingProgressStyle" parent="@style/Widget.AppCompat.ProgressBar">
+        <item name="android:minWidth">20dp</item>
+        <item name="android:maxWidth">20dp</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:maxHeight">20dp</item>
+    </style>
+
+
+</resources>

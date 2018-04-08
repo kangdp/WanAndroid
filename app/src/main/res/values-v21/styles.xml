@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--沉浸式 5.0以上-->
+    <style name="AppTheme" parent="AppTheme.Base">
+        <!--注意5.0以上需要设置windowTranslucentStatus为false,否则statusBarColor不起作用-->
+        <item name="android:windowTranslucentStatus">false</item>
+        <!--透明导航栏-->
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!--使状态栏，导航栏可绘制-->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <!--设置状态栏颜色为透明-->
+        <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
+        <item name="android:statusBarColor">@color/translucent</item>
+        <item name="searchViewStyle">@style/SearchViewStyle</item>
+    </style>
+
+    //定义ProgressBar大小及颜色,颜色的定义需sdk21以上的设备
+    <style name="LoadingProgressStyle" parent="@style/Widget.AppCompat.ProgressBar">
+        <item name="android:minWidth">20dp</item>
+        <item name="android:maxWidth">20dp</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:maxHeight">20dp</item>
+        <item name="android:indeterminateTint">@color/_0091ea</item>
+        <item name="android:indeterminateTintMode">src_atop</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        release {
+            keyAlias 'wanandroid'
+            keyPassword 'wanandroid'
+            storeFile file('../wanandroid.jks')
+            storePassword 'wanandroid'
+        }
+    }
+    compileSdkVersion 25
+    buildToolsVersion '27.0.0'
+    defaultConfig {
+        applicationId "com.kdp.wanandroidclient"
+        minSdkVersion 14
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:cardview-v7:26.0.0-alpha1'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+    compile 'com.just.agentweb:agentweb:4.0.1'
+    compile 'com.hyman:flowlayout-lib:1.1.2'
+}

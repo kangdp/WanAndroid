@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- 自定义menu布局来同时显示icon和title
+     使用actionLayout标签来引入你自定义的layout,
+     另外还需要通过反射设置图标和title同时显示-->
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/ic_share_green_24dp"
+        android:title="@string/share"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/collect"
+        android:icon="@drawable/ic_favorite_light_24dp"
+        android:title="@string/collect"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/browser"
+        android:icon="@drawable/ic_open_in_browser_green_24dp"
+        android:title="@string/open_in_browser"
+        app:showAsAction="never"/>
+
+</menu>

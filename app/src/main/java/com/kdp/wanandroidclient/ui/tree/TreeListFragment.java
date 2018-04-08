@@ -1,0 +1,129 @@
+package com.kdp.wanandroidclient.ui.tree;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
+import com.kdp.wanandroidclient.bean.ArticleBean;
+import com.kdp.wanandroidclient.common.Const;
+import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
+import com.kdp.wanandroidclient.manager.UserInfoManager;
+import com.kdp.wanandroidclient.ui.adapter.ArticleListAdapter;
+import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
+import com.kdp.wanandroidclient.ui.base.BaseAbListFragment;
+import com.kdp.wanandroidclient.ui.logon.LogonActivity;
+import com.kdp.wanandroidclient.ui.web.WebViewActivity;
+import com.kdp.wanandroidclient.utils.ToastUtils;
+
+import java.util.List;
+
+/**
+ * 知识体系下的文章
+ * author: 康栋普
+ * date: 2018/3/20
+ */
+
+public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, TreeListContract.ITreeListView, ArticleBean> implements TreeListContract.ITreeListView, OnArticleListItemClickListener {
+    private int cid;//分类id
+    private int id;//文章id
+    private int position;
+
+    /**
+     * 实例化对象
+     * @param cid
+     * @return
+     */
+    public static TreeListFragment instantiate(int cid) {
+        TreeListFragment instance = new TreeListFragment();
+        Bundle b = new Bundle();
+        b.putInt(Const.BUNDLE_KEY.ID, cid);
+        instance.setArguments(b);
+        return instance;
+    }
+
+
+    @Override
+    protected TreeListPresenter createPresenter() {
+        return new TreeListPresenter();
+    }
+
+    @Override
+    protected View initHeaderView() {
+        return null;
+    }
+
+    @Override
+    protected void getBundle(Bundle bundle) {
+        cid = bundle.getInt(Const.BUNDLE_KEY.ID);
+    }
+
+    @Override
+    protected boolean isCanLoadMore() {
+        return true;
+    }
+
+    @Override
+    protected BaseListAdapter getListAdapter() {
+        return new ArticleListAdapter(this,Const.LIST_TYPE.TREE);
+    }
+
+    @Override
+    public int getCid() {
+        return cid;
+    }
+
+    @Override
+    public void setData(List<ArticleBean> data) {
+        mListData.addAll(data);
+    }
+
+
+    @Override
+    protected void loadDatas() {
+        mPresenter.loadTreeList();
+    }
+
+    @Override
+    public int getArticleId() {
+        return id;
+    }
+
+    @Override
+    public void collect(boolean isCollect, String result) {
+        notifyItemData(isCollect,result);
+    }
+
+    private void notifyItemData(boolean isCollect,String result) {
+        mListData.get(position).setCollect(isCollect);
+        mListAdapter.notifyItemDataChanged(position, mRecyclerView);
+        ToastUtils.showToast(getActivity(), result);
+    }
+
+    @Override
+    public void onItemClick(String title, String url) {
+        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+        intent.putExtra(Const.BUNDLE_KEY.TITLE, title);
+        intent.putExtra(Const.BUNDLE_KEY.URL, url);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onCollectClick(int position, int id, int originId) {
+    }
+
+    @Override
+    public void onCollectClick(int position, int id) {
+        if (!UserInfoManager.isLogin())
+            startActivity(new Intent(getActivity(), LogonActivity.class));
+        this.position = position;
+        this.id = id;
+        if (mListData.get(this.position).isCollect())
+            mPresenter.unCollectArticle();
+        else
+            mPresenter.collectArticle();
+    }
+
+    @Override
+    public void onTreeClick(int chapterId, String chapterName) {
+    }
+}
