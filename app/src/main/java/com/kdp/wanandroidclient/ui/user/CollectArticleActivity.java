@@ -105,9 +105,7 @@ public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Us
         return originId;
     }
 
-    /**
-     * 删除收藏的文章
-     */
+    //删除收藏
     @Override
     public void deleteCollect() {
         if (mListData.size() > 1) {

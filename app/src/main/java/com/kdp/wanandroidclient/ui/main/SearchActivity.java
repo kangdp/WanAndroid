@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * 搜索页面
  * author: 康栋普
  * date: 2018/4/5
  */
@@ -66,6 +67,7 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
         return mHeaderView;
     }
 
+    //设置搜索的数据
     @Override
     public void setData(List<ArticleBean> data) {
         mRecyclerView.removeHeaderView();
@@ -88,16 +90,13 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
         return keyword;
     }
 
-    /**
-     * 文章id
-     *
-     * @return
-     */
+
     @Override
     public int getArticleId() {
         return id;
     }
 
+    //热搜关键词
     @Override
     public void setHotwordData(final List<HotwordBean> mHotListDatas) {
         mHotwordDatas.clear();
@@ -123,6 +122,7 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
         });
     }
 
+    //历史网站
     @Override
     public void setFriendData(final List<FriendBean> mFriendListDatas) {
         mFriendDatas.clear();
@@ -149,6 +149,7 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
         });
     }
 
+    //关键词颜色
     private void setTagTextColor(TextView tagView) {
         int red, green, blue;
         Random mRandow = new Random();
@@ -159,6 +160,7 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
         tagView.setTextColor(color);
     }
 
+    //SearchView相关设置
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu_setting, menu);
@@ -200,7 +202,7 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
         return super.onCreateOptionsMenu(menu);
     }
 
-
+   //去除SearchView的输入框默认背景
     private void deleteSearchPlate() {
         try {
             Class<?> cla = mSearchView.getClass();

@@ -25,6 +25,7 @@ public class TreeFragment extends BaseAbListFragment<TreePresenter, TreeContract
         return new TreePresenter();
     }
 
+    //加载列表数据
     @Override
     protected void loadDatas() {
         mPresenter.loadTree();
@@ -51,6 +52,7 @@ public class TreeFragment extends BaseAbListFragment<TreePresenter, TreeContract
         mListData.addAll(data);
     }
 
+    //进入子分类页面
     @Override
     public void onItemClick(TreeBean mTreeBean) {
         Intent intent = new Intent(getActivity(), TreeActivity.class);

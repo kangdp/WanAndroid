@@ -8,6 +8,8 @@
     <string name="register">注&#160;&#160;册</string>
     <string name="login_success">登录成功!</string>
     <string name="register_success">注册成功!</string>
+    <string name="username_not_empty">用户名不能为空</string>
+    <string name="password_not_empty">"密码不能为空</string>
     <string name="collect_success">收藏成功</string>
     <string name="uncollect_success">取消收藏</string>
     <string name="navigation_drawer_open">打开</string>

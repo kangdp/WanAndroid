@@ -28,11 +28,7 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Tree
     private int id;//文章id
     private int position;
 
-    /**
-     * 实例化对象
-     * @param cid
-     * @return
-     */
+    //实例化fragment
     public static TreeListFragment instantiate(int cid) {
         TreeListFragment instance = new TreeListFragment();
         Bundle b = new Bundle();
@@ -67,27 +63,30 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Tree
         return new ArticleListAdapter(this,Const.LIST_TYPE.TREE);
     }
 
+    //分类id
     @Override
     public int getCid() {
         return cid;
     }
 
+    //列表数据
     @Override
     public void setData(List<ArticleBean> data) {
         mListData.addAll(data);
     }
 
-
+    //加载列表数据
     @Override
     protected void loadDatas() {
         mPresenter.loadTreeList();
     }
 
+    //文章id
     @Override
     public int getArticleId() {
         return id;
     }
-
+    //收藏结果
     @Override
     public void collect(boolean isCollect, String result) {
         notifyItemData(isCollect,result);
@@ -99,6 +98,7 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Tree
         ToastUtils.showToast(getActivity(), result);
     }
 
+    //进入详情
     @Override
     public void onItemClick(String title, String url) {
         Intent intent = new Intent(getActivity(), WebViewActivity.class);
@@ -111,6 +111,7 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Tree
     public void onCollectClick(int position, int id, int originId) {
     }
 
+    //收藏click
     @Override
     public void onCollectClick(int position, int id) {
         if (!UserInfoManager.isLogin())

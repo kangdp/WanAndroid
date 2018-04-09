@@ -1,6 +1,6 @@
 package com.kdp.wanandroidclient.ui.mvp.model.impl;
 
-import com.kdp.wanandroidclient.ui.mvp.model.ICollectModel;
+import com.kdp.wanandroidclient.ui.mvp.model.ICommonModel;
 import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 
@@ -9,7 +9,7 @@ import com.kdp.wanandroidclient.net.callback.RxObserver;
  * date: 2018/2/26
  */
 
-public class CollectModel extends BaseModel implements ICollectModel {
+public class CommonModel extends BaseModel implements ICommonModel {
     @Override
     public void collectArticle(int id, RxObserver<String> callback) {
         doRxRequest().

@@ -11,7 +11,7 @@ import com.kdp.wanandroidclient.ui.mvp.model.IUserModel;
  * date: 2018/3/21
  */
 
-public class UserModel extends BaseModel implements IUserModel {
+public class UserModel extends CommonModel implements IUserModel {
     @Override
     public void getCollectArticleList(int page, RxPageListObserver<ArticleBean> rxObserver) {
         doRxRequest()

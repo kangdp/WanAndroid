@@ -16,7 +16,7 @@ import java.util.List;
  * date: 2018/4/5
  */
 
-public class SearchModel extends CollectModel implements ISearchModel {
+public class SearchModel extends CommonModel implements ISearchModel {
     @Override
     public void searchArticle(int page, String keyword, RxPageListObserver<ArticleBean> rxObserver) {
         LogUtils.e(page+"");

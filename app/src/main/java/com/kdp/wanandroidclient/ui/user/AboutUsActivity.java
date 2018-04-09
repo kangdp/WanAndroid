@@ -17,6 +17,7 @@ import com.kdp.wanandroidclient.utils.AppUtils;
 import com.kdp.wanandroidclient.utils.LightStatusbarUtils;
 
 /**
+ * 关于我们
  * author: 康栋普
  * date: 2018/3/25
  */
@@ -65,7 +66,7 @@ public class AboutUsActivity extends AppCompatActivity {
         mIntroduceView.setMovementMethod(LinkMovementMethod.getInstance());
 
     }
-
+   //版本
     private void setVersion() {
         String mVersionFormat = getString(R.string.version_format);
         String mVersionName = AppUtils.getVersionName(this);

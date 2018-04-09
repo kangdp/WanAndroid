@@ -5,7 +5,7 @@ package com.kdp.wanandroidclient.ui.mvp.presenter;
  * date: 2018/3/20
  */
 
-public interface ICollectPresenter {
+public interface ICommonPresenter {
 
     void collectArticle();
 

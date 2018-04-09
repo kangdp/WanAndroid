@@ -121,7 +121,6 @@ public class SearchPresenter extends BasePresenter<SearchContract.ISearchView> i
             @Override
             protected void onFail(int errorCode, String errorMsg) {
             }
-
             @Override
             public void showLoading() {
             }

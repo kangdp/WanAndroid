@@ -10,7 +10,7 @@ import com.kdp.wanandroidclient.ui.mvp.model.ITreeListModel;
  * date: 2018/3/20
  */
 
-public class TreeListModel extends BaseModel implements ITreeListModel {
+public class TreeListModel extends CommonModel implements ITreeListModel {
 
     @Override
     public void getTreeList(int page,int cid,RxPageListObserver<ArticleBean> rxObserver) {

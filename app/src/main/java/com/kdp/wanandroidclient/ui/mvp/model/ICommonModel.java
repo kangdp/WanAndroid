@@ -7,7 +7,7 @@ import com.kdp.wanandroidclient.net.callback.RxObserver;
  * date: 2018/2/26
  */
 
-public interface ICollectModel {
+public interface ICommonModel {
 
     /**
      * 收藏文章

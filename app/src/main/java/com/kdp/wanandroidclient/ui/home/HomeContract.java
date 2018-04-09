@@ -2,7 +2,7 @@ package com.kdp.wanandroidclient.ui.home;
 
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.BannerBean;
-import com.kdp.wanandroidclient.ui.mvp.presenter.ICollectPresenter;
+import com.kdp.wanandroidclient.ui.mvp.presenter.ICommonPresenter;
 import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 public interface HomeContract{
-    interface IHomePresenter extends ICollectPresenter {
+    interface IHomePresenter extends ICommonPresenter {
         void getHomeList();
     }
 

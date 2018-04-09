@@ -47,6 +47,7 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
         return true;
     }
 
+    //初始化HeaderView
     @Override
     protected View initHeaderView() {
         View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.main_header_banner, mRecyclerView, false);
@@ -55,16 +56,12 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
     }
 
 
-    /**
-     * setCurrentItem
-     *
-     * @param position
-     */
+    //设置Banner选中item
     private void setCurrentItem(final int position) {
         mViewPager.setCurrentItem(position, false);
     }
 
-
+    //加载列表数据
     @Override
     protected void loadDatas() {
         mPresenter.getHomeList();
@@ -75,39 +72,27 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
         return new ArticleListAdapter(this, Const.LIST_TYPE.HOME);
     }
 
-    /**
-     * 广告Banner
-     *
-     * @param banner
-     */
+    //Banner数据
     @Override
     public void setBannerData(List<BannerBean> banner) {
         mBannerList.clear();
         mBannerList.addAll(banner);
     }
 
-    /**
-     * 文章列表
-     *
-     * @param data
-     */
+    //列表数据
     @Override
     public void setData(List<ArticleBean> data) {
         mListData.addAll(data);
     }
 
-    /**
-     * 显示内容
-     */
+    //显示内容
     @Override
     public void showContent() {
         notifyDatas();
         super.showContent();
     }
 
-    /**
-     * 刷新数据
-     */
+    //刷新所有数据
     public void notifyDatas() {
         if (mBannerAdapter == null) {
             mBannerAdapter = new BannerAdapter(mBannerList);
@@ -121,22 +106,13 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
     }
 
 
-    /**
-     * 收藏结果
-     *
-     * @param isCollect
-     * @param result
-     */
+    //收藏结果
     @Override
     public void collect(boolean isCollect, String result) {
         notifyItemData(isCollect, result);
     }
 
-    /**
-     * 刷新item
-     *
-     * @param isCollect
-     */
+    //刷新单条Item
     private void notifyItemData(boolean isCollect, String result) {
         mListData.get(position).setCollect(isCollect);
         position++;
@@ -144,22 +120,13 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
         ToastUtils.showToast(getActivity(), result);
     }
 
-    /**
-     * 文章id
-     *
-     * @return
-     */
+    //文章id
     @Override
     public int getArticleId() {
         return id;
     }
 
-    /**
-     * 进入详情
-     *
-     * @param title
-     * @param url
-     */
+    //进入详情
     @Override
     public void onItemClick(String title, String url) {
 
@@ -185,12 +152,7 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
         mViewPager.start();
     }
 
-    /**
-     * 收藏
-     *
-     * @param position
-     * @param id
-     */
+    //收藏click
     @Override
     public void onCollectClick(int position, int id) {
         if (!UserInfoManager.isLogin())
@@ -203,12 +165,7 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
             mPresenter.collectArticle();
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
-    }
-
+    //分类click
     @Override
     public void onTreeClick(int chapterId, String chapterName) {
         Intent intent = new Intent(getActivity(), TreeActivity.class);

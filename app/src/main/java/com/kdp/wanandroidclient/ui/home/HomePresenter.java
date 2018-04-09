@@ -7,7 +7,6 @@ import com.kdp.wanandroidclient.bean.BannerBean;
 import com.kdp.wanandroidclient.net.callback.RxConsumer;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
-import com.kdp.wanandroidclient.ui.mvp.model.impl.CollectModel;
 import com.kdp.wanandroidclient.ui.mvp.model.impl.HomeModel;
 import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
 
@@ -20,12 +19,10 @@ import java.util.List;
 
 public class HomePresenter extends BasePresenter<HomeContract.IHomeView> implements HomeContract.IHomePresenter {
     private HomeModel mHomeModel;
-    private CollectModel mCollectArticleModel;
     private HomeContract.IHomeView homeView;
 
-    public HomePresenter() {
+    HomePresenter() {
         this.mHomeModel = new HomeModel();
-        this.mCollectArticleModel = new CollectModel();
     }
 
     @Override
@@ -43,7 +40,7 @@ public class HomePresenter extends BasePresenter<HomeContract.IHomeView> impleme
                 homeView.setBannerData(data);
             }
 
-        }, new RxPageListObserver<ArticleBean>(this,HomeModel.class.getName()) {
+        }, new RxPageListObserver<ArticleBean>(this, HomeModel.class.getName()) {
             @Override
             public void onSuccess(List<ArticleBean> mData) {
                 homeView.setData(mData);
@@ -65,10 +62,10 @@ public class HomePresenter extends BasePresenter<HomeContract.IHomeView> impleme
     @Override
     public void collectArticle() {
         homeView = getView();
-        mCollectArticleModel.collectArticle(homeView.getArticleId(), new RxObserver<String>(this) {
+        mHomeModel.collectArticle(homeView.getArticleId(), new RxObserver<String>(this) {
             @Override
             protected void onSuccess(String data) {
-                homeView.collect(true,AppContext.getContext().getString(R.string.collect_success));
+                homeView.collect(true, AppContext.getContext().getString(R.string.collect_success));
             }
 
             @Override
@@ -90,7 +87,7 @@ public class HomePresenter extends BasePresenter<HomeContract.IHomeView> impleme
     @Override
     public void unCollectArticle() {
         homeView = getView();
-        mCollectArticleModel.unCollectArticle(homeView.getArticleId(), new RxObserver<String>(this) {
+        mHomeModel.unCollectArticle(homeView.getArticleId(), new RxObserver<String>(this) {
             @Override
             protected void onSuccess(String data) {
                 homeView.collect(false, AppContext.getContext().getString(R.string.uncollect_success));

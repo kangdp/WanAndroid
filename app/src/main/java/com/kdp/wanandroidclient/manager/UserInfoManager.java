@@ -52,9 +52,4 @@ public class UserInfoManager {
     public static void saveIsLogin(boolean isLogin){
         PreUtils.put(Const.USERINFO_KEY.IS_LOGIN,isLogin);
     }
-
-
-
-
-
 }

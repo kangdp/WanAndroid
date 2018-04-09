@@ -99,6 +99,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mDrawerLayout.addDrawerListener(mToggle);
         mNavigationView.setItemIconTintList(null);
         mNavigationView.setNavigationItemSelectedListener(onNavigationItemSelectedListener);
+        //侧滑菜单
         initNavigationHeaderView();
         initFragments();
     }
@@ -130,9 +131,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
-    /**
-     * 设置侧滑item click
-     */
+    //设置侧滑item click
     private NavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(MenuItem item) {
@@ -140,11 +139,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 case R.id.menu_favorite_article: {
                     if (!UserInfoManager.isLogin()) {
                         startActivity(new Intent(MainActivity.this, LogonActivity.class));
-                    }else {
+                    } else {
                         startActivity(new Intent(MainActivity.this, CollectArticleActivity.class));
                     }
                 }
-                    break;
+                break;
                 case R.id.menu_about:
                     startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
                     break;
@@ -156,24 +155,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     };
 
-    /**
-     * 创建Menu
-     *
-     * @param menu
-     * @return
-     */
+
+    //创建Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu_setting, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    /**
-     * Menu点击事件
-     *
-     * @param item
-     * @return
-     */
+   //Menu点击事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -186,9 +176,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * 退出登录
-     */
+    //退出登录
     private void exitToLogin() {
         startActivity(new Intent(MainActivity.this, LogonActivity.class));
         PreUtils.clearAll();
@@ -257,8 +245,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
             return true;
         }
-
-
         return super.onKeyDown(keyCode, event);
     }
 }

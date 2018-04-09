@@ -30,7 +30,7 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
     @Override
     public void login() {
         if (!verifyAccount()) return;
-        logonModel.login(username, password, new RxObserver<UserBean>(this,LogonModel.class.getName()) {
+        logonModel.login(username, password, new RxObserver<UserBean>(this, LogonModel.class.getName()) {
 
             @Override
             public void onSubscribe(Disposable d) {
@@ -56,7 +56,7 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
     @Override
     public void register() {
         if (!verifyAccount()) return;
-        logonModel.register(username, password, new RxObserver<String>(this,LogonModel.class.getName()) {
+        logonModel.register(username, password, new RxObserver<String>(this, LogonModel.class.getName()) {
             @Override
             protected void onSuccess(String data) {
                 mLoginRegisterView.showResult(AppContext.getContext().getString(R.string.register_success));
@@ -75,19 +75,17 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
     }
 
 
-    /**
-     * verify account
-     */
     private boolean verifyAccount() {
         mLoginRegisterView = getView();
         username = mLoginRegisterView.getUserName();
         password = mLoginRegisterView.getPassWord();
         if (TextUtils.isEmpty(username)) {
-            mLoginRegisterView.onAccoundError("用户名不能为空");
+            mLoginRegisterView.onAccoundError(AppContext.getContext().getString(R.string.username_not_empty));
             return false;
         }
+
         if (TextUtils.isEmpty(password)) {
-            mLoginRegisterView.onAccoundError("密码不能为空");
+            mLoginRegisterView.onAccoundError(AppContext.getContext().getString(R.string.password_not_empty));
             return false;
         }
         return true;

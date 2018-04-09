@@ -19,7 +19,7 @@ import io.reactivex.schedulers.Schedulers;
  * date: 2018/2/22
  */
 
-public class HomeModel extends BaseModel implements IHomeModel {
+public class HomeModel extends CommonModel implements IHomeModel {
 
     @Override
     public void getHomeData(final int page, RxConsumer<List<BannerBean>> consumer, final RxPageListObserver<ArticleBean> rxObserver) {

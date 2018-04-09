@@ -5,7 +5,6 @@ import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
-import com.kdp.wanandroidclient.ui.mvp.model.impl.CollectModel;
 import com.kdp.wanandroidclient.ui.mvp.model.impl.TreeListModel;
 import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
 
@@ -19,20 +18,16 @@ import java.util.List;
 public class TreeListPresenter extends BasePresenter<TreeListContract.ITreeListView> implements TreeListContract.ITreePresenter {
 
     private TreeListModel mTreeListModel;
-    private CollectModel mCollectModel;
 
     private TreeListContract.ITreeListView mTreeListView;
 
-    public TreeListPresenter() {
+    TreeListPresenter() {
         mTreeListModel = new TreeListModel();
-        mCollectModel = new CollectModel();
     }
 
     @Override
     public void loadTreeList() {
-
         mTreeListView = getView();
-
         mTreeListModel.getTreeList(mTreeListView.getPage(), mTreeListView.getCid(), new RxPageListObserver<ArticleBean>(this,TreeListModel.class.getName()) {
             @Override
             public void onSuccess(List<ArticleBean> mData) {
@@ -62,7 +57,7 @@ public class TreeListPresenter extends BasePresenter<TreeListContract.ITreeListV
 
         mTreeListView = getView();
 
-        mCollectModel.collectArticle(mTreeListView.getArticleId(), new RxObserver<String>(this) {
+        mTreeListModel.collectArticle(mTreeListView.getArticleId(), new RxObserver<String>(this) {
             @Override
             protected void onSuccess(String data) {
                 mTreeListView.collect(true,AppContext.getContext().getString(R.string.collect_success));
@@ -82,7 +77,7 @@ public class TreeListPresenter extends BasePresenter<TreeListContract.ITreeListV
     public void unCollectArticle() {
         mTreeListView = getView();
 
-        mCollectModel.unCollectArticle(mTreeListView.getArticleId(), new RxObserver<String>(this) {
+        mTreeListModel.unCollectArticle(mTreeListView.getArticleId(), new RxObserver<String>(this) {
             @Override
             protected void onSuccess(String data) {
                 mTreeListView.collect(false,AppContext.getContext().getString(R.string.uncollect_success));

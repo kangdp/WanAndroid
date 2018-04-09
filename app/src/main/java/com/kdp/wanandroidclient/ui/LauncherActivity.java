@@ -27,8 +27,7 @@ public class LauncherActivity extends BasePresenterActivity<LogonPresenter, Logo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DelayHandler mDelayHandler = new DelayHandler();
-        mDelayHandler.postDelayed(new DelayRunnable(this), 2000);
+        new Handler().postDelayed(new DelayRunnable(this), 2000);
     }
 
     //自动登录
@@ -39,11 +38,9 @@ public class LauncherActivity extends BasePresenterActivity<LogonPresenter, Logo
             if (userBean != null)
                 mPresenter.login();
         }
-        startToActivity(MainActivity.class);
+        startToActivity();
     }
 
-    private static class DelayHandler extends Handler {
-    }
 
     private static class DelayRunnable implements Runnable {
         private WeakReference<LauncherActivity> mWeakReference;
@@ -60,8 +57,9 @@ public class LauncherActivity extends BasePresenterActivity<LogonPresenter, Logo
         }
     }
 
-    private void startToActivity(Class<?> cla) {
-        Intent intent = new Intent(this, cla);
+    //进入首页
+    private void startToActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -94,5 +92,4 @@ public class LauncherActivity extends BasePresenterActivity<LogonPresenter, Logo
     @Override
     public void showResult(String msg) {
     }
-
 }

@@ -15,7 +15,6 @@ import com.kdp.wanandroidclient.utils.ToastUtils;
  */
 
 public class LogonActivity extends BasePresenterActivity<LogonPresenter,LogonContract.ILoginRegisterView> implements LogonContract.ILoginRegisterView{
-    private LogonPresenter logonPresenter;
     private EditText et_username, et_password;
 
     @Override
@@ -48,8 +47,7 @@ public class LogonActivity extends BasePresenterActivity<LogonPresenter,LogonCon
 
     @Override
     protected LogonPresenter createPresenter() {
-        logonPresenter = new LogonPresenter();
-        return logonPresenter;
+        return new LogonPresenter();
     }
 
     @Override
@@ -70,13 +68,13 @@ public class LogonActivity extends BasePresenterActivity<LogonPresenter,LogonCon
         findViewById(R.id.bt_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logonPresenter.login();
+                mPresenter.login();
             }
         });
         findViewById(R.id.bt_register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logonPresenter.register();
+                mPresenter.register();
             }
         });
     }
