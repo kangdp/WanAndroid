@@ -49,6 +49,7 @@ public class TreeFragment extends BaseAbListFragment<TreePresenter, TreeContract
 
     @Override
     public void setData(List<TreeBean> data) {
+        mListData.clear();
         mListData.addAll(data);
     }
 
