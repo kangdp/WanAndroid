@@ -11,7 +11,6 @@ import com.kdp.wanandroidclient.ui.base.BasePresenterActivity;
 import com.kdp.wanandroidclient.ui.logon.LogonContract;
 import com.kdp.wanandroidclient.ui.logon.LogonPresenter;
 import com.kdp.wanandroidclient.ui.main.MainActivity;
-import com.kdp.wanandroidclient.utils.ToastUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -84,10 +83,6 @@ public class LauncherActivity extends BasePresenterActivity<LogonPresenter, Logo
         return userBean.getPassword();
     }
 
-    @Override
-    public void onAccoundError(String msg) {
-        ToastUtils.showToast(this, msg);
-    }
 
     @Override
     public void showResult(String msg) {

@@ -10,31 +10,21 @@ import io.reactivex.disposables.Disposable;
 
 public interface IPresenter<V extends IView> {
 
-    /**
-     * bind view
-     *
-     * @param view
-     */
+    //绑定View
     void attachView(V view);
 
-    /**
-     * unbind view
-     */
+    //解除View绑定
     void detachView();
 
-    /**
-     * check view
-     */
+    //检查View是否存在
     void checkAttachView();
 
     V getView();
 
-
-    void addRequestTag(String tag,Disposable disposable);
-
-    /**
-     * cancel request
-     */
-    void cancelRequestTags();
-
+    //添加指定的请求
+    void addDisposable(Disposable disposable);
+    //移除指定的请求
+    void removeDisposable(Disposable disposable);
+    //取消所有请求
+    void removeAllDisposable();
 }

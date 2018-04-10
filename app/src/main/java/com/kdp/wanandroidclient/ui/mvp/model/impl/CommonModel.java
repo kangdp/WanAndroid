@@ -16,6 +16,7 @@ public class CommonModel extends BaseModel implements ICommonModel {
                 collectArticle(id)
                 .compose(RxSchedulers.io_main())
                 .subscribe(callback);
+
     }
 
     @Override

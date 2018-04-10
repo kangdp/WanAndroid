@@ -4,7 +4,6 @@ import com.kdp.wanandroidclient.bean.BaseBean;
 import com.kdp.wanandroidclient.net.NetConfig;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
 
 /**
@@ -13,21 +12,16 @@ import io.reactivex.functions.Function;
  * date: 2018/3/7
  */
 
-public abstract class RxFunction<T, R> implements Function<BaseBean<T>, ObservableSource<BaseBean<R>>> {
+public abstract class RxFunction<T, R> implements Function<BaseBean<T>, Observable<BaseBean<R>>> {
 
     @Override
-    public ObservableSource<BaseBean<R>> apply(BaseBean<T> tBaseBean) throws Exception {
+    public Observable<BaseBean<R>> apply(BaseBean<T> tBaseBean) throws Exception {
         if (tBaseBean.errorCode == NetConfig.REQUEST_SUCCESS){
             return doOnNextRequest();
         }
         return null;
     }
 
-    /**
-     * doOnNext
-     *
-     * @return
-     */
     protected abstract Observable<BaseBean<R>> doOnNextRequest();
 
 }

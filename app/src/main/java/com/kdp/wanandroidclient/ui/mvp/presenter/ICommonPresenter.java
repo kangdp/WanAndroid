@@ -1,5 +1,7 @@
 package com.kdp.wanandroidclient.ui.mvp.presenter;
 
+import com.kdp.wanandroidclient.ui.mvp.view.IView;
+
 /**
  * author: 康栋普
  * date: 2018/3/20
@@ -7,10 +9,10 @@ package com.kdp.wanandroidclient.ui.mvp.presenter;
 
 public interface ICommonPresenter {
 
-    void collectArticle();
+    void collectArticle(int articleId,IView view);
 
-    void collectInsideArticle();
+    void collectInsideArticle(int articleId,IView view);
 
-    void unCollectArticle();
+    void unCollectArticle(int articleId,IView view);
 
 }

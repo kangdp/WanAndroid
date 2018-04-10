@@ -19,6 +19,5 @@ public interface TreeContract {
 
     interface ITreeView extends IListDataView<TreeBean>{
         void setData(List<TreeBean> tree);
-
     }
 }

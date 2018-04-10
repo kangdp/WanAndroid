@@ -24,7 +24,7 @@ public class UserPresenter extends BasePresenter<UserContract.IUserView> impleme
     @Override
     public void deleteCollectArticle() {
         mUserView = getView();
-        mUserModel.deleteCollectArticle(mUserView.getArticleId(),mUserView.getOriginId(), new RxObserver<String>(this) {
+        RxObserver<String> mDeleteRxObserver = new RxObserver<String>(this) {
             @Override
             protected void onSuccess(String data) {
                 mUserView.deleteCollect();
@@ -37,15 +37,16 @@ public class UserPresenter extends BasePresenter<UserContract.IUserView> impleme
 
             @Override
             public void showLoading() {
-//                super.showLoading();
             }
-        });
+        };
+        mUserModel.deleteCollectArticle(mUserView.getArticleId(), mUserView.getOriginId(), mDeleteRxObserver);
+        addDisposable(mDeleteRxObserver);
     }
 
     @Override
-    public void loadArticleList() {
+    public void loadCollectList() {
         mUserView = getView();
-        mUserModel.getCollectArticleList(mUserView.getPage(), new RxPageListObserver<ArticleBean>(this, UserModel.class.getName()) {
+        RxPageListObserver<ArticleBean> mCollectRxPageListObserver = new RxPageListObserver<ArticleBean>(this) {
             @Override
             public void onSuccess(List<ArticleBean> mData) {
                 mUserView.setData(mData);
@@ -59,10 +60,8 @@ public class UserPresenter extends BasePresenter<UserContract.IUserView> impleme
             public void onFail(int errorCode, String errorMsg) {
                 mUserView.showFail(errorMsg);
             }
-        });
-    }
-
-    @Override
-    public void loadWebList() {
+        };
+        mUserModel.getCollectArticleList(mUserView.getPage(), mCollectRxPageListObserver);
+        addDisposable(mCollectRxPageListObserver);
     }
 }

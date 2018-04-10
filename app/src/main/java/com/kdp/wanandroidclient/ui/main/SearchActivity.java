@@ -266,9 +266,9 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
         intent.putExtra(Const.BUNDLE_KEY.URL, url);
         startActivity(intent);
     }
-
     @Override
     public void onCollectClick(int position, int id, int originId) {
+
     }
 
     @Override

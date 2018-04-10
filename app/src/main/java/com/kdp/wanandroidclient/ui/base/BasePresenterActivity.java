@@ -37,8 +37,8 @@ public abstract class BasePresenterActivity<P extends BasePresenter<V>, V extend
     protected void onDestroy() {
         //view置空
         detachView();
-        //取消请求
-        cancelRequest();
+        //取消所有请求
+        removeAllDisposable();
         super.onDestroy();
     }
 
@@ -54,9 +54,9 @@ public abstract class BasePresenterActivity<P extends BasePresenter<V>, V extend
         }
     }
 
-    protected void cancelRequest() {
+    protected void removeAllDisposable() {
         if (mPresenter != null) {
-            mPresenter.cancelRequestTags();
+            mPresenter.removeAllDisposable();
         }
     }
 
@@ -83,14 +83,15 @@ public abstract class BasePresenterActivity<P extends BasePresenter<V>, V extend
     public void showFail(String msg) {
         ToastUtils.showToast(this, msg);
     }
-
-
     @Override
     public void showError() {
     }
-
     @Override
     public void showEmpty() {
+    }
+
+    @Override
+    public void collect(boolean isCollect, String result) {
 
     }
 }

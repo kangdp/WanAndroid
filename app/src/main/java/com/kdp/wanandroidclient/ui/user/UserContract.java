@@ -10,11 +10,8 @@ import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
 
 public interface UserContract {
     interface IUserPresenter {
-        void loadArticleList();
-
+        void loadCollectList();
         void deleteCollectArticle();
-
-        void loadWebList();
     }
 
     interface IUserView extends IListDataView<ArticleBean> {

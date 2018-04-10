@@ -1,14 +1,11 @@
 package com.kdp.wanandroidclient.ui.home;
 
-import com.kdp.wanandroidclient.R;
-import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.BannerBean;
 import com.kdp.wanandroidclient.net.callback.RxConsumer;
-import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 import com.kdp.wanandroidclient.ui.mvp.model.impl.HomeModel;
-import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
+import com.kdp.wanandroidclient.ui.mvp.presenter.CommonPresenter;
 
 import java.util.List;
 
@@ -17,7 +14,7 @@ import java.util.List;
  * date: 2018/2/11
  */
 
-public class HomePresenter extends BasePresenter<HomeContract.IHomeView> implements HomeContract.IHomePresenter {
+public class HomePresenter extends CommonPresenter<HomeContract.IHomeView> implements HomeContract.IHomePresenter {
     private HomeModel mHomeModel;
     private HomeContract.IHomeView homeView;
 
@@ -28,19 +25,8 @@ public class HomePresenter extends BasePresenter<HomeContract.IHomeView> impleme
     @Override
     public void getHomeList() {
         homeView = getView();
-        final int page = homeView.getPage();
-        mHomeModel.getHomeData(page, new RxConsumer<List<BannerBean>>() {
-            @Override
-            protected void onFail(String errorMsg) {
-                homeView.showFail(errorMsg);
-            }
+        RxPageListObserver<ArticleBean> mHomeRxPageListObserver = new RxPageListObserver<ArticleBean>(this) {
 
-            @Override
-            protected void onSuccess(List<BannerBean> data) {
-                homeView.setBannerData(data);
-            }
-
-        }, new RxPageListObserver<ArticleBean>(this, HomeModel.class.getName()) {
             @Override
             public void onSuccess(List<ArticleBean> mData) {
                 homeView.setData(mData);
@@ -54,54 +40,30 @@ public class HomePresenter extends BasePresenter<HomeContract.IHomeView> impleme
             public void onFail(int errorCode, String errorMsg) {
                 homeView.showFail(errorMsg);
             }
-        });
-
-
-    }
-
-    @Override
-    public void collectArticle() {
-        homeView = getView();
-        mHomeModel.collectArticle(homeView.getArticleId(), new RxObserver<String>(this) {
+        };
+        mHomeModel.getHomeData(homeView.getPage(), new RxConsumer<List<BannerBean>>() {
             @Override
-            protected void onSuccess(String data) {
-                homeView.collect(true, AppContext.getContext().getString(R.string.collect_success));
-            }
-
-            @Override
-            protected void onFail(int errorCode, String errorMsg) {
+            protected void onFail(String errorMsg) {
                 homeView.showFail(errorMsg);
             }
 
             @Override
-            public void showLoading() {
+            protected void onSuccess(List<BannerBean> data) {
+                homeView.setBannerData(data);
             }
-        });
+        }, mHomeRxPageListObserver);
+
+        addDisposable(mHomeRxPageListObserver);
     }
 
-    @Override
-    public void collectInsideArticle() {
 
+    @Override
+    public void collectArticle() {
+        collectArticle(homeView.getArticleId(),homeView);
     }
 
     @Override
     public void unCollectArticle() {
-        homeView = getView();
-        mHomeModel.unCollectArticle(homeView.getArticleId(), new RxObserver<String>(this) {
-            @Override
-            protected void onSuccess(String data) {
-                homeView.collect(false, AppContext.getContext().getString(R.string.uncollect_success));
-            }
-
-            @Override
-            protected void onFail(int errorCode, String errorMsg) {
-                homeView.showFail(errorMsg);
-            }
-
-            @Override
-            public void showLoading() {
-            }
-        });
+        unCollectArticle(homeView.getArticleId(),homeView);
     }
-
 }

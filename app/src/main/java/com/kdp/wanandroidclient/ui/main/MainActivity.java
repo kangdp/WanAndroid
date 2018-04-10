@@ -2,7 +2,6 @@ package com.kdp.wanandroidclient.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Process;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -67,6 +66,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void getIntent(Intent intent) {
     }
+
 
     @Override
     protected void initViews() {
@@ -238,7 +238,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             if (System.currentTimeMillis() - mExitTime < 2000) {
                 finish();
-                Process.killProcess(Process.myTid());
             } else {
                 mExitTime = System.currentTimeMillis();
                 ToastUtils.showToast(this, "请再按一次退出程序");

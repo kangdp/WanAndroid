@@ -3,7 +3,6 @@ package com.kdp.wanandroidclient.ui.main;
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.FriendBean;
 import com.kdp.wanandroidclient.bean.HotwordBean;
-import com.kdp.wanandroidclient.ui.mvp.presenter.ICommonPresenter;
 import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
 
 import java.util.List;
@@ -14,12 +13,16 @@ import java.util.List;
  */
 
 public class SearchContract {
-    interface ISearchPresenter extends ICommonPresenter {
+    interface ISearchPresenter {
         void search();
 
         void getHotWord();
 
         void getFriend();
+
+        void collectInsideArticle();
+
+        void unCollectArticle();
     }
 
     interface ISearchView extends IListDataView<ArticleBean> {

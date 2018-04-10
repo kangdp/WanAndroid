@@ -1,16 +1,12 @@
 package com.kdp.wanandroidclient.ui.logon;
 
-import android.text.TextUtils;
-
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.bean.UserBean;
-import com.kdp.wanandroidclient.manager.UserInfoManager;
+import com.kdp.wanandroidclient.inter.VerifyAccountCallback;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.ui.mvp.model.impl.LogonModel;
 import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
-
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by 康栋普 on 2018/2/1.
@@ -20,7 +16,7 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
 
     private String username, password;
     private LogonModel logonModel;
-    private LogonContract.ILoginRegisterView mLoginRegisterView;
+    private LogonContract.ILoginRegisterView mLogonView;
 
     public LogonPresenter() {
         this.logonModel = new LogonModel();
@@ -29,66 +25,65 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
 
     @Override
     public void login() {
-        if (!verifyAccount()) return;
-        logonModel.login(username, password, new RxObserver<UserBean>(this, LogonModel.class.getName()) {
-
+        verifyAccount();
+        RxObserver<UserBean> mLoginRxObserver = new RxObserver<UserBean>(this) {
             @Override
-            public void onSubscribe(Disposable d) {
-                mLoginRegisterView.showLoading(AppContext.getContext().getString(R.string.isLoging));
+            protected void onStart() {
+                mLogonView.showLoading(AppContext.getContext().getString(R.string.isLoging));
             }
 
             @Override
-            protected void onSuccess(UserBean data) {
-                //加密保存用户信息和密钥
-                UserInfoManager.saveUserInfo(data);
-                UserInfoManager.saveIsLogin(true);
-                mLoginRegisterView.showResult(AppContext.getContext().getString(R.string.login_success));
+            protected void onSuccess(UserBean userBean) {
+                logonModel.saveUserInfo(userBean);
+                mLogonView.showResult(AppContext.getContext().getString(R.string.login_success));
             }
 
             @Override
             protected void onFail(int errorCode, String errorMsg) {
-                mLoginRegisterView.showFail(errorMsg);
+                mLogonView.showFail(errorMsg);
             }
-
-        });
+        };
+        logonModel.login(username, password, mLoginRxObserver);
+        addDisposable(mLoginRxObserver);
     }
 
     @Override
     public void register() {
-        if (!verifyAccount()) return;
-        logonModel.register(username, password, new RxObserver<String>(this, LogonModel.class.getName()) {
+        verifyAccount();
+        RxObserver<String> mRegisterRxObserver = new RxObserver<String>(this) {
+            @Override
+            protected void onStart() {
+                mLogonView.showLoading(AppContext.getContext().getString(R.string.isRegistering));
+            }
+
             @Override
             protected void onSuccess(String data) {
-                mLoginRegisterView.showResult(AppContext.getContext().getString(R.string.register_success));
+                mLogonView.showResult(AppContext.getContext().getString(R.string.register_success));
             }
 
             @Override
             protected void onFail(int errorCode, String errorMsg) {
-                mLoginRegisterView.showFail(errorMsg);
+                mLogonView.showFail(errorMsg);
             }
-
-            @Override
-            public void onSubscribe(Disposable d) {
-                mLoginRegisterView.showLoading(AppContext.getContext().getString(R.string.isRegistering));
-            }
-        });
+        };
+        logonModel.register(username, password, mRegisterRxObserver);
+        addDisposable(mRegisterRxObserver);
     }
 
-
-    private boolean verifyAccount() {
-        mLoginRegisterView = getView();
-        username = mLoginRegisterView.getUserName();
-        password = mLoginRegisterView.getPassWord();
-        if (TextUtils.isEmpty(username)) {
-            mLoginRegisterView.onAccoundError(AppContext.getContext().getString(R.string.username_not_empty));
-            return false;
+    private VerifyAccountCallback mVerifyAccountCallback = new VerifyAccountCallback() {
+        @Override
+        public void onVerifyResult(String msg) {
+            mLogonView.showFail(msg);
         }
+    };
 
-        if (TextUtils.isEmpty(password)) {
-            mLoginRegisterView.onAccoundError(AppContext.getContext().getString(R.string.password_not_empty));
-            return false;
-        }
-        return true;
+
+    private void verifyAccount() {
+        mLogonView = getView();
+        username = mLogonView.getUserName();
+        password = mLogonView.getPassWord();
+        if (!logonModel.verifyAccount(username, password, mVerifyAccountCallback))
+            return;
     }
 
 }

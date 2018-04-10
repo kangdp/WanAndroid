@@ -1,7 +1,6 @@
 package com.kdp.wanandroidclient.ui.tree;
 
 import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.ui.mvp.presenter.ICommonPresenter;
 import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
 
 /**
@@ -11,9 +10,13 @@ import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
 
 public interface TreeListContract {
 
-    interface ITreePresenter extends ICommonPresenter {
+    interface ITreePresenter {
 
         void loadTreeList();
+
+        void collectArticle();
+
+        void unCollectArticle();
     }
 
     interface ITreeListView extends IListDataView<ArticleBean> {

@@ -18,31 +18,25 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.text.ParseException;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 
 /**
  * Observer基类
  */
 
-public abstract class RxBaseObserver<T> implements Observer<BaseBean<T>> {
+public abstract class RxBaseObserver<T> extends DisposableObserver<BaseBean<T>> {
 
     protected IView view;
-    private BasePresenter mPresenter;
-    private String mTag;
 
-    RxBaseObserver(BasePresenter mPresenter, String mTag) {
-        this.mPresenter = mPresenter;
+    RxBaseObserver(BasePresenter mPresenter) {
         this.view = mPresenter.getView();
-        this.mTag = mTag;
     }
 
-    @Override
-    public void onSubscribe(Disposable d) {
-        showLoading();
 
-        if (mTag != null)
-            mPresenter.addRequestTag(mTag, d);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        showLoading();
     }
 
     public void showLoading() {

@@ -32,19 +32,9 @@ public interface LogonContract {
          */
         String getPassWord();
 
-
         /**
-         * 账号错误
-         *
-         * @param msg
-         */
-        void onAccoundError(String msg);
-
-        /**
-         * 登录或注册result
+         * 登录或注册Result
          */
         void showResult(String msg);
-
-
     }
 }

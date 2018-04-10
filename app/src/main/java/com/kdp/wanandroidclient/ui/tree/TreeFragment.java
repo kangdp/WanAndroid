@@ -53,6 +53,11 @@ public class TreeFragment extends BaseAbListFragment<TreePresenter, TreeContract
         mListData.addAll(data);
     }
 
+    @Override
+    public int getArticleId() {
+        return 0;
+    }
+
     //进入子分类页面
     @Override
     public void onItemClick(TreeBean mTreeBean) {

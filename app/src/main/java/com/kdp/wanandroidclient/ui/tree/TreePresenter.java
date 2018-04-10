@@ -24,17 +24,16 @@ public class TreePresenter extends BasePresenter<TreeContract.ITreeView> impleme
     @Override
     public void loadTree() {
         mSystemView = getView();
-        mTreeModel.getTree(new RxObserver<List<TreeBean>>(this,TreeModel.class.getName()) {
+        RxObserver<List<TreeBean>> mTreeRxObserver = new RxObserver<List<TreeBean>>(this) {
             @Override
             protected void onSuccess(List<TreeBean> data) {
                 mSystemView.setData(data);
-                if (mSystemView.getData().size() == 0){
+                if (mSystemView.getData().size() == 0) {
                     mSystemView.showEmpty();
-                }else {
+                } else {
                     mSystemView.showContent();
                 }
             }
-
             @Override
             protected void onFail(int errorCode, String errorMsg) {
                 mSystemView.showFail(errorMsg);
@@ -45,7 +44,8 @@ public class TreePresenter extends BasePresenter<TreeContract.ITreeView> impleme
                 super.onError(e);
                 mSystemView.showError();
             }
-        });
-
+        };
+        mTreeModel.getTree(mTreeRxObserver);
+        addDisposable(mTreeRxObserver);
     }
 }

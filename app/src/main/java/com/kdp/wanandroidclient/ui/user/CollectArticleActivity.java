@@ -46,7 +46,7 @@ public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Us
 
     @Override
     protected void loadDatas() {
-        mPresenter.loadArticleList();
+        mPresenter.loadCollectList();
     }
 
     @Override
@@ -76,6 +76,10 @@ public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Us
     @Override
     public int getArticleId() {
         return id;
+    }
+
+    @Override
+    public void collect(boolean isCollect, String result) {
     }
 
     @Override

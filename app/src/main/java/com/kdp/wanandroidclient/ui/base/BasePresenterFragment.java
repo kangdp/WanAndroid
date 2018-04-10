@@ -1,6 +1,7 @@
 package com.kdp.wanandroidclient.ui.base;
 
-import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
 import com.kdp.wanandroidclient.ui.mvp.view.IView;
@@ -10,29 +11,39 @@ import com.kdp.wanandroidclient.ui.mvp.view.IView;
  * date: 2018/2/11
  */
 
-public abstract class BasePresenterFragment<P extends BasePresenter<V>, V extends IView> extends BaseFragment{
+public abstract class BasePresenterFragment<P extends BasePresenter<V>, V extends IView> extends BaseFragment implements IView{
 
     protected P mPresenter;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mPresenter = createPresenter();
+        //关联View
+        attachView();
+    }
 
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //解除关联
+        detachView();
+    }
+
+    private void detachView() {
+        if (mPresenter != null) {
+            mPresenter.detachView();
+            mPresenter.removeAllDisposable();
+            mPresenter = null;
+        }
+    }
+
+    private void attachView() {
+        if (mPresenter != null) {
+            mPresenter.attachView((V) this);
+        }
+    }
 
     protected abstract P createPresenter();
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        if (mPresenter != null) {
-            mPresenter.detachView();
-            mPresenter = null;
-        }
-
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mPresenter = createPresenter();
-        if (mPresenter != null)
-            mPresenter.attachView((V) this);
-    }
 }

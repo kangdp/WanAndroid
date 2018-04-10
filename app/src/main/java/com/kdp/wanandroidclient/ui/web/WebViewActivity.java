@@ -11,7 +11,8 @@ import android.widget.FrameLayout;
 import com.just.agentweb.AgentWeb;
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.common.Const;
-import com.kdp.wanandroidclient.ui.base.BaseActivity;
+import com.kdp.wanandroidclient.ui.base.BasePresenterActivity;
+import com.kdp.wanandroidclient.utils.ToastUtils;
 
 import java.lang.reflect.Method;
 
@@ -21,7 +22,7 @@ import java.lang.reflect.Method;
  * date: 2018/2/27
  */
 
-public class WebViewActivity extends BaseActivity{
+public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, WebViewContract.IWebView> implements WebViewContract.IWebView {
     private FrameLayout mContainer;
     private AgentWeb mAgentWeb;
     private String title = "";
@@ -42,6 +43,11 @@ public class WebViewActivity extends BaseActivity{
     protected void getIntent(Intent intent) {
         title = intent.getStringExtra(Const.BUNDLE_KEY.TITLE);
         url = intent.getStringExtra(Const.BUNDLE_KEY.URL);
+    }
+
+    @Override
+    protected WebViewPresenter createPresenter() {
+        return new WebViewPresenter();
     }
 
     @Override
@@ -84,6 +90,7 @@ public class WebViewActivity extends BaseActivity{
                 share();
                 break;
             case R.id.collect:
+//                mPresenter.collect();
                 break;
             case R.id.browser:
                 openInBrowser();
@@ -119,8 +126,9 @@ public class WebViewActivity extends BaseActivity{
         intent.setType("text/plain");//分享文本
         startActivity(Intent.createChooser(intent, "分享至"));
     }
-   //打开浏览器
-    private void openInBrowser(){
+
+    //打开浏览器
+    private void openInBrowser() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         Uri uri = Uri.parse(url);
         intent.setData(uri);
@@ -144,5 +152,15 @@ public class WebViewActivity extends BaseActivity{
     protected void onDestroy() {
         super.onDestroy();
         mAgentWeb.destroy();
+    }
+
+    @Override
+    public int getArticleId() {
+        return 0;
+    }
+
+    @Override
+    public void collect(boolean isCollect, String result) {
+        ToastUtils.showToast(this, result);
     }
 }

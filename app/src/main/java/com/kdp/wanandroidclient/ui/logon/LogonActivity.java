@@ -28,13 +28,6 @@ public class LogonActivity extends BasePresenterActivity<LogonPresenter,LogonCon
     }
 
     @Override
-    public void onAccoundError(String msg) {
-        ToastUtils.showToast(this, msg);
-    }
-
-
-
-    @Override
     public void showResult(String msg) {
         ToastUtils.showToast(this, msg);
         finish();

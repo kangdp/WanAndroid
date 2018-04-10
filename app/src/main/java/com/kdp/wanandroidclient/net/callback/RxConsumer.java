@@ -11,7 +11,7 @@ import io.reactivex.functions.Consumer;
  * date: 2018/3/7
  */
 
-public abstract class RxConsumer<T> implements Consumer<BaseBean<T>>{
+public abstract class RxConsumer<T> implements Consumer<BaseBean<T>> {
 
     @Override
     public void accept(@NonNull BaseBean<T> tBaseBean) throws Exception {

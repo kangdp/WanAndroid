@@ -1,15 +1,12 @@
 package com.kdp.wanandroidclient.ui.main;
 
-import com.kdp.wanandroidclient.R;
-import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.FriendBean;
 import com.kdp.wanandroidclient.bean.HotwordBean;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 import com.kdp.wanandroidclient.ui.mvp.model.impl.SearchModel;
-import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
-import com.kdp.wanandroidclient.utils.LogUtils;
+import com.kdp.wanandroidclient.ui.mvp.presenter.CommonPresenter;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ import java.util.List;
  * date: 2018/4/5
  */
 
-public class SearchPresenter extends BasePresenter<SearchContract.ISearchView> implements SearchContract.ISearchPresenter {
+public class SearchPresenter extends CommonPresenter<SearchContract.ISearchView> implements SearchContract.ISearchPresenter {
     private SearchModel mSearchModel;
     private SearchContract.ISearchView mSearchView;
 
@@ -27,54 +24,9 @@ public class SearchPresenter extends BasePresenter<SearchContract.ISearchView> i
     }
 
     @Override
-    public void collectArticle() {
-    }
-
-    @Override
-    public void collectInsideArticle() {
-        mSearchView = getView();
-        mSearchModel.collectInSideArticle(mSearchView.getArticleId(), new RxObserver<String>(this) {
-            @Override
-            protected void onSuccess(String data) {
-                mSearchView.collect(true, AppContext.getContext().getString(R.string.collect_success));
-            }
-
-            @Override
-            protected void onFail(int errorCode, String errorMsg) {
-                mSearchView.showFail(errorMsg);
-            }
-
-            @Override
-            public void showLoading() {
-            }
-        });
-    }
-
-    @Override
-    public void unCollectArticle() {
-        mSearchView = getView();
-        mSearchModel.unCollectArticle(mSearchView.getArticleId(), new RxObserver<String>(this) {
-            @Override
-            protected void onSuccess(String data) {
-                mSearchView.collect(false, AppContext.getContext().getString(R.string.uncollect_success));
-            }
-
-            @Override
-            protected void onFail(int errorCode, String errorMsg) {
-                mSearchView.showFail(errorMsg);
-            }
-
-            @Override
-            public void showLoading() {
-            }
-        });
-    }
-
-    @Override
     public void search() {
         mSearchView = getView();
-        LogUtils.e(mSearchView.getPage()+"");
-        mSearchModel.searchArticle(mSearchView.getPage(), mSearchView.getKeyword(), new RxPageListObserver<ArticleBean>(this) {
+        RxPageListObserver<ArticleBean> mSearchRxPageListObserver = new RxPageListObserver<ArticleBean>(this) {
             @Override
             public void onSuccess(List<ArticleBean> mData) {
                 mSearchView.setData(mData);
@@ -86,33 +38,38 @@ public class SearchPresenter extends BasePresenter<SearchContract.ISearchView> i
 
             @Override
             public void onFail(int errorCode, String errorMsg) {
+                mSearchView.showFail(errorMsg);
             }
-
-        });
+        };
+        mSearchModel.searchArticle(mSearchView.getPage(), mSearchView.getKeyword(), mSearchRxPageListObserver);
+        addDisposable(mSearchRxPageListObserver);
     }
 
     @Override
     public void getHotWord() {
         mSearchView = getView();
-        mSearchModel.getHotWord(new RxObserver<List<HotwordBean>>(this) {
+        RxObserver<List<HotwordBean>> mHotWordRxObserver = new RxObserver<List<HotwordBean>>(this) {
             @Override
             protected void onSuccess(List<HotwordBean> data) {
-               mSearchView.setHotwordData(data);
+                mSearchView.setHotwordData(data);
             }
 
             @Override
             protected void onFail(int errorCode, String errorMsg) {
+                mSearchView.showFail(errorMsg);
             }
+
             @Override
             public void showLoading() {
             }
-        });
+        };
+        mSearchModel.getHotWord(mHotWordRxObserver);
+        addDisposable(mHotWordRxObserver);
     }
 
     @Override
     public void getFriend() {
-        mSearchView = getView();
-        mSearchModel.getFriend(new RxObserver<List<FriendBean>>(this) {
+        RxObserver<List<FriendBean>> mFriendRxObserver = new RxObserver<List<FriendBean>>(this) {
             @Override
             protected void onSuccess(List<FriendBean> data) {
                 mSearchView.setFriendData(data);
@@ -120,10 +77,24 @@ public class SearchPresenter extends BasePresenter<SearchContract.ISearchView> i
 
             @Override
             protected void onFail(int errorCode, String errorMsg) {
+                mSearchView.showFail(errorMsg);
             }
+
             @Override
             public void showLoading() {
             }
-        });
+        };
+        mSearchModel.getFriend(mFriendRxObserver);
+        addDisposable(mFriendRxObserver);
+    }
+
+    @Override
+    public void collectInsideArticle() {
+        collectInsideArticle(mSearchView.getArticleId(),mSearchView);
+    }
+
+    @Override
+    public void unCollectArticle() {
+        unCollectArticle(mSearchView.getArticleId(),mSearchView);
     }
 }

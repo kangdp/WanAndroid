@@ -114,10 +114,4 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
-//        //当处于后台被系统杀死后不保存当前状态
-////        super.onSaveInstanceState(outState);
-//    }
-
 }

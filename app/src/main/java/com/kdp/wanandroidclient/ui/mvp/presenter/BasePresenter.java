@@ -2,10 +2,7 @@ package com.kdp.wanandroidclient.ui.mvp.presenter;
 
 import com.kdp.wanandroidclient.ui.mvp.view.IView;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -14,78 +11,55 @@ import io.reactivex.disposables.Disposable;
 
 public class BasePresenter<V extends IView> implements IPresenter<V> {
     private V view;
-    private Map<String, Disposable> mDisposableMaps;
+    //用来存放Disposable的容器
+    private CompositeDisposable mCompositeDisposable;
 
-    /**
-     * 绑定
-     *
-     * @param view
-     */
+    //绑定View
     @Override
     public void attachView(V view) {
         this.view = view;
     }
 
-    /**
-     * 解绑
-     */
+    //解除View绑定
     @Override
     public void detachView() {
         this.view = null;
     }
 
-    /**
-     * 获取目标view
-     *
-     * @return
-     */
+    //获取绑定的View
     @Override
     public V getView() {
         checkAttachView();
         return view;
     }
 
-    /**
-     * 验证是否已绑定此View
-     *
-     * @return
-     */
+    //检查View是否存在
     @Override
     public void checkAttachView() {
         if (view == null)
             throw new RuntimeException("You have no binding this view");
     }
 
-    /**
-     * @param tag
-     * @param disposable
-     */
+    //添加指定的请求
     @Override
-    public void addRequestTag(String tag, Disposable disposable) {
-        if (mDisposableMaps == null)
-            mDisposableMaps = new HashMap<>();
-        mDisposableMaps.put(tag, disposable);
+    public void addDisposable(Disposable disposable) {
+        if (mCompositeDisposable == null)
+            mCompositeDisposable = new CompositeDisposable();
+        mCompositeDisposable.add(disposable);
     }
 
-
-    /**
-     * 取消请求
-     */
+    //移除指定的请求
     @Override
-    public void cancelRequestTags() {
-        if (mDisposableMaps == null) return;
-        Iterator<Map.Entry<String, Disposable>> mIterator = mDisposableMaps.entrySet().iterator();
-        Disposable mDisposable;
-        while (mIterator.hasNext()) {
-            mDisposable = mIterator.next().getValue();
-            if (!mDisposable.isDisposed())
-                mDisposable.dispose();
-        }
-        mDisposableMaps.clear();
-        mDisposableMaps = null;
-
-
+    public void removeDisposable(Disposable disposable) {
+        if (mCompositeDisposable != null)
+            mCompositeDisposable.remove(disposable);
     }
 
+    //取消所有的请求Tag
+    @Override
+    public void removeAllDisposable() {
+        if (mCompositeDisposable != null)
+            mCompositeDisposable.clear();
+    }
 
 }

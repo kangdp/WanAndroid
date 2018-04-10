@@ -18,15 +18,10 @@ public abstract class RxPageListObserver<T> extends RxBaseObserver<PageListDataB
 
     private IListDataView<T> mListDataView;
 
-    protected RxPageListObserver(BasePresenter mPresenter,String mTag) {
-        super(mPresenter,mTag);
+    public RxPageListObserver(BasePresenter mPresenter) {
+        super(mPresenter);
         this.mListDataView = (IListDataView<T>) mPresenter.getView();
     }
-
-    public RxPageListObserver(BasePresenter mPresenter) {
-        this(mPresenter,null);
-    }
-
     @Override
     public void onNext(BaseBean<PageListDataBean<T>> baseBean) {
         if (baseBean.errorCode == NetConfig.REQUEST_SUCCESS) {
@@ -34,7 +29,7 @@ public abstract class RxPageListObserver<T> extends RxBaseObserver<PageListDataB
             PageListDataBean<T> mListData = baseBean.data;
 
             if (mListDataView.getPage() == 0) {
-                mListDataView.refresh();
+                mListDataView.clearListData();
             }
             if (mListData.isOver()) {
                 mListDataView.showNoMore();

@@ -11,7 +11,6 @@ import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
 import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
 import com.kdp.wanandroidclient.ui.mvp.view.IView;
-import com.kdp.wanandroidclient.utils.ToastUtils;
 import com.kdp.wanandroidclient.widget.ContainerLayout;
 import com.kdp.wanandroidclient.widget.LMRecyclerView;
 import com.kdp.wanandroidclient.widget.NoAlphaItemAnimator;
@@ -64,30 +63,22 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
         return R.layout.include_recycler_list;
     }
 
-    /**
-     * 是否能够自动加载更多
-     */
-
+    //是否能够自动加载更多
     protected abstract boolean isCanLoadMore();
-
-    @Override
-    public void collect(boolean isCollect, String result) {
-    }
 
     @Override
     public List<T> getData() {
         return mListData;
     }
 
+    //显示内容
     @Override
     public void showContent() {
         mContainerLayout.showContent();
         mListAdapter.notifyAllDatas(mListData, mRecyclerView);
     }
 
-    /**
-     * 下拉刷新
-     */
+    //下拉刷新监听
     private SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
@@ -96,9 +87,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
     };
 
 
-    /**
-     * 刷新列表
-     */
+    // 刷新列表
     public void refreshData() {
         state = Const.PAGE_STATE.STATE_REFRESH;
         isAutoLoadMore = true;
@@ -106,9 +95,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
         loadDatas();
     }
 
-    /**
-     * 滑到底部自动加载
-     */
+    //滑到底部自动加载
     @Override
     public void loadMore() {
         if (!isAutoLoadMore) return;
@@ -116,9 +103,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
         loadDatas();
     }
 
-    /**
-     * 点击重新加载
-     */
+    //点击重新加载
     @Override
     public void reLoadMore() {
         isAutoLoadMore = true;
@@ -126,18 +111,13 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
     }
 
 
-    /**
-     * 当前page = 1,清空列表数据
-     */
+    //清空列表数据
     @Override
-    public void refresh() {
-        //清空列表
+    public void clearListData() {
         mListData.clear();
     }
 
-    /**
-     * 自动加载更多
-     */
+    //自动加载更多
     @Override
     public void autoLoadMore() {
         mRecyclerView.showLoadMore();
@@ -145,9 +125,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
         isAutoLoadMore = true;
     }
 
-    /**
-     * 没有更多数据了
-     */
+    ///没有更多数据
     @Override
     public void showNoMore() {
         mRecyclerView.showNoMoreData();
@@ -155,9 +133,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
     }
 
 
-    /**
-     * 加载出错
-     */
+    //加载出错
     @Override
     public void showError() {
         isAutoLoadMore = false;
@@ -172,11 +148,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
 
     }
 
-    /**
-     * 当前page
-     *
-     * @return
-     */
+    //当前请求的页
     public int getPage() {
         return page;
     }
@@ -193,28 +165,20 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
     }
 
     //是否开启加载更多
-    public void setCanLoadMore(boolean isCanLoadMore){
+    public void setCanLoadMore(boolean isCanLoadMore) {
         mRecyclerView.setCanLoadMore(isCanLoadMore);
     }
+
     //是否禁用刷新
-    public void setRefreshEnable(boolean isEnableRefresh){
+    public void setRefreshEnable(boolean isEnableRefresh) {
         mRefreshLayout.setEnabled(isEnableRefresh);
     }
-
-    @Override
-    public int getArticleId() {
-        return 0;
-    }
-
+    //无数据
     @Override
     public void showEmpty() {
         mContainerLayout.showEmpty();
     }
 
-    @Override
-    public void showFail(String msg) {
-        ToastUtils.showToast(this, msg);
-    }
 
     protected void setRefreshing(final boolean isRefrshing) {
         mRefreshLayout.postDelayed(new Runnable() {

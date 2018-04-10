@@ -19,21 +19,23 @@ public interface IView{
     void hideLoading();
 
     /**
-     * 显示失败
+     * 失败
      *
      * @param msg
      */
     void showFail(String msg);
 
     /**
-     * 显示错误
+     * 错误
      */
     void showError();
 
     /**
-     * 显示没有数据
+     * 没有数据
      */
     void showEmpty();//没有数据
+
+    void collect(boolean isCollect,String result); //收藏Result
 
 
 }
