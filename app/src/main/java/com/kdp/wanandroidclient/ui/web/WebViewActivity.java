@@ -10,9 +10,13 @@ import android.widget.FrameLayout;
 
 import com.just.agentweb.AgentWeb;
 import com.kdp.wanandroidclient.R;
+import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.common.Const;
+import com.kdp.wanandroidclient.event.Event;
+import com.kdp.wanandroidclient.event.RxEvent;
+import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.base.BasePresenterActivity;
-import com.kdp.wanandroidclient.utils.ToastUtils;
+import com.kdp.wanandroidclient.ui.logon.LogonActivity;
 
 import java.lang.reflect.Method;
 
@@ -25,6 +29,9 @@ import java.lang.reflect.Method;
 public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, WebViewContract.IWebView> implements WebViewContract.IWebView {
     private FrameLayout mContainer;
     private AgentWeb mAgentWeb;
+    private ArticleBean bean;
+    private int type;
+    private int id;
     private String title = "";
     private String url = "";
 
@@ -41,8 +48,14 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, Web
 
     @Override
     protected void getIntent(Intent intent) {
-        title = intent.getStringExtra(Const.BUNDLE_KEY.TITLE);
-        url = intent.getStringExtra(Const.BUNDLE_KEY.URL);
+        Bundle bundle = intent.getExtras();
+        bean = (ArticleBean) bundle.getSerializable(Const.BUNDLE_KEY.OBJ);
+        type = intent.getIntExtra(Const.BUNDLE_KEY.COLLECT_TYPE, -1);
+        if (bean != null) {
+            id = bean.getId();
+            title = bean.getTitle();
+            url = bean.getLink();
+        }
     }
 
     @Override
@@ -79,7 +92,10 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, Web
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.content_menu_setting, menu);
-        return super.onCreateOptionsMenu(menu);
+        if (type == -1)
+            menu.findItem(R.id.collect).setVisible(false);
+        return true;
+
     }
 
     @Override
@@ -90,7 +106,13 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, Web
                 share();
                 break;
             case R.id.collect:
-//                mPresenter.collect();
+                if (!UserInfoManager.isLogin())
+                    startActivity(new Intent(this, LogonActivity.class));
+                if (type == 1) {
+                    mPresenter.collectArticle();
+                } else if (type == 2) {
+                    mPresenter.collectInsideArticle();
+                }
                 break;
             case R.id.browser:
                 openInBrowser();
@@ -156,11 +178,15 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, Web
 
     @Override
     public int getArticleId() {
-        return 0;
+        return id;
     }
 
     @Override
     public void collect(boolean isCollect, String result) {
-        ToastUtils.showToast(this, result);
+        if (!bean.isCollect()) {
+            bean.setCollect(isCollect);
+            Event mEvent = new Event(Event.Type.ITEM, bean);
+            RxEvent.getInstance().postEvent(Const.EVENT_ACTION.REFRESH_DATA, mEvent);
+        }
     }
 }

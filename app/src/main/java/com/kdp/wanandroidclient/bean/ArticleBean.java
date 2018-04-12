@@ -1,12 +1,14 @@
 package com.kdp.wanandroidclient.bean;
 
+import java.io.Serializable;
+
 /**
  * 文章
  * author: 康栋普
  * date: 2018/2/12
  */
 
-public class ArticleBean {
+public class ArticleBean implements Serializable {
     /**
      * apkLink :
      * author : 小编
@@ -191,4 +193,12 @@ public class ArticleBean {
         this.zan = zan;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj instanceof ArticleBean) {
+            return this.id == ((ArticleBean) obj).id;
+        }
+        return false;
+    }
 }

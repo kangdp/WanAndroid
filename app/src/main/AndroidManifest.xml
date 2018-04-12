@@ -49,6 +49,7 @@
         <activity
             android:name="com.kdp.wanandroidclient.ui.web.WebViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
 
         <activity

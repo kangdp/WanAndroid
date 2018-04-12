@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.common.Const;
+import com.kdp.wanandroidclient.event.Event;
+import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.adapter.ArticleListAdapter;
@@ -60,7 +63,7 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Tree
 
     @Override
     protected BaseListAdapter getListAdapter() {
-        return new ArticleListAdapter(this,Const.LIST_TYPE.TREE);
+        return new ArticleListAdapter(this, Const.LIST_TYPE.TREE);
     }
 
     //分类id
@@ -86,13 +89,16 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Tree
     public int getArticleId() {
         return id;
     }
+
     //收藏结果
     @Override
     public void collect(boolean isCollect, String result) {
-        notifyItemData(isCollect,result);
+        mListData.get(position).setCollect(isCollect);
+        RxEvent.getInstance().postEvent(Const.EVENT_ACTION.REFRESH_DATA, new Event(Event.Type.ITEM,mListData.get(position)));
+        notifyItemData(isCollect, result);
     }
 
-    private void notifyItemData(boolean isCollect,String result) {
+    private void notifyItemData(boolean isCollect, String result) {
         mListData.get(position).setCollect(isCollect);
         mListAdapter.notifyItemDataChanged(position, mRecyclerView);
         ToastUtils.showToast(getActivity(), result);
@@ -100,15 +106,17 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Tree
 
     //进入详情
     @Override
-    public void onItemClick(String title, String url) {
+    public void onItemClick(ArticleBean bean) {
         Intent intent = new Intent(getActivity(), WebViewActivity.class);
-        intent.putExtra(Const.BUNDLE_KEY.TITLE, title);
-        intent.putExtra(Const.BUNDLE_KEY.URL, url);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
+        bundle.putInt(Const.BUNDLE_KEY.COLLECT_TYPE, 1);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
     @Override
-    public void onCollectClick(int position, int id, int originId) {
+    public void onDeleteCollectClick(int position, int id, int originId) {
     }
 
     //收藏click
@@ -126,5 +134,24 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Tree
 
     @Override
     public void onTreeClick(int chapterId, String chapterName) {
+    }
+
+    @Override
+    protected void receiveEvent(Object object) {
+        Event mEvent = (Event) object;
+        if (mEvent.type == Event.Type.ITEM) {
+            ArticleBean bean = (ArticleBean) mEvent.object;
+            for (int i = 0; i < mListData.size(); i++) {
+                if (bean.equals(mListData.get(i))) {
+                    position = i;
+                    notifyItemData(bean.isCollect(), getString(R.string.collect_success));
+                }
+            }
+        }
+    }
+
+    @Override
+    protected String registerEvent() {
+        return Const.EVENT_ACTION.REFRESH_DATA;
     }
 }

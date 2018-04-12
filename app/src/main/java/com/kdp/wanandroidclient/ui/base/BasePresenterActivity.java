@@ -94,4 +94,13 @@ public abstract class BasePresenterActivity<P extends BasePresenter<V>, V extend
     public void collect(boolean isCollect, String result) {
 
     }
+
+    @Override
+    protected void receiveEvent(Object object) {
+    }
+
+    @Override
+    protected String registerEvent() {
+        return null;
+    }
 }

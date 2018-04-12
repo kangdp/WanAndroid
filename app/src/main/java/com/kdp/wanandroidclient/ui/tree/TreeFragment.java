@@ -3,11 +3,12 @@ package com.kdp.wanandroidclient.ui.tree;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.kdp.wanandroidclient.bean.TreeBean;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.inter.OnTreeItemClickListener;
-import com.kdp.wanandroidclient.ui.adapter.TreeAdapter;
-import com.kdp.wanandroidclient.bean.TreeBean;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
+import com.kdp.wanandroidclient.ui.adapter.TreeAdapter;
 import com.kdp.wanandroidclient.ui.base.BaseAbListFragment;
 
 import java.util.List;

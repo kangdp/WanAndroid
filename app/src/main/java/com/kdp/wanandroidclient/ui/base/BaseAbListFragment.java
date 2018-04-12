@@ -194,6 +194,15 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
 
     }
 
+    @Override
+    protected void receiveEvent(Object object) {
+    }
+
+    @Override
+    protected String registerEvent() {
+        return null;
+    }
+
     protected abstract View initHeaderView();
 
     protected abstract void loadDatas();

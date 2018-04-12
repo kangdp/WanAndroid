@@ -3,6 +3,7 @@ package com.kdp.wanandroidclient.ui.main;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
@@ -18,6 +19,7 @@ import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.FriendBean;
 import com.kdp.wanandroidclient.bean.HotwordBean;
 import com.kdp.wanandroidclient.common.Const;
+import com.kdp.wanandroidclient.event.Event;
 import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.adapter.ArticleListAdapter;
@@ -140,9 +142,13 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
                 FriendBean mFriendBean = mFriendListDatas.get(position);
+                ArticleBean bean = new ArticleBean();
+                bean.setTitle(mFriendBean.getName());
+                bean.setLink(mFriendBean.getLink());
                 Intent intent = new Intent(SearchActivity.this, WebViewActivity.class);
-                intent.putExtra(Const.BUNDLE_KEY.TITLE, mFriendBean.getName());
-                intent.putExtra(Const.BUNDLE_KEY.URL, mFriendBean.getLink());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 return false;
             }
@@ -202,7 +208,7 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
         return super.onCreateOptionsMenu(menu);
     }
 
-   //去除SearchView的输入框默认背景
+    //去除SearchView的输入框默认背景
     private void deleteSearchPlate() {
         try {
             Class<?> cla = mSearchView.getClass();
@@ -260,15 +266,17 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
     }
 
     @Override
-    public void onItemClick(String title, String url) {
+    public void onItemClick(ArticleBean bean) {
         Intent intent = new Intent(this, WebViewActivity.class);
-        intent.putExtra(Const.BUNDLE_KEY.TITLE, title);
-        intent.putExtra(Const.BUNDLE_KEY.URL, url);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
+        bundle.putInt(Const.BUNDLE_KEY.COLLECT_TYPE, 2);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
-    @Override
-    public void onCollectClick(int position, int id, int originId) {
 
+    @Override
+    public void onDeleteCollectClick(int position, int id, int originId) {
     }
 
     @Override
@@ -301,5 +309,24 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
         intent.putExtra(Const.BUNDLE_KEY.CHAPTER_ID, chapterId);
         intent.putExtra(Const.BUNDLE_KEY.CHAPTER_NAME, chapterName);
         startActivity(intent);
+    }
+
+    @Override
+    protected String registerEvent() {
+        return Const.EVENT_ACTION.REFRESH_DATA;
+    }
+
+    @Override
+    protected void receiveEvent(Object object) {
+        Event mEvent = (Event) object;
+        if (mEvent.type == Event.Type.ITEM) {
+            ArticleBean bean = (ArticleBean) mEvent.object;
+            for (int i = 0; i < mListData.size(); i++) {
+                if (bean.equals(mListData.get(i))) {
+                    position = i;
+                    notifyItemData(bean.isCollect(), getString(R.string.collect_success));
+                }
+            }
+        }
     }
 }

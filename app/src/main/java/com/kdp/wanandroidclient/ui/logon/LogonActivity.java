@@ -5,6 +5,9 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.kdp.wanandroidclient.R;
+import com.kdp.wanandroidclient.common.Const;
+import com.kdp.wanandroidclient.event.Event;
+import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.ui.base.BasePresenterActivity;
 import com.kdp.wanandroidclient.utils.LightStatusbarUtils;
 import com.kdp.wanandroidclient.utils.ToastUtils;
@@ -14,7 +17,7 @@ import com.kdp.wanandroidclient.utils.ToastUtils;
  * Created by 康栋普 on 2018/2/1.
  */
 
-public class LogonActivity extends BasePresenterActivity<LogonPresenter,LogonContract.ILoginRegisterView> implements LogonContract.ILoginRegisterView{
+public class LogonActivity extends BasePresenterActivity<LogonPresenter, LogonContract.ILoginRegisterView> implements LogonContract.ILoginRegisterView {
     private EditText et_username, et_password;
 
     @Override
@@ -30,6 +33,7 @@ public class LogonActivity extends BasePresenterActivity<LogonPresenter,LogonCon
     @Override
     public void showResult(String msg) {
         ToastUtils.showToast(this, msg);
+        RxEvent.getInstance().postEvent(Const.EVENT_ACTION.REFRESH_DATA, new Event(Event.Type.LIST, null));
         finish();
     }
 
@@ -50,7 +54,7 @@ public class LogonActivity extends BasePresenterActivity<LogonPresenter,LogonCon
 
     @Override
     protected boolean initToolbar() {
-       return false;
+        return false;
     }
 
 
@@ -75,7 +79,7 @@ public class LogonActivity extends BasePresenterActivity<LogonPresenter,LogonCon
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        LightStatusbarUtils.setLightStatusBar(this,true);
+        LightStatusbarUtils.setLightStatusBar(this, true);
     }
 
 

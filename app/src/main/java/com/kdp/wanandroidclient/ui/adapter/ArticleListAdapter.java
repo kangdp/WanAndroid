@@ -18,6 +18,7 @@ import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.common.ListDataHolder;
 import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
 import com.kdp.wanandroidclient.utils.DateUtils;
+import com.kdp.wanandroidclient.utils.LogUtils;
 
 /**
  * author: 康栋普
@@ -65,6 +66,16 @@ public class ArticleListAdapter extends BaseListAdapter<ArticleBean> {
             case Const.LIST_TYPE.HOME:
             case Const.LIST_TYPE.SEARCH:
                 img_collect.setImageResource(bean.isCollect() ? R.drawable.ic_favorite_light_24dp : R.drawable.ic_favorite_gray_24dp);
+
+                tv_type.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (listener != null) {
+                            listener.onTreeClick(bean.getChapterId(), bean.getChapterName());
+                        }
+                    }
+                });
+
                 img_collect.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -80,7 +91,7 @@ public class ArticleListAdapter extends BaseListAdapter<ArticleBean> {
                     @Override
                     public void onClick(View v) {
                         if (listener != null) {
-                            listener.onCollectClick(position, bean.getId(), bean.getOriginId());
+                            listener.onDeleteCollectClick(position, bean.getId(), bean.getOriginId());
                         }
                     }
                 });
@@ -90,20 +101,11 @@ public class ArticleListAdapter extends BaseListAdapter<ArticleBean> {
         }
 
 
-        tv_type.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listener.onTreeClick(bean.getChapterId(), bean.getChapterName());
-                }
-            }
-        });
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    listener.onItemClick(tv_title.getText().toString(), bean.getLink());
+                    listener.onItemClick(bean);
                 }
             }
         });

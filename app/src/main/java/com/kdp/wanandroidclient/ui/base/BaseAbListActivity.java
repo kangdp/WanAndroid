@@ -173,6 +173,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
     public void setRefreshEnable(boolean isEnableRefresh) {
         mRefreshLayout.setEnabled(isEnableRefresh);
     }
+
     //无数据
     @Override
     public void showEmpty() {
@@ -188,6 +189,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
             }
         }, 100);
     }
+
 
     protected abstract View initHeaderView();
 

@@ -1,6 +1,7 @@
 package com.kdp.wanandroidclient.ui.home;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -8,6 +9,7 @@ import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.BannerBean;
 import com.kdp.wanandroidclient.common.Const;
+import com.kdp.wanandroidclient.event.Event;
 import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.adapter.ArticleListAdapter;
@@ -100,7 +102,7 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
             //设置预加载两个页面
             mViewPager.setOffscreenPageLimit(2);
             setCurrentItem(1000 * mBannerList.size());
-            mViewPager.start();
+//            mViewPager.start();
         }
         mBannerAdapter.notifyDatas(mBannerList);
     }
@@ -128,28 +130,18 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
 
     //进入详情
     @Override
-    public void onItemClick(String title, String url) {
-
+    public void onItemClick(ArticleBean bean) {
         Intent intent = new Intent(getActivity(), WebViewActivity.class);
-        intent.putExtra(Const.BUNDLE_KEY.TITLE, title);
-        intent.putExtra(Const.BUNDLE_KEY.URL, url);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
+        bundle.putInt(Const.BUNDLE_KEY.COLLECT_TYPE, 1);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
     @Override
-    public void onCollectClick(int position, int id, int originId) {
-    }
+    public void onDeleteCollectClick(int position, int id, int originId) {
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mViewPager.stop();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mViewPager.start();
     }
 
     //收藏click
@@ -174,4 +166,39 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
         intent.putExtra(Const.BUNDLE_KEY.CHAPTER_NAME, chapterName);
         startActivity(intent);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mViewPager.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mViewPager.stop();
+    }
+
+    @Override
+    protected void receiveEvent(Object object) {
+        Event mEvent = (Event) object;
+        if (mEvent.type == Event.Type.ITEM) {
+            ArticleBean bean = (ArticleBean) mEvent.object;
+            for (int i = 0; i < mListData.size(); i++) {
+                if (bean.equals(mListData.get(i))) {
+                    position = i;
+                    notifyItemData(bean.isCollect(), getString(R.string.collect_success));
+                }
+            }
+        } else {
+            refreshData();
+        }
+    }
+
+    @Override
+    protected String registerEvent() {
+        return Const.EVENT_ACTION.REFRESH_DATA;
+    }
+
+
 }

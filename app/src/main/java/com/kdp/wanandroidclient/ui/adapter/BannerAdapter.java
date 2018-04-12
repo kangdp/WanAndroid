@@ -1,6 +1,7 @@
 package com.kdp.wanandroidclient.ui.adapter;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.application.AppContext;
+import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.BannerBean;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.manager.GlideLoaderManager;
@@ -42,7 +44,7 @@ public class BannerAdapter extends PagerAdapter {
     @Override
     public int getCount() {
         if (mBannerDatas == null) return 0;
-        return mBannerDatas.size()<=1?mBannerDatas.size():Integer.MAX_VALUE;
+        return mBannerDatas.size() <= 1 ? mBannerDatas.size() : Integer.MAX_VALUE;
     }
 
     @Override
@@ -55,14 +57,18 @@ public class BannerAdapter extends PagerAdapter {
             view = LayoutInflater.from(AppContext.getContext()).inflate(R.layout.item_banner, container, false);
             ImageView imageView = (ImageView) view.findViewById(R.id.img);
             TextView titleView = (TextView) view.findViewById(R.id.title);
-            GlideLoaderManager.loadImage(bean.getImagePath(), imageView,Const.IMAGE_LOADER.NOMAL_IMG);
+            GlideLoaderManager.loadImage(bean.getImagePath(), imageView, Const.IMAGE_LOADER.NOMAL_IMG);
             titleView.setText(bean.getTitle());
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(container.getContext(), WebViewActivity.class);
-                    intent.putExtra(Const.BUNDLE_KEY.TITLE, bean.getTitle());
-                    intent.putExtra(Const.BUNDLE_KEY.URL, bean.getUrl());
+                    ArticleBean mArticleBean = new ArticleBean();
+                    mArticleBean.setTitle(bean.getTitle());
+                    mArticleBean.setLink(bean.getUrl());
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Const.BUNDLE_KEY.OBJ, mArticleBean);
+                    intent.putExtras(bundle);
                     container.getContext().startActivity(intent);
                 }
             });
@@ -84,23 +90,22 @@ public class BannerAdapter extends PagerAdapter {
     }
 
 
-
     @Override
     public int getItemPosition(Object object) {
         mViews.clear();
         return POSITION_NONE;
     }
 
-    @Override
-    public void startUpdate(ViewGroup container) {
-        super.startUpdate(container);
+//    @Override
+//    public void startUpdate(ViewGroup container) {
+//        super.startUpdate(container);
 
         //ViewPager显示的页面数据有所改变的回调(还未处理)
-    }
+//    }
 
-    @Override
-    public void finishUpdate(ViewGroup container) {
-        super.finishUpdate(container);
+//    @Override
+//    public void finishUpdate(ViewGroup container) {
+//        super.finishUpdate(container);
 
         //页面数据改变的处理结束后的回调
         //此处的处理其实就是 回调instantiateItem和destroyItem方法
@@ -111,12 +116,7 @@ public class BannerAdapter extends PagerAdapter {
 //        }else if (position == 9){
 //            viewPager.setCurrentItem(1,false);
 //        }
-    }
+//    }
 
-    @Override
-    public void setPrimaryItem(ViewGroup container, int position, Object object) {
-        super.setPrimaryItem(container, position, object);
-        //动态加载,当切换item时，才去设置显示数据
-    }
 
 }

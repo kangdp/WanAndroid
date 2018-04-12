@@ -10,12 +10,19 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.kdp.wanandroidclient.R;
+import com.kdp.wanandroidclient.event.RxEvent;
+
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.subjects.PublishSubject;
 
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected Toolbar mToolbar;
     protected FrameLayout mContainerLayout;
     private ProgressDialog loadingDialog = null;
+    private PublishSubject mSubject;
+    private DisposableObserver mDisposableObserver;
+    private RxEvent mRxEvent;
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -50,8 +57,38 @@ public abstract class BaseActivity extends AppCompatActivity {
         //初始化Content
         initContent(getLayoutId());
 
+        mRxEvent = RxEvent.getInstance();
+        //注册事件
+        mSubject = mRxEvent.registerEvent(registerEvent());
+        mDisposableObserver = new ReceiveEvent();
+        mSubject.subscribe(mDisposableObserver);
     }
 
+    private class ReceiveEvent extends DisposableObserver {
+        @Override
+        public void onNext(Object o) {
+            receiveEvent(o);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+        }
+
+        @Override
+        public void onComplete() {
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //注销事件
+        RxEvent.getInstance().unRegisterEvent(registerEvent(), mSubject, mDisposableObserver);
+    }
+
+    protected abstract void receiveEvent(Object object);
+
+    protected abstract String registerEvent();
 
     protected void onNavigationClick() {
         finish();

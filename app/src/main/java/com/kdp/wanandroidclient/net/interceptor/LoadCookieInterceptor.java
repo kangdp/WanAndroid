@@ -2,7 +2,6 @@ package com.kdp.wanandroidclient.net.interceptor;
 
 import android.text.TextUtils;
 
-import com.kdp.wanandroidclient.utils.LogUtils;
 import com.kdp.wanandroidclient.utils.PreUtils;
 
 import java.io.IOException;
@@ -24,7 +23,6 @@ public class LoadCookieInterceptor implements Interceptor {
         String mCookieStr = (String) PreUtils.get(chain.request().url().host(), "");
         if (!TextUtils.isEmpty(mCookieStr)) {
             builder.addHeader("Cookie", mCookieStr.substring(0,mCookieStr.length()-1));//长度减1为了去除最后的逗号
-            LogUtils.e(mCookieStr);
         }
         return chain.proceed(builder.build());
     }

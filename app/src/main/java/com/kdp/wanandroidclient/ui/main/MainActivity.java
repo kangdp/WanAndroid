@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.bean.UserBean;
 import com.kdp.wanandroidclient.common.Const;
+import com.kdp.wanandroidclient.event.Event;
+import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.manager.GlideLoaderManager;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.base.BaseActivity;
@@ -104,6 +106,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         initFragments();
     }
 
+    @Override
+    protected void receiveEvent(Object object) {
+    }
+
+    @Override
+    protected String registerEvent() {
+        return null;
+    }
+
 
     private void initNavigationHeaderView() {
         View mHeaderView = mNavigationView.getHeaderView(0);
@@ -163,7 +174,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         return super.onCreateOptionsMenu(menu);
     }
 
-   //Menu点击事件
+    //Menu点击事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -178,6 +189,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     //退出登录
     private void exitToLogin() {
+        //刷新首页数据
+        if (UserInfoManager.isLogin())
+            RxEvent.getInstance().postEvent(Const.EVENT_ACTION.REFRESH_DATA, new Event(Event.Type.LIST, null));
         startActivity(new Intent(MainActivity.this, LogonActivity.class));
         PreUtils.clearAll();
     }

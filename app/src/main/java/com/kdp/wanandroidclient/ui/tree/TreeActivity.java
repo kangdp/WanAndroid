@@ -80,4 +80,13 @@ public class TreeActivity extends BaseActivity {
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }
+
+    @Override
+    protected void receiveEvent(Object object) {
+    }
+
+    @Override
+    protected String registerEvent() {
+        return null;
+    }
 }

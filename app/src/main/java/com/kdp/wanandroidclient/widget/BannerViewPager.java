@@ -141,14 +141,14 @@ public class BannerViewPager extends ViewPager {
         super.onAttachedToWindow();
         //防止ViewPager可见时第一次切换无动画效果
         //滚动监听
-        addOnPageChangeListener(mOnPagerChangeListener);
         setFirstLayout(false);
+        start();
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        removeOnPageChangeListener(mOnPagerChangeListener);
+        start();
     }
 
     /**

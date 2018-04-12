@@ -1,6 +1,5 @@
 package com.kdp.wanandroidclient.net.interceptor;
 
-import com.kdp.wanandroidclient.utils.LogUtils;
 import com.kdp.wanandroidclient.utils.PreUtils;
 
 import java.io.IOException;
@@ -29,7 +28,6 @@ public class SaveCookieInterceptor implements Interceptor {
                 //注意Cookie请求头字段中的每个Cookie之间用逗号或分号分隔
                 sb.append(cookie).append(",");
             }
-            LogUtils.e(sb.toString());
             PreUtils.put(response.request().url().host(), sb.toString());
         }
         return response;

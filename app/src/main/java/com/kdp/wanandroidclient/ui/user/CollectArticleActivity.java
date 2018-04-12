@@ -1,6 +1,7 @@
 package com.kdp.wanandroidclient.ui.user;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
 import com.kdp.wanandroidclient.R;
@@ -66,10 +67,11 @@ public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Us
 
 
     @Override
-    public void onItemClick(String title, String url) {
+    public void onItemClick(ArticleBean bean) {
         Intent intent = new Intent(this, WebViewActivity.class);
-        intent.putExtra(Const.BUNDLE_KEY.TITLE, title);
-        intent.putExtra(Const.BUNDLE_KEY.URL, url);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -83,7 +85,7 @@ public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Us
     }
 
     @Override
-    public void onCollectClick(int position, int id,int originId) {
+    public void onDeleteCollectClick(int position, int id,int originId) {
         this.id = id;
         this.originId = originId;
         this.position = position;
@@ -92,7 +94,9 @@ public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Us
 
     @Override
     public void onCollectClick(int position, int id) {
+
     }
+
 
     @Override
     public void onTreeClick(int chapterId, String chapterName) {

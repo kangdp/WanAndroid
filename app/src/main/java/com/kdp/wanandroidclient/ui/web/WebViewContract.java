@@ -9,7 +9,8 @@ import com.kdp.wanandroidclient.ui.mvp.view.IView;
 
 public class WebViewContract {
     interface IWebViewPresenter{
-        void collect();
+        void collectArticle();
+        void collectInsideArticle();
     }
 
     interface IWebView extends IView{
