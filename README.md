@@ -8,7 +8,7 @@
 
 Apk
 ----
-[1.0.0](https://www.pgyer.com/SDIx)
+[1.0.1](https://www.pgyer.com/SDIx)
 
 接口
 ----
