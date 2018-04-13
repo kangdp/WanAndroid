@@ -106,13 +106,7 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, Web
                 share();
                 break;
             case R.id.collect:
-                if (!UserInfoManager.isLogin())
-                    startActivity(new Intent(this, LogonActivity.class));
-                if (type == 1) {
-                    mPresenter.collectArticle();
-                } else if (type == 2) {
-                    mPresenter.collectInsideArticle();
-                }
+                collect();
                 break;
             case R.id.browser:
                 openInBrowser();
@@ -147,6 +141,18 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, Web
         intent.putExtra(Intent.EXTRA_TEXT, "玩Android分享(" + title + "):" + url);
         intent.setType("text/plain");//分享文本
         startActivity(Intent.createChooser(intent, "分享至"));
+    }
+
+    //收藏
+    private void collect() {
+        if (!UserInfoManager.isLogin())
+            startActivity(new Intent(this, LogonActivity.class));
+        if (bean.isCollect()) return;
+        if (type == 1) {
+            mPresenter.collectArticle();
+        } else if (type == 2) {
+            mPresenter.collectInsideArticle();
+        }
     }
 
     //打开浏览器

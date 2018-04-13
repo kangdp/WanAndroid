@@ -19,6 +19,7 @@ import com.kdp.wanandroidclient.ui.base.BaseAbListFragment;
 import com.kdp.wanandroidclient.ui.logon.LogonActivity;
 import com.kdp.wanandroidclient.ui.tree.TreeActivity;
 import com.kdp.wanandroidclient.ui.web.WebViewActivity;
+import com.kdp.wanandroidclient.utils.LogUtils;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 import com.kdp.wanandroidclient.widget.BannerViewPager;
 
@@ -147,6 +148,7 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
     //收藏click
     @Override
     public void onCollectClick(int position, int id) {
+        LogUtils.e(id+"");
         if (!UserInfoManager.isLogin())
             startActivity(new Intent(getActivity(), LogonActivity.class));
         this.position = position;

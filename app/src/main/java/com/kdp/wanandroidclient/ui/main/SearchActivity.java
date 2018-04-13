@@ -327,6 +327,8 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
                     notifyItemData(bean.isCollect(), getString(R.string.collect_success));
                 }
             }
+        } else {
+            refreshData();
         }
     }
 }

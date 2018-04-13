@@ -52,7 +52,7 @@ public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Us
 
     @Override
     protected BaseListAdapter getListAdapter() {
-        return new ArticleListAdapter(this,Const.LIST_TYPE.COLLECT);
+        return new ArticleListAdapter(this, Const.LIST_TYPE.COLLECT);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Us
     }
 
     @Override
-    public void onDeleteCollectClick(int position, int id,int originId) {
+    public void onDeleteCollectClick(int position, int id, int originId) {
         this.id = id;
         this.originId = originId;
         this.position = position;

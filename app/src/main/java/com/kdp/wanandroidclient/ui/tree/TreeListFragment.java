@@ -147,6 +147,8 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Tree
                     notifyItemData(bean.isCollect(), getString(R.string.collect_success));
                 }
             }
+        }else {
+            refreshData();
         }
     }
 
