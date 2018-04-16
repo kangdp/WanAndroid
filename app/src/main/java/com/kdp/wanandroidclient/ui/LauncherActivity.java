@@ -3,6 +3,7 @@ package com.kdp.wanandroidclient.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.bean.UserBean;
@@ -86,5 +87,15 @@ public class LauncherActivity extends BasePresenterActivity<LogonPresenter, Logo
 
     @Override
     public void showResult(String msg) {
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 }

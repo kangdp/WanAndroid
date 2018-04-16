@@ -2,7 +2,9 @@ package com.kdp.wanandroidclient.ui.web;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,6 +56,11 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, Web
         if (bean != null) {
             id = bean.getId();
             title = bean.getTitle();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                title = Html.fromHtml(title, Html.FROM_HTML_MODE_LEGACY).toString();
+            } else {
+                title = Html.fromHtml(title).toString();
+            }
             url = bean.getLink();
         }
     }
