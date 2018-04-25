@@ -5,8 +5,8 @@
     <style name="AppTheme" parent="AppTheme.Base">
         <!--透明状态栏-->
         <item name="android:windowTranslucentStatus">true</item>
-        <!--透明导航栏-->
-        <item name="android:windowTranslucentNavigation">true</item>
+        <!--设置导航栏不透明-->
+        <item name="android:windowTranslucentNavigation">false</item>
     </style>
 
 

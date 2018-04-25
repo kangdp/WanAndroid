@@ -14,12 +14,11 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="AppTheme.Logon">
-        <item name="colorAccent">@color/colorPrimary</item>
-    </style>
+    <style name="AppTheme.Logon" />
 
     <!--定义Toolbar样式-->
     <style name="ToolBarStyle" parent="@style/ThemeOverlay.AppCompat">
+        <item name="android:fitsSystemWindows">true</item>
         <!--toolbar 标题和溢出菜单按钮字体的颜色-->
         <!--<item name="android:textColorPrimary">@android:color/white</item>-->
         <!--系统图标的颜色-->
