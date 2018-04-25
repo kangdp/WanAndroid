@@ -33,7 +33,12 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
     protected int page;
     protected int state;
     protected boolean isAutoLoadMore = true;//是否开启自动加载
+    private boolean isPreload; //是否已经预加载完成
+    private boolean isVisible; //是否可见
+    private boolean isFirst = true;//是否第一次加载数据
+    private boolean isEnableLazy = false; //是否懒加载
     protected List<T> mListData = new ArrayList<>();
+
 
     @Override
     protected void initViews(View view) {
@@ -41,6 +46,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
         mContainerLayout = (ContainerLayout) view.findViewById(R.id.containerLayout);
         mRecyclerView = (LMRecyclerView) view.findViewById(R.id.recyclerView);
     }
+
 
     @Override
     public List<T> getData() {
@@ -78,7 +84,39 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
         if (mListAdapter != null) {
             mRecyclerView.addHeaderView(initHeaderView());
             mRecyclerView.setAdapter(mListAdapter);
-            loadDatas();
+            if (isEnableLazy) {
+                isPreload = true;
+                isFirst = true;
+                lazyLoad();
+            } else {
+                loadDatas();
+            }
+        }
+    }
+
+    //是否开启懒加载
+    protected boolean isEnableLazy() {
+        return false;
+    }
+
+    private void lazyLoad() {
+        if (!isPreload || !isVisible || !isFirst) {
+            return;
+        }
+        loadDatas();
+        isFirst = false;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        isEnableLazy = isEnableLazy();//默认不开启懒加载
+        if (!isEnableLazy) return;
+        if (isVisibleToUser) {
+            isVisible = true;
+            lazyLoad();
+        } else {
+            isVisible = false;
         }
     }
 

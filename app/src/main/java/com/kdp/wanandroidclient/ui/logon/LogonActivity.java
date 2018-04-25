@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.kdp.wanandroidclient.R;
+import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
 import com.kdp.wanandroidclient.event.RxEvent;
@@ -32,7 +33,7 @@ public class LogonActivity extends BasePresenterActivity<LogonPresenter, LogonCo
 
     @Override
     public void showResult(String msg) {
-        ToastUtils.showToast(this, msg);
+        ToastUtils.showToast(AppContext.getContext(), msg);
         RxEvent.getInstance().postEvent(Const.EVENT_ACTION.REFRESH_DATA, new Event(Event.Type.LIST, null));
         finish();
     }

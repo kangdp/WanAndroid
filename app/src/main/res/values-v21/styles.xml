@@ -3,10 +3,11 @@
 
     <!--沉浸式 5.0以上-->
     <style name="AppTheme" parent="AppTheme.Base">
-        <!--设置导航栏不透明-->
-        <item name="android:windowTranslucentNavigation">false</item>
+        <!--设置导航栏透明-->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
         <!--使状态栏，导航栏可绘制-->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:fitsSystemWindows">true</item>
         <!--设置状态栏颜色为透明-->
         <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
         <item name="android:statusBarColor">@color/_0091ea</item>
@@ -15,6 +16,10 @@
     <style name="AppTheme.Logon" parent="AppTheme.Base">
         //设置状态栏透明色
         <item name="android:statusBarColor">@color/translucent</item>
+    </style>
+
+    <style name="ToolBarStyle" parent="@style/BaseToolBarStyle">
+        <item name="android:fitsSystemWindows">false</item>
     </style>
 
 </resources>

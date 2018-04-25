@@ -40,6 +40,10 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Tree
         return instance;
     }
 
+    @Override
+    protected boolean isEnableLazy() {
+        return true;
+    }
 
     @Override
     protected TreeListPresenter createPresenter() {
@@ -94,7 +98,7 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Tree
     @Override
     public void collect(boolean isCollect, String result) {
         mListData.get(position).setCollect(isCollect);
-        RxEvent.getInstance().postEvent(Const.EVENT_ACTION.REFRESH_DATA, new Event(Event.Type.ITEM,mListData.get(position)));
+        RxEvent.getInstance().postEvent(Const.EVENT_ACTION.REFRESH_DATA, new Event(Event.Type.ITEM, mListData.get(position)));
         notifyItemData(isCollect, result);
     }
 
@@ -147,7 +151,7 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Tree
                     notifyItemData(bean.isCollect(), getString(R.string.collect_success));
                 }
             }
-        }else {
+        } else {
             refreshData();
         }
     }

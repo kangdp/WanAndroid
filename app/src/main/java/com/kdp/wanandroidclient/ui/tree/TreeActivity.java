@@ -78,6 +78,7 @@ public class TreeActivity extends BaseActivity {
             mAdapter = new TreeFragPageAdapter(getSupportFragmentManager(), mAction, mChapterId, mChapterName);
         }
         mViewPager.setAdapter(mAdapter);
+        mViewPager.setOffscreenPageLimit(2);
         mTabLayout.setupWithViewPager(mViewPager);
     }
 

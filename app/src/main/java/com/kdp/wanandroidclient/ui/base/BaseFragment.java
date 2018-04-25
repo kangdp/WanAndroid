@@ -40,6 +40,7 @@ public abstract class BaseFragment extends Fragment {
         public void onNext(Object o) {
             receiveEvent(o);
         }
+
         @Override
         public void onError(Throwable e) {
         }
