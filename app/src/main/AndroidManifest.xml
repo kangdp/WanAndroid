@@ -46,7 +46,8 @@
             android:name=".ui.main.SearchActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Search"/>
 
         <activity
             android:name="com.kdp.wanandroidclient.ui.web.WebViewActivity"

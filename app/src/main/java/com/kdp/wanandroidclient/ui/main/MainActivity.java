@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kdp.wanandroidclient.R;
+import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.bean.UserBean;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
@@ -254,7 +255,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 finish();
             } else {
                 mExitTime = System.currentTimeMillis();
-                ToastUtils.showToast(this, "请再按一次退出程序");
+                ToastUtils.showToast(AppContext.getContext(), "请再按一次退出程序");
             }
             return true;
         }

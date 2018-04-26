@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kdp.wanandroidclient.R;
+import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.FriendBean;
 import com.kdp.wanandroidclient.bean.HotwordBean;
@@ -138,7 +139,9 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
                 return tagView;
             }
         });
-        mFriendTagLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+        mFriendTagLayout.setOnTagClickListener(
+
+                new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
                 FriendBean mFriendBean = mFriendListDatas.get(position);
@@ -287,7 +290,7 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
     private void notifyItemData(boolean isCollect, String result) {
         mListData.get(position).setCollect(isCollect);
         mListAdapter.notifyItemDataChanged(position, mRecyclerView);
-        ToastUtils.showToast(this, result);
+        ToastUtils.showToast(AppContext.getContext(), result);
     }
 
     @Override

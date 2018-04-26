@@ -4,20 +4,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimary</item>
-    </style>
-
-    <style name="AppTheme" parent="AppTheme.Base">
         <item name="searchViewStyle">@style/SearchViewStyle</item>
     </style>
 
+    <style name="AppTheme" parent="AppTheme.Base" />
     <style name="AppTheme.Start">
         <item name="android:windowFullscreen">true</item>
     </style>
-
     <style name="AppTheme.Logon" />
-
+    <style name="AppTheme.Search">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
     <style name="ToolBarStyle" parent="@style/BaseToolBarStyle" />
-
     <!--定义SearchView样式-->
     <style name="SearchViewStyle" parent="Base.Widget.AppCompat.SearchView">
         <item name="searchHintIcon">@null</item>

@@ -12,13 +12,6 @@ public abstract class RxObserver<T> extends RxBaseObserver<T> {
     public RxObserver(BasePresenter mPresenter) {
         super(mPresenter);
     }
-//    public RxObserver(BasePresenter mPresenter) {
-//        super(mPresenter);
-//    }
-
-//    public RxObserver(BasePresenter mPresenter) {
-//        this(mPresenter);
-//    }
 
     @Override
     public void onNext(BaseBean<T> mBaseBean) {
