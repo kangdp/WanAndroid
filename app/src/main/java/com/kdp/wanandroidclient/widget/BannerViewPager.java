@@ -10,6 +10,7 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 
 /**
+ * Banner广告
  * author: 康栋普
  * date: 2018/3/7
  */
@@ -148,7 +149,7 @@ public class BannerViewPager extends ViewPager {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        start();
+        stop();
     }
 
     /**

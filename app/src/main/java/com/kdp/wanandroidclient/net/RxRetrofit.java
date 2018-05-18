@@ -2,7 +2,6 @@ package com.kdp.wanandroidclient.net;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
 import com.kdp.wanandroidclient.api.ApiServer;
 import com.kdp.wanandroidclient.net.interceptor.LoadCookieInterceptor;
 import com.kdp.wanandroidclient.net.interceptor.SaveCookieInterceptor;
@@ -21,7 +20,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RxRetrofit {
     private Retrofit retrofit;
     private static ApiServer apiServer;
-    private static Gson gson = new Gson();
 
     private static final class Holder {
         private static final RxRetrofit INSTANCE = new RxRetrofit();

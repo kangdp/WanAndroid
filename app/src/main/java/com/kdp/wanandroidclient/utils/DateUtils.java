@@ -3,6 +3,7 @@ package com.kdp.wanandroidclient.utils;
 import java.text.SimpleDateFormat;
 
 /**
+ * 时间解析工具
  * author: 康栋普
  * date: 2018/2/23
  */

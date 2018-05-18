@@ -22,7 +22,7 @@ public class LoadCookieInterceptor implements Interceptor {
         Request.Builder builder = chain.request().newBuilder();
         String mCookieStr = (String) PreUtils.get(chain.request().url().host(), "");
         if (!TextUtils.isEmpty(mCookieStr)) {
-            builder.addHeader("Cookie", mCookieStr.substring(0,mCookieStr.length()-1));//长度减1为了去除最后的逗号
+            builder.addHeader("Cookie", mCookieStr.substring(0, mCookieStr.length() - 1));//长度减1为了去除最后的逗号
         }
         return chain.proceed(builder.build());
     }

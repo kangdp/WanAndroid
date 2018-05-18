@@ -16,6 +16,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
+ * 加密工具
  * author: 康栋普
  * date: 2018/2/28
  */

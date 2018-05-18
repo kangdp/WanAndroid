@@ -5,11 +5,6 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/tip_load_data" />-->
-
     <ProgressBar
         style="@style/LoadingProgressStyle"
         android:layout_width="wrap_content"

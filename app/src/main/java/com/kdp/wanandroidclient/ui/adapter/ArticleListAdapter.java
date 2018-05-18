@@ -18,7 +18,6 @@ import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.common.ListDataHolder;
 import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
 import com.kdp.wanandroidclient.utils.DateUtils;
-import com.kdp.wanandroidclient.utils.LogUtils;
 
 /**
  * author: 康栋普
@@ -43,7 +42,7 @@ public class ArticleListAdapter extends BaseListAdapter<ArticleBean> {
     @Override
     public void bindDatas(ListDataHolder holder, final ArticleBean bean, int itemType, final int position) {
         TextView tv_author = holder.getView(R.id.tv_author);
-        final TextView tv_title = holder.getView(R.id.tv_title);
+        TextView tv_title = holder.getView(R.id.tv_title);
         TextView tv_time = holder.getView(R.id.tv_time);
         TextView tv_type = holder.getView(R.id.tv_type);
         ImageView img_collect = holder.getView(R.id.img_collect);

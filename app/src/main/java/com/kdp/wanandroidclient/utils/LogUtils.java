@@ -3,8 +3,8 @@ package com.kdp.wanandroidclient.utils;
 import android.util.Log;
 
 /**
+ *  Log工具类
  * Created by 康栋普 on 2017/11/29.
- * Log工具类
  */
 
 public class LogUtils {

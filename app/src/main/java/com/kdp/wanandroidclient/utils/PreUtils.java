@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 
 /**
+ * 缓存
  * author: 康栋普
  * date: 2018/2/7
  */

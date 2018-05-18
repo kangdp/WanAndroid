@@ -7,7 +7,7 @@
 
 
     <application
-        android:name="com.kdp.wanandroidclient.application.WApp"
+        android:name=".application.WApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.kdp.wanandroidclient.ui.LauncherActivity"
+            android:name=".ui.LauncherActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Start">
@@ -25,19 +25,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.kdp.wanandroidclient.ui.logon.LogonActivity"
+            android:name=".ui.logon.LogonActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Logon"
             />
         <activity
-            android:name="com.kdp.wanandroidclient.ui.main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.kdp.wanandroidclient.ui.tree.TreeActivity"
+            android:name=".ui.tree.TreeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
@@ -50,13 +50,13 @@
             android:theme="@style/AppTheme.Search"/>
 
         <activity
-            android:name="com.kdp.wanandroidclient.ui.web.WebViewActivity"
+            android:name=".ui.web.WebViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.kdp.wanandroidclient.ui.user.CollectArticleActivity"
+            android:name=".ui.user.CollectArticleActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity
