@@ -3,7 +3,9 @@ package com.kdp.wanandroidclient.net;
 import android.content.Context;
 
 import com.kdp.wanandroidclient.api.ApiServer;
+import com.kdp.wanandroidclient.net.interceptor.CacheInterceptor;
 import com.kdp.wanandroidclient.net.interceptor.LoadCookieInterceptor;
+import com.kdp.wanandroidclient.net.interceptor.RequestInterceptor;
 import com.kdp.wanandroidclient.net.interceptor.SaveCookieInterceptor;
 
 import java.util.concurrent.TimeUnit;
@@ -37,6 +39,9 @@ public class RxRetrofit {
                 //添加Cookie拦截器
                 .addInterceptor(new SaveCookieInterceptor())
                 .addInterceptor(new LoadCookieInterceptor())
+                //添加缓存拦截器
+                .addInterceptor(new RequestInterceptor())//无网
+                .addNetworkInterceptor(new CacheInterceptor())//有网
                 .build();
 
         retrofit = new Retrofit.Builder()
