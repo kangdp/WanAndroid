@@ -10,7 +10,7 @@ android {
         }
     }
     compileSdkVersion 25
-    buildToolsVersion '27.0.0'
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.kdp.wanandroidclient"
         minSdkVersion 14
@@ -28,6 +28,7 @@ android {
     }
     productFlavors {
     }
+
 }
 
 dependencies {

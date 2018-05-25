@@ -103,7 +103,6 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
             //设置预加载两个页面
             mViewPager.setOffscreenPageLimit(2);
             setCurrentItem(1000 * mBannerList.size());
-//            mViewPager.start();
         }
         mBannerAdapter.notifyDatas(mBannerList);
     }
@@ -148,7 +147,7 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
     //收藏click
     @Override
     public void onCollectClick(int position, int id) {
-        LogUtils.e(id+"");
+        LogUtils.e(id + "");
         if (!UserInfoManager.isLogin())
             startActivity(new Intent(getActivity(), LogonActivity.class));
         this.position = position;
@@ -179,6 +178,15 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
     public void onPause() {
         super.onPause();
         mViewPager.stop();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (hidden) {
+            mViewPager.stop();
+        } else {
+            mViewPager.start();
+        }
     }
 
     @Override
