@@ -16,6 +16,8 @@ import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.utils.AppUtils;
 import com.kdp.wanandroidclient.utils.LightStatusbarUtils;
 
+import java.text.SimpleDateFormat;
+
 /**
  * 关于我们
  * author: 康栋普
