@@ -115,7 +115,6 @@ public class LauncherActivity extends BasePresenterActivity<LogonPresenter, Logo
         if (keyCode == KeyEvent.KEYCODE_BACK){
             return true;
         }
-
         return super.onKeyDown(keyCode, event);
     }
 }

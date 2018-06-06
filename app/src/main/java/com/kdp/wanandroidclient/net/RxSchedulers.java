@@ -14,11 +14,11 @@ import io.reactivex.schedulers.Schedulers;
 public class RxSchedulers {
 
     /**
-     * 指定上游为io线程
-     * 下游为主线程
+     * 指定被观察者为io线程
+     * 观察者为主线程
      */
 
-    public static ObservableTransformer io_main(){
+    public static ObservableTransformer io_main() {
         return new ObservableTransformer() {
             @Override
             public ObservableSource apply(Observable upstream) {

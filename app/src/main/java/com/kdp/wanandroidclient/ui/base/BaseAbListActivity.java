@@ -11,7 +11,7 @@ import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
 import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
 import com.kdp.wanandroidclient.ui.mvp.view.IView;
-import com.kdp.wanandroidclient.widget.ContainerLayout;
+import com.kdp.wanandroidclient.widget.StatusLayout;
 import com.kdp.wanandroidclient.widget.LMRecyclerView;
 import com.kdp.wanandroidclient.widget.NoAlphaItemAnimator;
 
@@ -25,12 +25,12 @@ import java.util.List;
 public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends IView, T> extends BasePresenterActivity<P, V> implements LMRecyclerView.OnFooterAutoLoadMoreListener, IListDataView<T> {
 
 
-    protected ContainerLayout mContainerLayout;
+    protected StatusLayout mStatusLayout;
     protected SwipeRefreshLayout mRefreshLayout;
     protected LMRecyclerView mRecyclerView;
     protected BaseListAdapter mListAdapter;
     protected int page;
-    protected int state;
+    protected int state = -1;
     protected boolean isAutoLoadMore = true;//是否显示自动加载
     protected List<T> mListData = new ArrayList<>();
 
@@ -43,6 +43,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
         setCanLoadMore(isCanLoadMore());
         mRecyclerView.addFooterAutoLoadMoreListener(this);
         mListAdapter = getListAdapter();
+        mStatusLayout.showLoding();
         if (mListAdapter != null) {
             mRecyclerView.addHeaderView(initHeaderView());
             mRecyclerView.setAdapter(mListAdapter);
@@ -54,7 +55,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
     @Override
     protected void initViews() {
         mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refreshLayout);
-        mContainerLayout = (ContainerLayout) findViewById(R.id.containerLayout);
+        mStatusLayout = (StatusLayout) findViewById(R.id.containerLayout);
         mRecyclerView = (LMRecyclerView) findViewById(R.id.recyclerView);
     }
 
@@ -74,7 +75,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
     //显示内容
     @Override
     public void showContent() {
-        mContainerLayout.showContent();
+        mStatusLayout.showContent();
         mListAdapter.notifyAllDatas(mListData, mRecyclerView);
     }
 
@@ -143,7 +144,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
             mRecyclerView.showLoadMoreError();
             mListAdapter.notifyAllDatas(mListData, mRecyclerView);
         } else {
-            mContainerLayout.showError();
+            mStatusLayout.showError();
         }
 
     }
@@ -177,7 +178,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
     //无数据
     @Override
     public void showEmpty() {
-        mContainerLayout.showEmpty();
+        mStatusLayout.showEmpty();
     }
 
 

@@ -1,5 +1,8 @@
 package com.kdp.wanandroidclient.widget;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +19,7 @@ import com.kdp.wanandroidclient.R;
  * 加载各种状态的布局(empty、loading、error、content)
  */
 
-public class ContainerLayout extends FrameLayout {
+public class StatusLayout extends FrameLayout {
 
     private Context mContext;
     private LayoutInflater mInflater;
@@ -26,15 +29,10 @@ public class ContainerLayout extends FrameLayout {
     private View mContentView;
 
 
-    public ContainerLayout(Context context, @Nullable AttributeSet attrs) {
+    public StatusLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
-    }
-
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
         mLoadingView = mInflater.inflate(R.layout.loading_layout, this, false);
         mErrorView = mInflater.inflate(R.layout.error_layout, this, false);
         mEmptyView = mInflater.inflate(R.layout.empty_layout, this, false);
@@ -44,6 +42,11 @@ public class ContainerLayout extends FrameLayout {
         mLoadingView.setVisibility(GONE);
         mErrorView.setVisibility(GONE);
         mEmptyView.setVisibility(GONE);
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
     }
 
     @Override

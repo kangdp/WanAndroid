@@ -12,7 +12,7 @@ import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
 import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
 import com.kdp.wanandroidclient.ui.mvp.view.IView;
 import com.kdp.wanandroidclient.utils.ToastUtils;
-import com.kdp.wanandroidclient.widget.ContainerLayout;
+import com.kdp.wanandroidclient.widget.StatusLayout;
 import com.kdp.wanandroidclient.widget.LMRecyclerView;
 
 import java.util.ArrayList;
@@ -26,12 +26,12 @@ import java.util.List;
 
 public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends IView, T> extends BasePresenterFragment<P, V> implements LMRecyclerView.OnFooterAutoLoadMoreListener, IListDataView<T> {
 
-    protected ContainerLayout mContainerLayout;
+    protected StatusLayout mStatusLayout;
     protected SwipeRefreshLayout mRefreshLayout;
     protected LMRecyclerView mRecyclerView;
     protected BaseListAdapter mListAdapter;
     protected int page;
-    protected int state;
+    protected int state = -1;
     protected boolean isAutoLoadMore = true;//是否开启自动加载
     private boolean isPreload; //是否已经预加载完成
     private boolean isVisible; //是否可见
@@ -43,7 +43,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
     @Override
     protected void initViews(View view) {
         mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshLayout);
-        mContainerLayout = (ContainerLayout) view.findViewById(R.id.containerLayout);
+        mStatusLayout = (StatusLayout) view.findViewById(R.id.containerLayout);
         mRecyclerView = (LMRecyclerView) view.findViewById(R.id.recyclerView);
     }
 
@@ -56,7 +56,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
     //显示内容
     @Override
     public void showContent() {
-        mContainerLayout.showContent();
+        mStatusLayout.showContent();
         mListAdapter.notifyAllDatas(mListData, mRecyclerView);
     }
 
@@ -89,6 +89,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
                 isFirst = true;
                 lazyLoad();
             } else {
+                mStatusLayout.showLoding();
                 loadDatas();
             }
         }
@@ -103,6 +104,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
         if (!isPreload || !isVisible || !isFirst) {
             return;
         }
+        mStatusLayout.showLoding();
         loadDatas();
         isFirst = false;
     }
@@ -188,7 +190,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
             mRecyclerView.showLoadMoreError();
             mListAdapter.notifyAllDatas(mListData, mRecyclerView);
         } else {
-            mContainerLayout.showError();
+            mStatusLayout.showError();
         }
 
     }
@@ -196,7 +198,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
     //无数据
     @Override
     public void showEmpty() {
-        mContainerLayout.showEmpty();
+        mStatusLayout.showEmpty();
     }
 
 
