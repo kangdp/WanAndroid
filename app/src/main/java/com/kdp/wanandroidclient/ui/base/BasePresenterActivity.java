@@ -8,6 +8,7 @@ import com.kdp.wanandroidclient.ui.mvp.view.IView;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 
 /**
+ * 管理Presenter的Activity基类
  * Created by 康栋普 on 2018/2/1.
  */
 
@@ -35,13 +36,14 @@ public abstract class BasePresenterActivity<P extends BasePresenter<V>, V extend
 
     @Override
     protected void onDestroy() {
-        //view置空
+        //接触presenter与View关联
         detachView();
-        //取消所有请求
+        //移除所有请求
         removeAllDisposable();
         super.onDestroy();
     }
 
+    //关联View
     private void attachView() {
         if (mPresenter != null) {
             mPresenter.attachView((V) this);

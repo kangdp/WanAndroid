@@ -33,7 +33,9 @@ import com.kdp.wanandroidclient.ui.user.CollectArticleActivity;
 import com.kdp.wanandroidclient.utils.PreUtils;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 
-
+/**
+ * 管理首页Tab的Activity
+ */
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -215,6 +217,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             default:
         }
 
+        showCurrentFragment(index);
+    }
+
+    /**
+     * 切换显示当前Fragment
+     *
+     * @param index
+     */
+    private void showCurrentFragment(int index) {
         if (currentPosition != index) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.hide(fragments[currentPosition]);
@@ -228,10 +239,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             currentPosition = index;
             setCurrentTitle();
         }
-
     }
 
-
+    /**
+     * view放大缩小
+     */
     private void scaleView() {
         btns[currentPosition].animate().scaleX(0.9f).scaleY(0.9f)
                 .setDuration(150).start();

@@ -3,6 +3,7 @@ package com.kdp.wanandroidclient.ui.mvp.presenter;
 import com.kdp.wanandroidclient.ui.mvp.view.IView;
 
 /**
+ * 通用业务接口
  * author: 康栋普
  * date: 2018/3/20
  */

@@ -1,6 +1,7 @@
 package com.kdp.wanandroidclient.net;
 
 /**
+ * 网络配置
  * author: 康栋普
  * date: 2017/11/27
  */

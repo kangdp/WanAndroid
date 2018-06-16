@@ -8,6 +8,7 @@ import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
 import java.util.List;
 
 /**
+ * 知识体系
  * author: 康栋普
  * date: 2018/2/26
  */
@@ -21,6 +22,9 @@ public class TreePresenter extends BasePresenter<TreeContract.ITreeView> impleme
         mTreeModel = new TreeModel();
     }
 
+    /**
+     * 获取知识体系下的分类
+     */
     @Override
     public void loadTree() {
         mSystemView = getView();

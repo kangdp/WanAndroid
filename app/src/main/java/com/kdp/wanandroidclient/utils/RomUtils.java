@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Room
+ * Room工具
  * author: 康栋普
  * date: 2018/2/7
  */

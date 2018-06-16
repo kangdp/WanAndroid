@@ -5,7 +5,7 @@ import com.kdp.wanandroidclient.net.NetConfig;
 import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
 
 /**
- * 通用Observer回调
+ * RxRetrofit通用接口回调类
  */
 
 public abstract class RxObserver<T> extends RxBaseObserver<T> {

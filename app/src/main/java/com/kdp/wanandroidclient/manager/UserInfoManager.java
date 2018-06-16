@@ -12,12 +12,17 @@ import com.kdp.wanandroidclient.bean.UserBean;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
+ * 用户信息管理类
  * author: 康栋普
  * date: 2018/3/1
  */
 
 public class UserInfoManager {
 
+    /**
+     * 获取用户信息
+     * @return
+     */
     public static UserBean getUserInfo() {
         UserBean userBean = null;
         SecretKeySpec keySpec = getAesKey();
@@ -26,6 +31,11 @@ public class UserInfoManager {
         userBean = new Gson().fromJson(userInfo, UserBean.class);
         return userBean;
     }
+
+    /**
+     * 保存用户信息
+     * @param userBean
+     */
     public static void saveUserInfo(UserBean userBean){
         String userInfo = new Gson().toJson(userBean);
         SecretKeySpec key = AesEncryptionUtils.createKey();

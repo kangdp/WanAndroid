@@ -21,6 +21,7 @@ import com.kdp.wanandroidclient.ui.web.WebViewActivity;
 import java.util.List;
 
 /**
+ * 广告
  * author: 康栋普
  * date: 2018/3/7
  */

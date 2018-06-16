@@ -3,6 +3,7 @@ package com.kdp.wanandroidclient.ui.mvp.view;
 import java.util.List;
 
 /**
+ * 列表View
  * author: 康栋普
  * date: 2018/3/7
  */

@@ -21,7 +21,7 @@ import java.text.ParseException;
 import io.reactivex.observers.DisposableObserver;
 
 /**
- * Observer基类
+ * RxRetrofit请求回调基类
  */
 
 public abstract class RxBaseObserver<T> extends DisposableObserver<BaseBean<T>> {
@@ -36,6 +36,7 @@ public abstract class RxBaseObserver<T> extends DisposableObserver<BaseBean<T>> 
     @Override
     protected void onStart() {
         super.onStart();
+        //显示loading
         showLoading();
     }
 
@@ -45,10 +46,9 @@ public abstract class RxBaseObserver<T> extends DisposableObserver<BaseBean<T>> 
 
     @Override
     public void onError(Throwable e) {
-        /**
-         * 处理异常
-         */
+        //隐藏loading
         hideLoading();
+        //处理异常
         dealException(AppContext.getContext(), e);
     }
 

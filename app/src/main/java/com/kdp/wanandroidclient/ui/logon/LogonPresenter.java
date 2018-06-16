@@ -9,6 +9,7 @@ import com.kdp.wanandroidclient.ui.mvp.model.impl.LogonModel;
 import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
 
 /**
+ * 登录、注册Presenter
  * Created by 康栋普 on 2018/2/1.
  */
 
@@ -22,7 +23,9 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
         this.logonModel = new LogonModel();
     }
 
-
+    /**
+     * 登录
+     */
     @Override
     public void login() {
         verifyAccount();
@@ -47,6 +50,9 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
         addDisposable(mLoginRxObserver);
     }
 
+    /**
+     * 注册
+     */
     @Override
     public void register() {
         verifyAccount();
@@ -77,7 +83,9 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
         }
     };
 
-
+    /**
+     * 帐号验证
+     */
     private void verifyAccount() {
         mLogonView = getView();
         username = mLogonView.getUserName();

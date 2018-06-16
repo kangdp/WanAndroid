@@ -1,6 +1,7 @@
 package com.kdp.wanandroidclient.ui.mvp.view;
 
 /**
+ * view基类
  * Created by 康栋普 on 2018/2/1.
  */
 

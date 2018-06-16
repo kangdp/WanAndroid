@@ -4,6 +4,7 @@ import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
 
 /**
+ * 用户协约类
  * author: 康栋普
  * date: 2018/3/21
  */

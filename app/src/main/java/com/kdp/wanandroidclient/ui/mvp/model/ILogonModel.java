@@ -5,6 +5,7 @@ import com.kdp.wanandroidclient.inter.VerifyAccountCallback;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 
 /**
+ * 登录注册业务接口
  * Created by 康栋普 on 2018/2/1.
  */
 

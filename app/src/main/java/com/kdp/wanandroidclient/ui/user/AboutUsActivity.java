@@ -68,7 +68,7 @@ public class AboutUsActivity extends AppCompatActivity {
         mIntroduceView.setMovementMethod(LinkMovementMethod.getInstance());
 
     }
-   //版本
+   //设置版本
     private void setVersion() {
         String mVersionFormat = getString(R.string.version_format);
         String mVersionName = AppUtils.getVersionName(this);

@@ -10,6 +10,7 @@ import com.kdp.wanandroidclient.ui.mvp.presenter.CommonPresenter;
 import java.util.List;
 
 /**
+ * Home Presenter
  * author: 康栋普
  * date: 2018/2/11
  */
@@ -22,6 +23,9 @@ public class HomePresenter extends CommonPresenter<HomeContract.IHomeView> imple
         this.mHomeModel = new HomeModel();
     }
 
+    /**
+     * 获取首页列表文章和Bannder
+     */
     @Override
     public void getHomeList() {
         homeView = getView();

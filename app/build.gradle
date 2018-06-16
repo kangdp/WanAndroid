@@ -22,6 +22,8 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            //打包时剔除剔除无用资源
+//            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -46,6 +48,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.0.0'
     compile 'com.just.agentweb:agentweb:4.0.1'
     compile 'com.hyman:flowlayout-lib:1.1.2'
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4' //只在debug模式下有用
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    //只在debug模式下有用
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }

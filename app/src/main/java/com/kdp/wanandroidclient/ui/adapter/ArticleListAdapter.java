@@ -20,6 +20,7 @@ import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
 import com.kdp.wanandroidclient.utils.DateUtils;
 
 /**
+ * 文章列表
  * author: 康栋普
  * date: 2018/2/12
  */

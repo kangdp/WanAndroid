@@ -5,6 +5,7 @@ import com.kdp.wanandroidclient.ui.mvp.view.IView;
 import io.reactivex.disposables.Disposable;
 
 /**
+ * Presenter接口类
  * Created by 康栋普 on 2018/2/1.
  */
 

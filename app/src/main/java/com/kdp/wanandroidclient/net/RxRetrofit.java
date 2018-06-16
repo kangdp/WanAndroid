@@ -17,7 +17,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * 网络工具类
+ * 网络请求工具类
  */
 public class RxRetrofit {
     private Retrofit retrofit;

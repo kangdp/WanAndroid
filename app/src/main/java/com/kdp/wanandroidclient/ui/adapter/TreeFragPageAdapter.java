@@ -11,6 +11,7 @@ import com.kdp.wanandroidclient.ui.tree.TreeListFragment;
 import java.util.List;
 
 /**
+ * fragmetn适配器
  * author: 康栋普
  * date: 2018/3/20
  */

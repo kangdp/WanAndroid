@@ -22,6 +22,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
+ * 接口
  * Created by 康栋普 on 2018/1/30.
  */
 

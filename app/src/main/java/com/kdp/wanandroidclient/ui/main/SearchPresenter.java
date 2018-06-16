@@ -11,6 +11,7 @@ import com.kdp.wanandroidclient.ui.mvp.presenter.CommonPresenter;
 import java.util.List;
 
 /**
+ * 搜索Presenter
  * author: 康栋普
  * date: 2018/4/5
  */
@@ -23,6 +24,9 @@ public class SearchPresenter extends CommonPresenter<SearchContract.ISearchView>
         this.mSearchModel = new SearchModel();
     }
 
+    /**
+     * 搜索文章
+     */
     @Override
     public void search() {
         mSearchView = getView();
@@ -45,6 +49,9 @@ public class SearchPresenter extends CommonPresenter<SearchContract.ISearchView>
         addDisposable(mSearchRxPageListObserver);
     }
 
+    /**
+     * 获取热搜
+     */
     @Override
     public void getHotWord() {
         mSearchView = getView();
@@ -67,6 +74,9 @@ public class SearchPresenter extends CommonPresenter<SearchContract.ISearchView>
         addDisposable(mHotWordRxObserver);
     }
 
+    /**
+     * 获取常用网站
+     */
     @Override
     public void getFriend() {
         RxObserver<List<FriendBean>> mFriendRxObserver = new RxObserver<List<FriendBean>>(this) {

@@ -15,7 +15,9 @@ import com.kdp.wanandroidclient.event.RxEvent;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.subjects.PublishSubject;
 
-
+/**
+ * Activity 基类
+ */
 public abstract class BaseActivity extends AppCompatActivity {
     protected Toolbar mToolbar;
     protected FrameLayout mContainerLayout;
@@ -33,21 +35,14 @@ public abstract class BaseActivity extends AppCompatActivity {
             bundle.remove(FRAGMENTS_TAG);
         }
         super.onCreate(bundle);
-        //如果有底部导航栏，将内容布局设置在导航栏上方
-//        boolean isHas = checkDeviceHasNavigationBar();
-//        if (isHas) {
-//            Log.e(this.getClass().getSimpleName(), "onCreate: isHas " + isHas);
-//            getWindow().getDecorView().findViewById(android.R.id.content).setPadding(0, 0, 0, getNavigationBarHeight());
-//        }
+
         setContentView(R.layout.activity_base);
         Intent intent = getIntent();
         if (intent != null)
             getIntent(intent);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mContainerLayout = (FrameLayout) findViewById(R.id.frameLayout);
-//        if (isHas && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-//            mToolbar.setFitsSystemWindows(false);
-//        }
+
         //初始化ToolBar
         boolean isToolbar = initToolbar();
         if (isToolbar) {
@@ -67,7 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initContent(getLayoutId());
 
         mRxEvent = RxEvent.getInstance();
-        //注册事件
+        //注册事件线
         mSubject = mRxEvent.registerEvent(registerEvent());
         mDisposableObserver = new ReceiveEvent();
         mSubject.subscribe(mDisposableObserver);

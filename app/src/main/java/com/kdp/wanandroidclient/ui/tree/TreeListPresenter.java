@@ -8,6 +8,7 @@ import com.kdp.wanandroidclient.ui.mvp.presenter.CommonPresenter;
 import java.util.List;
 
 /**
+ * 知识体系列表Presenter
  * author: 康栋普
  * date: 2018/3/20
  */
@@ -22,6 +23,9 @@ public class TreeListPresenter extends CommonPresenter<TreeListContract.ITreeLis
         mTreeListModel = new TreeListModel();
     }
 
+    /**
+     * 获取知识体系下的文章
+     */
     @Override
     public void loadTreeList() {
         mTreeListView = getView();

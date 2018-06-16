@@ -9,7 +9,8 @@ import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
 import java.util.List;
 
 /**
- * 分页列表加载通用Observer
+ * 分页加载功能的接口回调类
+ * 分页加载逻辑在这里统一处理
  * author: 康栋普
  * date: 2018/3/13
  */

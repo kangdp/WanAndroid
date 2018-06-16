@@ -4,6 +4,7 @@ import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 
 /**
+ * 知识体系列表业务接口
  * author: 康栋普
  * date: 2018/3/20
  */

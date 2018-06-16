@@ -9,6 +9,7 @@ import com.kdp.wanandroidclient.widget.LMRecyclerView;
 import java.util.List;
 
 /**
+ * 适配器基类
  * author: 康栋普
  * date: 2018/2/12
  */

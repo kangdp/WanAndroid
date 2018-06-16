@@ -9,6 +9,7 @@ import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.common.Const;
 
 /**
+ * Glide图片加载管理类
  * author: 康栋普
  * date: 2018/2/26
  */

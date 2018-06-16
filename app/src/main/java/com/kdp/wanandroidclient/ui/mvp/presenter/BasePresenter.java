@@ -6,6 +6,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
+ * 基类Presenter,用来处理view和请求
  * Created by 康栋普 on 2018/2/1.
  */
 

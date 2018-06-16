@@ -19,18 +19,27 @@ import java.lang.ref.WeakReference;
 
 
 /**
- * 启动页
+ * 启动页、程序入口
  * Created by 康栋普 on 2018/1/31.
  */
 
 public class LauncherActivity extends BasePresenterActivity<LogonPresenter, LogonContract.ILoginRegisterView> implements LogonContract.ILoginRegisterView {
     private UserBean userBean;
+    private Handler mHandler;
+    private DelayRunnable mRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         hideBottomUIMenu();
-        new Handler().postDelayed(new DelayRunnable(this), 2000);
+        //倒计时
+        startCountdown();
+    }
+
+    private void startCountdown() {
+        mHandler = new Handler();
+        mRunnable = new DelayRunnable(this);
+        mHandler.postDelayed(mRunnable, 2000);
     }
 
     /**
@@ -112,9 +121,15 @@ public class LauncherActivity extends BasePresenterActivity<LogonPresenter, Logo
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        if (keyCode == KeyEvent.KEYCODE_BACK){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mHandler.removeCallbacks(mRunnable);
+        super.onDestroy();
     }
 }

@@ -8,6 +8,7 @@ import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
 import java.util.List;
 
 /**
+ * 搜索协约类
  * author: 康栋普
  * date: 2018/4/5
  */

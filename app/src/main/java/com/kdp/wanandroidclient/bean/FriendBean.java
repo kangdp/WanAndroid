@@ -1,6 +1,7 @@
 package com.kdp.wanandroidclient.bean;
 
 /**
+ * 常用网站
  * author: 康栋普
  * date: 2018/4/7
  */

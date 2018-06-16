@@ -9,6 +9,7 @@ import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
 import java.util.List;
 
 /**
+ * 和用户相关的Presenter
  * author: 康栋普
  * date: 2018/3/21
  */
@@ -21,6 +22,9 @@ public class UserPresenter extends BasePresenter<UserContract.IUserView> impleme
         this.mUserModel = new UserModel();
     }
 
+    /**
+     * 删除收藏
+     */
     @Override
     public void deleteCollectArticle() {
         mUserView = getView();
@@ -43,6 +47,9 @@ public class UserPresenter extends BasePresenter<UserContract.IUserView> impleme
         addDisposable(mDeleteRxObserver);
     }
 
+    /**
+     * 获取收藏的列表
+     */
     @Override
     public void loadCollectList() {
         mUserView = getView();

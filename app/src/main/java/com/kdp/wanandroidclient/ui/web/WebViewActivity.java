@@ -147,7 +147,7 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, Web
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_TEXT, "玩Android分享(" + title + "):" + url);
         intent.setType("text/plain");//分享文本
-        startActivity(Intent.createChooser(intent, "分享至"));
+        startActivity(Intent.createChooser(intent, "分享"));
     }
 
     //收藏

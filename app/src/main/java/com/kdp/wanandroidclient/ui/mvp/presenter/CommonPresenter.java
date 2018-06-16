@@ -7,6 +7,7 @@ import com.kdp.wanandroidclient.ui.mvp.model.impl.CommonModel;
 import com.kdp.wanandroidclient.ui.mvp.view.IView;
 
 /**
+ * ICommonPresenter实现类，用于封装通用业务接口
  * author: 康栋普
  * date: 2018/4/10
  */
@@ -18,6 +19,11 @@ public class CommonPresenter<V extends IView> extends BasePresenter<V> implement
         this.mCommonModel = new CommonModel();
     }
 
+    /**
+     * 收藏文章
+     * @param articleId
+     * @param view
+     */
     @Override
     public void collectArticle(int articleId, IView view) {
         RxObserver<String> mCollectRxObserver = new RxObserver<String>(this) {
@@ -42,6 +48,11 @@ public class CommonPresenter<V extends IView> extends BasePresenter<V> implement
         addDisposable(mCollectRxObserver);
     }
 
+    /**
+     * 收藏站内文章
+     * @param articleId
+     * @param view
+     */
     @Override
     public void collectInsideArticle(int articleId, IView view) {
         RxObserver<String> mCollectInsideRxObserver = new RxObserver<String>(this) {
@@ -64,6 +75,11 @@ public class CommonPresenter<V extends IView> extends BasePresenter<V> implement
         addDisposable(mCollectInsideRxObserver);
     }
 
+    /**
+     * 取消收藏
+     * @param articleId
+     * @param view
+     */
     @Override
     public void unCollectArticle(int articleId, IView view) {
         RxObserver<String> mUnCollectRxObserver = new RxObserver<String>(this) {

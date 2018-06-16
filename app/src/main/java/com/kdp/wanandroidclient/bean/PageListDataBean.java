@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 分页bean
+ * 分页列表Bean
  * author: 康栋普
  * date: 2018/3/13
  */

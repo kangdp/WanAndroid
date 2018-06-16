@@ -5,6 +5,7 @@ import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 
 /**
+ * 和用户相关的业务接口
  * author: 康栋普
  * date: 2018/3/21
  */

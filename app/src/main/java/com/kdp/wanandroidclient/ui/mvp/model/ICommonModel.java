@@ -3,6 +3,7 @@ package com.kdp.wanandroidclient.ui.mvp.model;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 
 /**
+ * 通用业务接口
  * author: 康栋普
  * date: 2018/2/26
  */

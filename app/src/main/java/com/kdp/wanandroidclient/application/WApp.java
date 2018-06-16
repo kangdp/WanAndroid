@@ -5,6 +5,7 @@ import android.app.Application;
 import com.squareup.leakcanary.LeakCanary;
 
 /**
+ * 玩Android
  * Created by 康栋普 on 2018/1/31.
  */
 

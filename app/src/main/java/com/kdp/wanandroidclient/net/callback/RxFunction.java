@@ -7,7 +7,7 @@ import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
 /**
- * 用来处理嵌套请求的操作
+ * 用来处理嵌套请求
  * author: 康栋普
  * date: 2018/3/7
  */

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 分页列表fragment基类
+ * fragment列表基类
  * author: 康栋普
  * date: 2018/2/11
  */
@@ -36,7 +36,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
     private boolean isPreload; //是否已经预加载完成
     private boolean isVisible; //是否可见
     private boolean isFirst = true;//是否第一次加载数据
-    private boolean isEnableLazy = false; //是否懒加载
+    private boolean isEnableLazy = false; //是否开启懒加载
     protected List<T> mListData = new ArrayList<>();
 
 
@@ -53,7 +53,9 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
         return mListData;
     }
 
-    //显示内容
+    /**
+     * 请求数据成功展示内容
+     */
     @Override
     public void showContent() {
         mStatusLayout.showContent();
@@ -109,6 +111,11 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
         isFirst = false;
     }
 
+    /**
+     * 懒加载处理
+     *
+     * @param isVisibleToUser
+     */
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -122,10 +129,16 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
         }
     }
 
-    // 是否能够自动加载更多
+    /**
+     * 是否允许自动加载更多
+     *
+     * @return
+     */
     protected abstract boolean isCanLoadMore();
 
-    //下拉刷新监听
+    /**
+     * 下拉刷新监听
+     */
     private SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
@@ -134,7 +147,9 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
     };
 
 
-    // 刷新列表
+    /**
+     * 刷新数据，回到第一页
+     */
     public void refreshData() {
         state = Const.PAGE_STATE.STATE_REFRESH;
         isAutoLoadMore = true;
@@ -142,7 +157,9 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
         loadDatas();
     }
 
-    //滑到底部自动加载
+    /**
+     * 滑到底部开始加载更多数据
+     */
     @Override
     public void loadMore() {
         if (!isAutoLoadMore) return;
@@ -150,7 +167,9 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
         loadDatas();
     }
 
-    //点击重新加载
+    /**
+     * 底部加载更多失败，点击重新加载
+     */
     @Override
     public void reLoadMore() {
         isAutoLoadMore = true;
@@ -158,13 +177,17 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
     }
 
 
-    //清空列表数据
+    /**
+     * 清空当前列表数据
+     */
     @Override
     public void clearListData() {
         mListData.clear();
     }
 
-    //自动加载更多
+    /**
+     * 开始自动加载更多
+     */
     @Override
     public void autoLoadMore() {
         mRecyclerView.showLoadMore();
@@ -172,7 +195,9 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
         isAutoLoadMore = true;
     }
 
-    //没有更多数据
+    /**
+     * 底部加载没有更多数据时显示
+     */
     @Override
     public void showNoMore() {
         mRecyclerView.showNoMoreData();
@@ -180,11 +205,13 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
     }
 
 
-    //加载出错
+    /**
+     * 数据加载异常时显示
+     */
     @Override
     public void showError() {
         isAutoLoadMore = false;
-        //如果是加载更多出错，那么底部就显示点击重新加载;
+        //如果是加载更多出现异常，那么底部就显示点击重新加载;
         // 否则，就清空数据，显示没有数据
         if (state == Const.PAGE_STATE.STATE_LOAD_MORE) {
             mRecyclerView.showLoadMoreError();
@@ -195,14 +222,20 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
 
     }
 
-    //无数据
+    /**
+     * 没有数据时显示
+     */
     @Override
     public void showEmpty() {
         mStatusLayout.showEmpty();
     }
 
 
-    //当前请求的页
+    /**
+     * 当前请求页
+     *
+     * @return
+     */
     public int getPage() {
         return page;
     }

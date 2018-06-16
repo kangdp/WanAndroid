@@ -1,6 +1,7 @@
 package com.kdp.wanandroidclient.event;
 
 /**
+ * 事件类型
  * author: 康栋普
  * date: 2018/4/12
  */

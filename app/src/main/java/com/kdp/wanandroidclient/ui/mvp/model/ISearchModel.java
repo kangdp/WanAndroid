@@ -9,6 +9,7 @@ import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 import java.util.List;
 
 /**
+ * 和搜索相关的业务接口
  * author: 康栋普
  * date: 2018/4/5
  */

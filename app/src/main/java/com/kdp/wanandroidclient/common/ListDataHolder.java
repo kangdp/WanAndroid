@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
+ * 通用Holder类
  * author: 康栋普
  * date: 2018/2/8
  */

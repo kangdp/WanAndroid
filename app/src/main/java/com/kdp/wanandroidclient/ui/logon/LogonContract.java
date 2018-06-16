@@ -3,6 +3,7 @@ package com.kdp.wanandroidclient.ui.logon;
 import com.kdp.wanandroidclient.ui.mvp.view.IView;
 
 /**
+ * 登录、注册协约类
  * author: 康栋普
  * date: 2018/3/6
  */

@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 /**
+ * App工具类
  * author: 康栋普
  * date: 2018/3/25
  */

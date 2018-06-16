@@ -9,6 +9,7 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.subjects.PublishSubject;
 
 /**
+ * 事件线
  * author: 康栋普
  * date: 2018/4/11
  */
