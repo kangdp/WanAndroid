@@ -1,6 +1,6 @@
-package com.kdp.wanandroidclient.ui.mvp.presenter;
+package com.kdp.wanandroidclient.ui.core.presenter;
 
-import com.kdp.wanandroidclient.ui.mvp.view.IView;
+import com.kdp.wanandroidclient.ui.core.view.IView;
 
 /**
  * 通用业务接口

@@ -1,4 +1,4 @@
-package com.kdp.wanandroidclient.ui.mvp.view;
+package com.kdp.wanandroidclient.ui.core.view;
 
 /**
  * view基类

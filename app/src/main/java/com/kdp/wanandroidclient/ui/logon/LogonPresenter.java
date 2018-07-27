@@ -5,8 +5,8 @@ import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.bean.UserBean;
 import com.kdp.wanandroidclient.inter.VerifyAccountCallback;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
-import com.kdp.wanandroidclient.ui.mvp.model.impl.LogonModel;
-import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
+import com.kdp.wanandroidclient.ui.core.model.impl.LogonModel;
+import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
 
 /**
  * 登录、注册Presenter

@@ -1,10 +1,10 @@
-package com.kdp.wanandroidclient.ui.mvp.model.impl;
+package com.kdp.wanandroidclient.ui.core.model.impl;
 
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
-import com.kdp.wanandroidclient.ui.mvp.model.IUserModel;
+import com.kdp.wanandroidclient.ui.core.model.IUserModel;
 
 /**
  * author: 康栋普

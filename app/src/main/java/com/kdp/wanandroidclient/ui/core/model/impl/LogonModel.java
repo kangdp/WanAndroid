@@ -1,4 +1,4 @@
-package com.kdp.wanandroidclient.ui.mvp.model.impl;
+package com.kdp.wanandroidclient.ui.core.model.impl;
 
 import android.text.TextUtils;
 
@@ -9,7 +9,7 @@ import com.kdp.wanandroidclient.inter.VerifyAccountCallback;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
-import com.kdp.wanandroidclient.ui.mvp.model.ILogonModel;
+import com.kdp.wanandroidclient.ui.core.model.ILogonModel;
 
 /**
  * Created by 康栋普 on 2018/2/1.

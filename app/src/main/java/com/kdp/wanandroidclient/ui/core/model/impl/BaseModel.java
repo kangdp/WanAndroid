@@ -1,8 +1,8 @@
-package com.kdp.wanandroidclient.ui.mvp.model.impl;
+package com.kdp.wanandroidclient.ui.core.model.impl;
 
 import com.kdp.wanandroidclient.api.ApiServer;
 import com.kdp.wanandroidclient.net.RxRetrofit;
-import com.kdp.wanandroidclient.ui.mvp.model.IModel;
+import com.kdp.wanandroidclient.ui.core.model.IModel;
 
 
 public class BaseModel implements IModel {

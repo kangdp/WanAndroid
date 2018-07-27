@@ -1,4 +1,4 @@
-package com.kdp.wanandroidclient.ui.mvp.model;
+package com.kdp.wanandroidclient.ui.core.model;
 
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.net.callback.RxObserver;

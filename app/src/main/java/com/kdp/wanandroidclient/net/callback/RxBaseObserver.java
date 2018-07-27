@@ -7,8 +7,8 @@ import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.bean.BaseBean;
 import com.kdp.wanandroidclient.net.NetConfig;
-import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
-import com.kdp.wanandroidclient.ui.mvp.view.IView;
+import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
+import com.kdp.wanandroidclient.ui.core.view.IView;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 
 import org.json.JSONException;

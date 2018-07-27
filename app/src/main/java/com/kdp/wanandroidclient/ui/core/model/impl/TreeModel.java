@@ -1,9 +1,9 @@
-package com.kdp.wanandroidclient.ui.mvp.model.impl;
+package com.kdp.wanandroidclient.ui.core.model.impl;
 
 import com.kdp.wanandroidclient.bean.TreeBean;
 import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
-import com.kdp.wanandroidclient.ui.mvp.model.ITreeModel;
+import com.kdp.wanandroidclient.ui.core.model.ITreeModel;
 
 import java.util.List;
 

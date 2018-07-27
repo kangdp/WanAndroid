@@ -1,6 +1,6 @@
 package com.kdp.wanandroidclient.ui.web;
 
-import com.kdp.wanandroidclient.ui.mvp.presenter.CommonPresenter;
+import com.kdp.wanandroidclient.ui.core.presenter.CommonPresenter;
 
 /**
  * 文章详情页Presenter

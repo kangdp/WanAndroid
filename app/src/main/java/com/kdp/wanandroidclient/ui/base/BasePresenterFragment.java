@@ -3,8 +3,8 @@ package com.kdp.wanandroidclient.ui.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
-import com.kdp.wanandroidclient.ui.mvp.view.IView;
+import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
+import com.kdp.wanandroidclient.ui.core.view.IView;
 
 /**
  * author: 康栋普

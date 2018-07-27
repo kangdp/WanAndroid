@@ -5,8 +5,8 @@ import com.kdp.wanandroidclient.bean.FriendBean;
 import com.kdp.wanandroidclient.bean.HotwordBean;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
-import com.kdp.wanandroidclient.ui.mvp.model.impl.SearchModel;
-import com.kdp.wanandroidclient.ui.mvp.presenter.CommonPresenter;
+import com.kdp.wanandroidclient.ui.core.model.impl.SearchModel;
+import com.kdp.wanandroidclient.ui.core.presenter.CommonPresenter;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.kdp.wanandroidclient.ui.user;
 
 import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
+import com.kdp.wanandroidclient.ui.core.view.IListDataView;
 
 /**
  * 用户协约类

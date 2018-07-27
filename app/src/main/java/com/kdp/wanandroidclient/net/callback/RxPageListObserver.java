@@ -3,8 +3,8 @@ package com.kdp.wanandroidclient.net.callback;
 import com.kdp.wanandroidclient.bean.BaseBean;
 import com.kdp.wanandroidclient.bean.PageListDataBean;
 import com.kdp.wanandroidclient.net.NetConfig;
-import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
-import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
+import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
+import com.kdp.wanandroidclient.ui.core.view.IListDataView;
 
 import java.util.List;
 

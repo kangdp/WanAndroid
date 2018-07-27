@@ -3,7 +3,7 @@ package com.kdp.wanandroidclient.ui.main;
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.FriendBean;
 import com.kdp.wanandroidclient.bean.HotwordBean;
-import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
+import com.kdp.wanandroidclient.ui.core.view.IListDataView;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package com.kdp.wanandroidclient.ui.home;
 
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.BannerBean;
-import com.kdp.wanandroidclient.ui.mvp.view.IListDataView;
+import com.kdp.wanandroidclient.ui.core.view.IListDataView;
 
 import java.util.List;
 

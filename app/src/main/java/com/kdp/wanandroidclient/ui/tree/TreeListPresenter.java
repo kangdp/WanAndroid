@@ -2,8 +2,8 @@ package com.kdp.wanandroidclient.ui.tree;
 
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
-import com.kdp.wanandroidclient.ui.mvp.model.impl.TreeListModel;
-import com.kdp.wanandroidclient.ui.mvp.presenter.CommonPresenter;
+import com.kdp.wanandroidclient.ui.core.model.impl.TreeListModel;
+import com.kdp.wanandroidclient.ui.core.presenter.CommonPresenter;
 
 import java.util.List;
 

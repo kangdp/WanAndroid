@@ -4,8 +4,8 @@ import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.BannerBean;
 import com.kdp.wanandroidclient.net.callback.RxConsumer;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
-import com.kdp.wanandroidclient.ui.mvp.model.impl.HomeModel;
-import com.kdp.wanandroidclient.ui.mvp.presenter.CommonPresenter;
+import com.kdp.wanandroidclient.ui.core.model.impl.HomeModel;
+import com.kdp.wanandroidclient.ui.core.presenter.CommonPresenter;
 
 import java.util.List;
 

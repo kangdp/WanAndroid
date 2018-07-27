@@ -1,4 +1,4 @@
-package com.kdp.wanandroidclient.ui.mvp.model;
+package com.kdp.wanandroidclient.ui.core.model;
 
 import com.kdp.wanandroidclient.bean.UserBean;
 import com.kdp.wanandroidclient.inter.VerifyAccountCallback;

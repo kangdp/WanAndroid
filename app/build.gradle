@@ -1,12 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+
     signingConfigs {
         release {
-            keyAlias 'wanandroid'
-            keyPassword 'wanandroid'
-            storeFile file('../wanandroid.jks')
-            storePassword 'wanandroid'
+            def Properties buildPro = buildSign()
+            keyAlias buildPro['key_alias']
+            keyPassword buildPro['key_password']
+            storeFile file(buildPro['store_file'])
+            storePassword buildPro['store_password']
         }
     }
     compileSdkVersion 25
@@ -27,10 +29,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+//        debug {
+//            signingConfig signingConfigs.release
+//        }
     }
     productFlavors {
     }
 
+}
+
+//读取签名配置并返回Properties
+def buildSign() {
+  def Properties buildProperties = new Properties()
+    buildProperties.load(new FileInputStream(file("../local.properties")))
+    return buildProperties
 }
 
 dependencies {

@@ -1,4 +1,4 @@
-package com.kdp.wanandroidclient.ui.mvp.model.impl;
+package com.kdp.wanandroidclient.ui.core.model.impl;
 
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.BannerBean;
@@ -6,7 +6,7 @@ import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxConsumer;
 import com.kdp.wanandroidclient.net.callback.RxFunction;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
-import com.kdp.wanandroidclient.ui.mvp.model.IHomeModel;
+import com.kdp.wanandroidclient.ui.core.model.IHomeModel;
 
 import java.util.List;
 

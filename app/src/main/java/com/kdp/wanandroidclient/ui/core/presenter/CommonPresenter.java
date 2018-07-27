@@ -1,10 +1,10 @@
-package com.kdp.wanandroidclient.ui.mvp.presenter;
+package com.kdp.wanandroidclient.ui.core.presenter;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
-import com.kdp.wanandroidclient.ui.mvp.model.impl.CommonModel;
-import com.kdp.wanandroidclient.ui.mvp.view.IView;
+import com.kdp.wanandroidclient.ui.core.model.impl.CommonModel;
+import com.kdp.wanandroidclient.ui.core.view.IView;
 
 /**
  * ICommonPresenter实现类，用于封装通用业务接口

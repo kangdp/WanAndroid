@@ -1,6 +1,6 @@
 package com.kdp.wanandroidclient.ui.logon;
 
-import com.kdp.wanandroidclient.ui.mvp.view.IView;
+import com.kdp.wanandroidclient.ui.core.view.IView;
 
 /**
  * 登录、注册协约类

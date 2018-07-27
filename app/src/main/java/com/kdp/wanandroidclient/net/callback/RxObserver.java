@@ -2,7 +2,7 @@ package com.kdp.wanandroidclient.net.callback;
 
 import com.kdp.wanandroidclient.bean.BaseBean;
 import com.kdp.wanandroidclient.net.NetConfig;
-import com.kdp.wanandroidclient.ui.mvp.presenter.BasePresenter;
+import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
 
 /**
  * RxRetrofit通用接口回调类
