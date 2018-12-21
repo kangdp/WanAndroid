@@ -1,6 +1,7 @@
 package com.kdp.wanandroidclient.ui.core.model.impl;
 
 import com.kdp.wanandroidclient.bean.ArticleBean;
+import com.kdp.wanandroidclient.bean.PageListDataBean;
 import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
@@ -16,7 +17,7 @@ public class UserModel extends CommonModel implements IUserModel {
     public void getCollectArticleList(int page, RxPageListObserver<ArticleBean> rxObserver) {
         doRxRequest()
                 .getCollectArticleList(page)
-                .compose(RxSchedulers.io_main())
+                .compose(RxSchedulers.<PageListDataBean<ArticleBean>>io_main())
                 .subscribe(rxObserver);
     }
 
@@ -24,7 +25,7 @@ public class UserModel extends CommonModel implements IUserModel {
     public void deleteCollectArticle(int id, int originId, RxObserver<String> callback) {
         doRxRequest()
                 .deleteCollectArticle(id, originId)
-                .compose(RxSchedulers.io_main())
+                .compose(RxSchedulers.<String>io_main())
                 .subscribe(callback);
     }
 }

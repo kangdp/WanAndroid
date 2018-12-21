@@ -4,12 +4,19 @@ import android.text.TextUtils;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.application.AppContext;
+import com.kdp.wanandroidclient.bean.BaseBean;
 import com.kdp.wanandroidclient.bean.UserBean;
 import com.kdp.wanandroidclient.inter.VerifyAccountCallback;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.ui.core.model.ILogonModel;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 康栋普 on 2018/2/1.
@@ -21,15 +28,17 @@ public class LogonModel extends BaseModel implements ILogonModel {
     public void login(String username, String password, RxObserver<UserBean> callback) {
         doRxRequest()
                 .login(username, password)
-                .compose(RxSchedulers.io_main())
+                .compose(RxSchedulers.<UserBean>io_main())
                 .subscribe(callback);
+
+
     }
 
     @Override
-    public void register(final String username, final String password, final RxObserver<String> callback) {
+    public void register(final String username, final String password,  RxObserver<String> callback) {
         doRxRequest()
                 .register(username, password, password)
-                .compose(RxSchedulers.io_main())
+                .compose(RxSchedulers.<String>io_main())
                 .subscribe(callback);
     }
 

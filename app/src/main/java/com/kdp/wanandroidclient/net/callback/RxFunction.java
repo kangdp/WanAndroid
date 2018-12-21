@@ -1,6 +1,8 @@
 package com.kdp.wanandroidclient.net.callback;
 
+import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.BaseBean;
+import com.kdp.wanandroidclient.bean.PageListDataBean;
 import com.kdp.wanandroidclient.net.NetConfig;
 
 import io.reactivex.Observable;

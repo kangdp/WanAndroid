@@ -14,7 +14,7 @@ public class CommonModel extends BaseModel implements ICommonModel {
     public void collectArticle(int id, RxObserver<String> callback) {
         doRxRequest().
                 collectArticle(id)
-                .compose(RxSchedulers.io_main())
+                .compose(RxSchedulers.<String>io_main())
                 .subscribe(callback);
 
     }
@@ -23,7 +23,7 @@ public class CommonModel extends BaseModel implements ICommonModel {
     public void collectInSideArticle(int id, RxObserver<String> callback) {
         doRxRequest().
                 collectInsideArticle(id)
-                .compose(RxSchedulers.io_main())
+                .compose(RxSchedulers.<String>io_main())
                 .subscribe(callback);
     }
 
@@ -31,7 +31,7 @@ public class CommonModel extends BaseModel implements ICommonModel {
     public void unCollectArticle(int id, RxObserver<String> callback) {
         doRxRequest()
                 .unCollectArticle(id)
-                .compose(RxSchedulers.io_main())
+                .compose(RxSchedulers.<String>io_main())
                 .subscribe(callback);
     }
 

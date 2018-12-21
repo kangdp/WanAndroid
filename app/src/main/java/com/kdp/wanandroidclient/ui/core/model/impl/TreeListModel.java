@@ -1,6 +1,7 @@
 package com.kdp.wanandroidclient.ui.core.model.impl;
 
 import com.kdp.wanandroidclient.bean.ArticleBean;
+import com.kdp.wanandroidclient.bean.PageListDataBean;
 import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 import com.kdp.wanandroidclient.ui.core.model.ITreeListModel;
@@ -16,7 +17,7 @@ public class TreeListModel extends CommonModel implements ITreeListModel {
     public void getTreeList(int page,int cid,RxPageListObserver<ArticleBean> rxObserver) {
         doRxRequest()
                 .getTreeList(page, cid)
-                .compose(RxSchedulers.io_main())
+                .compose(RxSchedulers.<PageListDataBean<ArticleBean>>io_main())
                 .subscribe(rxObserver);
 
     }

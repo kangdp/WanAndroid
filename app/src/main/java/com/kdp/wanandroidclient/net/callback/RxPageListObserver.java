@@ -17,18 +17,17 @@ import java.util.List;
 
 public abstract class RxPageListObserver<T> extends RxBaseObserver<PageListDataBean<T>> {
 
-    private IListDataView<T> mListDataView;
+    private IListDataView mListDataView;
 
     public RxPageListObserver(BasePresenter mPresenter) {
         super(mPresenter);
-        this.mListDataView = (IListDataView<T>) mPresenter.getView();
+        this.mListDataView = (IListDataView) mPresenter.getView();
     }
     @Override
     public void onNext(BaseBean<PageListDataBean<T>> baseBean) {
         if (baseBean.errorCode == NetConfig.REQUEST_SUCCESS) {
 
             PageListDataBean<T> mListData = baseBean.data;
-
             if (mListDataView.getPage() == 0) {
                 mListDataView.clearListData();
             }

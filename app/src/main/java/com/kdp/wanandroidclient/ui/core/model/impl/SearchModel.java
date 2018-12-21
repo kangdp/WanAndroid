@@ -3,6 +3,7 @@ package com.kdp.wanandroidclient.ui.core.model.impl;
 import com.kdp.wanandroidclient.bean.ArticleBean;
 import com.kdp.wanandroidclient.bean.FriendBean;
 import com.kdp.wanandroidclient.bean.HotwordBean;
+import com.kdp.wanandroidclient.bean.PageListDataBean;
 import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
@@ -22,7 +23,7 @@ public class SearchModel extends CommonModel implements ISearchModel {
         LogUtils.e(page+"");
         doRxRequest()
                 .search(page, keyword)
-                .compose(RxSchedulers.io_main())
+                .compose(RxSchedulers.<PageListDataBean<ArticleBean>>io_main())
                 .subscribe(rxObserver);
     }
 
@@ -30,7 +31,7 @@ public class SearchModel extends CommonModel implements ISearchModel {
     public void getHotWord(RxObserver<List<HotwordBean>> observable) {
         doRxRequest()
                 .getHotKeyword()
-                .compose(RxSchedulers.io_main())
+                .compose(RxSchedulers.<List<HotwordBean>>io_main())
                 .subscribe(observable);
     }
 
@@ -38,7 +39,7 @@ public class SearchModel extends CommonModel implements ISearchModel {
     public void getFriend(RxObserver<List<FriendBean>> rxObserver) {
         doRxRequest()
                 .getFriend()
-                .compose(RxSchedulers.io_main())
+                .compose(RxSchedulers.<List<FriendBean>>io_main())
                 .subscribe(rxObserver);
     }
 }

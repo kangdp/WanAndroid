@@ -18,7 +18,7 @@ public class TreeModel extends BaseModel implements ITreeModel {
     public void getTree(RxObserver<List<TreeBean>> callback) {
         doRxRequest()
                 .getTree()
-                .compose(RxSchedulers.io_main())
+                .compose(RxSchedulers.<List<TreeBean>>io_main())
                 .subscribe(callback);
     }
 
