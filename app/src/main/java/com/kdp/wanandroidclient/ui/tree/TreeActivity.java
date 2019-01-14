@@ -25,7 +25,6 @@ public class TreeActivity extends BaseActivity {
     private List<TreeBean.ChildrenBean> mTreeDatas = new ArrayList<>();
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
-    private TreeFragPageAdapter mAdapter;
     private int mAction, mChapterId;
     private String mChapterName;
 
@@ -47,7 +46,10 @@ public class TreeActivity extends BaseActivity {
 
         if (mAction == Const.BUNDLE_KEY.INTENT_ACTION_TREE) {
             Bundle bundle = intent.getExtras();
-            TreeBean mTreeBean = (TreeBean) bundle.getSerializable(Const.BUNDLE_KEY.OBJ);
+            TreeBean mTreeBean = null;
+            if (bundle != null) {
+                mTreeBean = (TreeBean) bundle.getSerializable(Const.BUNDLE_KEY.OBJ);
+            }
             if (mTreeBean != null) {
                 mTitle = mTreeBean.getName();
                 mTreeDatas = mTreeBean.getChildren();
@@ -71,7 +73,7 @@ public class TreeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-
+        TreeFragPageAdapter mAdapter;
         if (mAction == Const.BUNDLE_KEY.INTENT_ACTION_TREE) {
             mAdapter = new TreeFragPageAdapter(getSupportFragmentManager(), mAction, mTreeDatas);
         } else {

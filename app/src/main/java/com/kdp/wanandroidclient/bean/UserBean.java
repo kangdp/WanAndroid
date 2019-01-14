@@ -7,12 +7,37 @@ import java.util.List;
  */
 public class UserBean{
 
+
+    /**
+     * chapterTops : []
+     * collectIds : [3373,7656,7650,7652,7643,7647,7645,7638,7637,7636,7640,7639,7658,7655,7653,7663,7659]
+     * email :
+     * icon :
+     * id : 2633
+     * password :
+     * token :
+     * type : 0
+     * username : kangdongpu
+     */
+
+    private String email;
     private String icon;
     private int id;
     private String password;
+    private String token;
     private int type;
     private String username;
+    private List<?> chapterTops;
     private List<Integer> collectIds;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getIcon() {
         return icon;
     }
@@ -37,6 +62,14 @@ public class UserBean{
         this.password = password;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public int getType() {
         return type;
     }
@@ -53,6 +86,14 @@ public class UserBean{
         this.username = username;
     }
 
+    public List<?> getChapterTops() {
+        return chapterTops;
+    }
+
+    public void setChapterTops(List<?> chapterTops) {
+        this.chapterTops = chapterTops;
+    }
+
     public List<Integer> getCollectIds() {
         return collectIds;
     }
@@ -60,5 +101,4 @@ public class UserBean{
     public void setCollectIds(List<Integer> collectIds) {
         this.collectIds = collectIds;
     }
-
 }
