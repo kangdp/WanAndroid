@@ -66,7 +66,9 @@ Apk
 部分截图
 -------
 
-<img src="https://github.com/kangdongpu/VerticalSeekBarSample/blob/master/screenshot/首页.png" width="300"/><img src="https://github.com/kangdongpu/VerticalSeekBarSample/blob/master/screenshot/知识体系.png" width="300"/>
+<img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/Home.png" width="300"/> <img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/System.png" width="300"/>
+<img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/Article.png" width="300"/> <img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/Collect.png" width="300"/>
+<img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/Search.png" width="300"/> <img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/SlideMenu.png" width="300"/>
 
 LICENSE
 =======
