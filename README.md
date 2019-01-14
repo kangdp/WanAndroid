@@ -65,15 +65,8 @@ Apk
 
 部分截图
 -------
- ![首页](https://upload-images.jianshu.io/upload_images/2349677-f4632873ede066da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)   
 
-![知识体系](https://upload-images.jianshu.io/upload_images/2349677-7d5899cdb679d27f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-![体系文章](https://upload-images.jianshu.io/upload_images/2349677-c561dbd064d1c908.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-![我的收藏](https://upload-images.jianshu.io/upload_images/2349677-fc18a5cb0f4f1ee1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-![搜索](https://upload-images.jianshu.io/upload_images/2349677-c879a22289a55f1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+<img src="https://github.com/kangdongpu/VerticalSeekBarSample/blob/master/screenshot/首页.png" width="300"/><img src="https://github.com/kangdongpu/VerticalSeekBarSample/blob/master/screenshot/知识体系.png" width="300"/>
 
 LICENSE
 =======
