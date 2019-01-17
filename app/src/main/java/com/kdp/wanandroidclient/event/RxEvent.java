@@ -75,10 +75,12 @@ public class RxEvent {
         //中断事件
         if (mDisposable != null && !mDisposable.isDisposed())
             mDisposable.dispose();
-        if (mSubjectList != null)
+        if (mSubjectList != null){
             mSubjectList.remove(mSubject);
-        if (mSubjectList.isEmpty())
-            mSubjectMaps.remove(mAction);
+            if (mSubjectList.isEmpty()){
+                mSubjectMaps.remove(mAction);
+            }
+        }
     }
 
 }
