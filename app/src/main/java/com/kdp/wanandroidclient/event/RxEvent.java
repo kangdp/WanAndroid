@@ -79,6 +79,7 @@ public class RxEvent {
             mSubjectList.remove(mSubject);
             if (mSubjectList.isEmpty()){
                 mSubjectMaps.remove(mAction);
+
             }
         }
     }
