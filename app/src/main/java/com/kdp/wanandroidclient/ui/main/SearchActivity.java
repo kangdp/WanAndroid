@@ -65,8 +65,8 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
     @Override
     protected View initHeaderView() {
         mHeaderView = LayoutInflater.from(this).inflate(R.layout.search_header, mRecyclerView, false);
-        mKeywordTagLayout = (TagFlowLayout) mHeaderView.findViewById(R.id.keywordTaglayout);
-        mFriendTagLayout = (TagFlowLayout) mHeaderView.findViewById(R.id.friendTaglayout);
+        mKeywordTagLayout =  mHeaderView.findViewById(R.id.keywordTaglayout);
+        mFriendTagLayout =  mHeaderView.findViewById(R.id.friendTaglayout);
         return mHeaderView;
     }
 
@@ -181,11 +181,11 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
         mSearchView.onActionViewExpanded();
         //去除搜索框背景
         deleteSearchPlate();
-        searchAutoComplete = (SearchView.SearchAutoComplete) mSearchView.findViewById(R.id.search_src_text);
+        searchAutoComplete =  mSearchView.findViewById(R.id.search_src_text);
         searchAutoComplete.setHintTextColor(ContextCompat.getColor(this, R.color._60ffffff));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ImageView mCloseView = (ImageView) mSearchView.findViewById(R.id.search_close_btn);
+            ImageView mCloseView =  mSearchView.findViewById(R.id.search_close_btn);
             mCloseView.setBackground(ContextCompat.getDrawable(this, R.drawable.ripple_close));
         }
 

@@ -4,7 +4,7 @@ package com.kdp.wanandroidclient.common;
  * Api接口地址
  */
 public class UrlConstainer {
-    public static final String baseUrl = "http://www.wanandroid.com/";
+    public static final String baseUrl = "https://www.wanandroid.com/";
     /**
      * 登录
      */

@@ -20,7 +20,7 @@ public class RequestInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        //无网络时只从缓存中获取
+        //无网络时从缓存中获取
         if (!NetworkUtils.isAvailable(AppContext.getContext())) {
             //无网络时,设置超时为30天
             int maxStale = 30 * 24 * 60 * 60;

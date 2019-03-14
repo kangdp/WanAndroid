@@ -51,6 +51,7 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, Web
     @Override
     protected void getIntent(Intent intent) {
         Bundle bundle = intent.getExtras();
+        assert bundle != null;
         bean = (ArticleBean) bundle.getSerializable(Const.BUNDLE_KEY.OBJ);
         type = intent.getIntExtra(Const.BUNDLE_KEY.COLLECT_TYPE, -1);
         if (bean != null) {

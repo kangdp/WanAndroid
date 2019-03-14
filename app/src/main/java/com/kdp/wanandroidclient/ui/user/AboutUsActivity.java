@@ -35,8 +35,8 @@ public class AboutUsActivity extends AppCompatActivity {
         LightStatusbarUtils.setLightStatusBar(this,false);
         super.onCreate(bundle);
         setContentView(R.layout.activity_about_us);
-        mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingbarlayout);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mCollapsingToolbarLayout =  findViewById(R.id.collapsingbarlayout);
+        mToolbar =  findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.about_us);
         setSupportActionBar(mToolbar);
 
@@ -51,8 +51,8 @@ public class AboutUsActivity extends AppCompatActivity {
                 finish();
             }
         });
-        mVersionView = (TextView) findViewById(R.id.version);
-        mIntroduceView = (TextView) findViewById(R.id.introduce);
+        mVersionView =  findViewById(R.id.version);
+        mIntroduceView =  findViewById(R.id.introduce);
         setVersion();
         setIntroduce();
 

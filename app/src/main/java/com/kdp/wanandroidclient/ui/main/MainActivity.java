@@ -75,11 +75,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initViews() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+        mDrawerLayout =  findViewById(R.id.drawerLayout);
+        mNavigationView =  findViewById(R.id.navigation_view);
         btns = new Button[2];
-        btns[0] = (Button) findViewById(R.id.btn_main);
-        btns[1] = (Button) findViewById(R.id.btn_system);
+        btns[0] =  findViewById(R.id.btn_main);
+        btns[1] =  findViewById(R.id.btn_system);
         btns[0].setOnClickListener(this);
         btns[1].setOnClickListener(this);
         btns[0].setSelected(true);
@@ -121,8 +121,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void initNavigationHeaderView() {
         View mHeaderView = mNavigationView.getHeaderView(0);
-        mAvatarView = (ImageView) mHeaderView.findViewById(R.id.img_avatar);
-        mNameView = (TextView) mHeaderView.findViewById(R.id.tv_name);
+        mAvatarView =  mHeaderView.findViewById(R.id.img_avatar);
+        mNameView =  mHeaderView.findViewById(R.id.tv_name);
     }
 
     private void setUserData() {

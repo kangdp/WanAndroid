@@ -3,6 +3,7 @@ package com.kdp.wanandroidclient.net.interceptor;
 import android.util.Log;
 
 import com.kdp.wanandroidclient.common.UrlConstainer;
+import com.kdp.wanandroidclient.utils.LogUtils;
 import com.kdp.wanandroidclient.utils.PreUtils;
 
 import java.io.IOException;

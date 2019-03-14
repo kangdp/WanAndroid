@@ -65,8 +65,8 @@ public class TreeActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-        mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        mViewPager = (ViewPager) findViewById(R.id.viewPager);
+        mTabLayout =  findViewById(R.id.tabLayout);
+        mViewPager =  findViewById(R.id.viewPager);
     }
 
 

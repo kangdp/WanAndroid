@@ -61,8 +61,8 @@ public class LogonActivity extends BasePresenterActivity<LogonPresenter, LogonCo
 
     @Override
     protected void initViews() {
-        et_username = (EditText) findViewById(R.id.et_username);
-        et_password = (EditText) findViewById(R.id.et_password);
+        et_username =  findViewById(R.id.et_username);
+        et_password =  findViewById(R.id.et_password);
         findViewById(R.id.bt_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

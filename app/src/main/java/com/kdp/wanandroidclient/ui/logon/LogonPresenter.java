@@ -55,6 +55,7 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
      */
     @Override
     public void register() {
+        if (!verifyAccount()) return;
         verifyAccount();
         RxObserver<String> mRegisterRxObserver = new RxObserver<String>(this) {
             @Override
@@ -86,12 +87,11 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
     /**
      * 帐号验证
      */
-    private void verifyAccount() {
+    private boolean verifyAccount() {
         mLogonView = getView();
         username = mLogonView.getUserName();
         password = mLogonView.getPassWord();
-        if (!logonModel.verifyAccount(username, password, mVerifyAccountCallback))
-            return;
+        return (!logonModel.verifyAccount(username, password, mVerifyAccountCallback));
     }
 
 }
