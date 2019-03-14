@@ -1,12 +1,14 @@
 package com.kdp.wanandroidclient.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 个人信息
  */
-public class UserBean{
+public class UserBean implements Serializable {
 
+    private static final long serialVersionUID = 1L;
 
     /**
      * chapterTops : []

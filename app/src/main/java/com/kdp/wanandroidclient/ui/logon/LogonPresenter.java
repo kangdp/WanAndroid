@@ -28,7 +28,7 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
      */
     @Override
     public void login() {
-        verifyAccount();
+        if(!verifyAccount()) return;
         RxObserver<UserBean> mLoginRxObserver = new RxObserver<UserBean>(this) {
             @Override
             protected void onStart() {
@@ -37,6 +37,7 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
 
             @Override
             protected void onSuccess(UserBean userBean) {
+                userBean.setPassword(password);
                 logonModel.saveUserInfo(userBean);
                 mLogonView.showResult(AppContext.getContext().getString(R.string.login_success));
             }
@@ -56,7 +57,6 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
     @Override
     public void register() {
         if (!verifyAccount()) return;
-        verifyAccount();
         RxObserver<String> mRegisterRxObserver = new RxObserver<String>(this) {
             @Override
             protected void onStart() {
@@ -91,7 +91,7 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
         mLogonView = getView();
         username = mLogonView.getUserName();
         password = mLogonView.getPassWord();
-        return (!logonModel.verifyAccount(username, password, mVerifyAccountCallback));
+        return logonModel.verifyAccount(username, password, mVerifyAccountCallback);
     }
 
 }

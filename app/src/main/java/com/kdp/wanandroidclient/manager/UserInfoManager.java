@@ -3,11 +3,19 @@ package com.kdp.wanandroidclient.manager;
 import android.text.TextUtils;
 import android.util.Base64;
 
+import com.bumptech.glide.load.Encoder;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.utils.AesEncryptionUtils;
 import com.google.gson.Gson;
 import com.kdp.wanandroidclient.utils.PreUtils;
 import com.kdp.wanandroidclient.bean.UserBean;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.crypto.spec.SecretKeySpec;
 
@@ -24,12 +32,17 @@ public class UserInfoManager {
      * @return
      */
     public static UserBean getUserInfo() {
-        UserBean userBean = null;
         SecretKeySpec keySpec = getAesKey();
         String userInfo = AesEncryptionUtils.decrypt(keySpec, (String) PreUtils.get(Const.USERINFO_KEY.USER_INFO, ""));
         if (TextUtils.isEmpty(userInfo)) return null;
-        userBean = new Gson().fromJson(userInfo, UserBean.class);
-        return userBean;
+        try {
+            return translateStringTOUserInfo(userInfo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -37,20 +50,25 @@ public class UserInfoManager {
      * @param userBean
      */
     public static void saveUserInfo(UserBean userBean){
-        String userInfo = new Gson().toJson(userBean);
-        SecretKeySpec key = AesEncryptionUtils.createKey();
-        String aesContent = AesEncryptionUtils.encrypt(key, userInfo);
-        //保存用户信息
-        PreUtils.put(Const.USERINFO_KEY.USER_INFO, aesContent);
-        //保存密钥
-        saveAesKey(key);
+        try {
+            String  userInfo = translateUserInfoTOString(userBean);
+            SecretKeySpec key = AesEncryptionUtils.createKey();
+            String aesContent = AesEncryptionUtils.encrypt(key, userInfo);
+            //保存用户信息
+            PreUtils.put(Const.USERINFO_KEY.USER_INFO, aesContent);
+            //保存密钥
+            saveAesKey(key);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    public static void saveAesKey(SecretKeySpec keySpec){
+    private static void saveAesKey(SecretKeySpec keySpec){
         PreUtils.put(Const.USERINFO_KEY.AES, Base64.encodeToString(keySpec.getEncoded(),Base64.DEFAULT));
     }
 
-    public static SecretKeySpec getAesKey(){
+    private static SecretKeySpec getAesKey(){
         String keyStr = (String) PreUtils.get(Const.USERINFO_KEY.AES, "");
         return AesEncryptionUtils.getSecretKey(Base64.decode(keyStr, Base64.DEFAULT));
     }
@@ -61,5 +79,33 @@ public class UserInfoManager {
 
     public static void saveIsLogin(boolean isLogin){
         PreUtils.put(Const.USERINFO_KEY.IS_LOGIN,isLogin);
+    }
+
+    /**
+     * UserBean 转 String
+     * @param userBean
+     * @return
+     * @throws IOException
+     */
+    private static String translateUserInfoTOString(UserBean userBean) throws IOException{
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(userBean);
+        return Base64.encodeToString(bos.toByteArray(), Base64.DEFAULT);
+    }
+
+    /**
+     * String 转 UserBean
+     * @param userStr
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    private static UserBean translateStringTOUserInfo(String userStr) throws IOException, ClassNotFoundException {
+        if (userStr == null) return null;
+        byte[] base64Bytes = Base64.decode(userStr,Base64.DEFAULT);
+        ByteArrayInputStream bis = new ByteArrayInputStream(base64Bytes);
+        ObjectInputStream ois = new ObjectInputStream(bis);
+        return (UserBean) ois.readObject();
     }
 }
