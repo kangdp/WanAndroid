@@ -8,7 +8,7 @@
 
 Apk
 ----
-[1.0.3](https://www.pgyer.com/SDIx)
+[1.0.3](https://github.com/kangdongpu/WanAndroid/raw/master/release/app-release.apk)
 
 接口
 ----
