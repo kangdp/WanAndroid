@@ -8,7 +8,7 @@
 
 Apk
 ----
-[1.0.3](https://github.com/kangdongpu/WanAndroid/raw/master/release/app-release.apk)
+[1.0.4](https://github.com/kangdongpu/WanAndroid/raw/master/release/app-release.apk)
 
 接口
 ----
