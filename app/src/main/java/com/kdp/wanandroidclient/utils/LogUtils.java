@@ -3,21 +3,23 @@ package com.kdp.wanandroidclient.utils;
 import android.util.Log;
 
 /**
- *  Log工具类
  * Created by 康栋普 on 2017/11/29.
+ * Log工具类
  */
 
 public class LogUtils {
     private static String className;  //类名
     private static String methodName; //方法名
     private static int lineNumber;   //行数
+    public static boolean isDebug; //是否开启debug模式，打印日志
 
     /**
      * 获取日志信息
      *
      * @param traceElements
      */
-    public static void getLogInfo(StackTraceElement[] traceElements) {
+    private static void getLogInfo(StackTraceElement[] traceElements) {
+        if (!isDebug) return;
         className = traceElements[1].getFileName();
         methodName = traceElements[1].getMethodName();
         lineNumber = traceElements[1].getLineNumber();
@@ -81,7 +83,7 @@ public class LogUtils {
      * @return
      */
     private static String createLog(String log) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append(methodName)
                 .append("(")
                 .append(className)

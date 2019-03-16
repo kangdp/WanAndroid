@@ -293,6 +293,11 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
         ToastUtils.showToast(AppContext.getContext(), result);
     }
 
+    /**
+     * 收藏
+     * @param position
+     * @param id
+     */
     @Override
     public void onCollectClick(int position, int id) {
         if (!UserInfoManager.isLogin())

@@ -40,8 +40,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null)
             getIntent(intent);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mContainerLayout = (FrameLayout) findViewById(R.id.frameLayout);
+        mToolbar =  findViewById(R.id.toolbar);
+        mContainerLayout =  findViewById(R.id.frameLayout);
 
         //初始化ToolBar
         boolean isToolbar = initToolbar();
@@ -104,7 +104,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract int getLayoutId();
 
-    protected abstract boolean initToolbar();
+    protected boolean initToolbar(){
+        return true;
+    }
 
     protected abstract void getIntent(Intent intent);
 

@@ -8,7 +8,6 @@ import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 import com.kdp.wanandroidclient.ui.core.model.ISearchModel;
-import com.kdp.wanandroidclient.utils.LogUtils;
 
 import java.util.List;
 

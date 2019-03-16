@@ -11,12 +11,10 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
-
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.utils.AppUtils;
 import com.kdp.wanandroidclient.utils.LightStatusbarUtils;
 
-import java.text.SimpleDateFormat;
 
 /**
  * 关于我们

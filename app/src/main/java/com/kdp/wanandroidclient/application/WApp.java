@@ -2,6 +2,8 @@ package com.kdp.wanandroidclient.application;
 
 import android.app.Application;
 
+import com.kdp.wanandroidclient.BuildConfig;
+import com.kdp.wanandroidclient.utils.LogUtils;
 import com.squareup.leakcanary.LeakCanary;
 
 /**
@@ -18,6 +20,8 @@ public class WApp extends Application{
             return;
         }
         LeakCanary.install(this);
+        //开启debug模式
+        LogUtils.isDebug = BuildConfig.LOG_DEBUG;
         //初始化App配置
         AppContext.initialize(this);
     }
