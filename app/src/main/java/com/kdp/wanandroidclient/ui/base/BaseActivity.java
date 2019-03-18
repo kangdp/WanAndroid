@@ -108,7 +108,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         return true;
     }
 
-    protected abstract void getIntent(Intent intent);
+    protected void getIntent(Intent intent){
+    }
 
     protected abstract void initViews();
 

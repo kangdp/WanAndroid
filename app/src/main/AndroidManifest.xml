@@ -34,6 +34,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Logon"
             />
+
         <activity
             android:name=".ui.main.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
