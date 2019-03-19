@@ -94,9 +94,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         RxEvent.getInstance().unRegisterEvent(registerEvent(), mSubject, mDisposableObserver);
     }
 
-    protected abstract void receiveEvent(Object object);
+    protected void receiveEvent(Object object){
+    }
 
-    protected abstract String registerEvent();
+    protected String registerEvent(){
+        return null;
+    }
 
     protected void onNavigationClick() {
         finish();
