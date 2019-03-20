@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.kdp.wanandroidclient.bean.Tree;
 import com.kdp.wanandroidclient.common.Const;
-import com.kdp.wanandroidclient.ui.adapter.TreeFragPageAdapter;
+import com.kdp.wanandroidclient.ui.adapter.TreeFragPagerAdapter;
 import com.kdp.wanandroidclient.ui.base.BaseTabActivity;
 
 import java.util.ArrayList;
@@ -53,11 +53,11 @@ public class TreeActivity extends BaseTabActivity {
 
     @Override
     protected FragmentPagerAdapter createFragPagerAdapter() {
-        TreeFragPageAdapter mAdapter;
+        TreeFragPagerAdapter mAdapter;
         if (mAction == Const.BUNDLE_KEY.INTENT_ACTION_TREE) {
-            mAdapter = new TreeFragPageAdapter(getSupportFragmentManager(), mAction, mTreeDatas);
+            mAdapter = new TreeFragPagerAdapter(getSupportFragmentManager(), mAction, mTreeDatas);
         } else {
-            mAdapter = new TreeFragPageAdapter(getSupportFragmentManager(), mAction, mChapterId, mChapterName);
+            mAdapter = new TreeFragPagerAdapter(getSupportFragmentManager(), mAction, mChapterId, mChapterName);
         }
         return mAdapter;
     }

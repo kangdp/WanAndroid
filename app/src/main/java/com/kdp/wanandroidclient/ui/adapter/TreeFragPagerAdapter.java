@@ -16,18 +16,18 @@ import java.util.List;
  * date: 2018/3/20
  */
 
-public class TreeFragPageAdapter extends FragmentPagerAdapter {
+public class TreeFragPagerAdapter extends FragmentPagerAdapter {
     private List<Tree.ChildrenBean> mTreeDatas;
     private int mAction, mChapterId;
     private String mChapterName;
 
-    public TreeFragPageAdapter(FragmentManager fm, int mAction, List<Tree.ChildrenBean> mTreeDatas) {
+    public TreeFragPagerAdapter(FragmentManager fm, int mAction, List<Tree.ChildrenBean> mTreeDatas) {
         super(fm);
         this.mAction = mAction;
         this.mTreeDatas = mTreeDatas;
     }
 
-    public TreeFragPageAdapter(FragmentManager fm, int mAction, int mChapterId, String mChapterName) {
+    public TreeFragPagerAdapter(FragmentManager fm, int mAction, int mChapterId, String mChapterName) {
         super(fm);
         this.mAction = mAction;
         this.mChapterId = mChapterId;
