@@ -74,4 +74,9 @@ public class UrlConstainer {
      * 常用网站
      */
     public static final String FRIEND = "friend/json";
+
+    /**
+     * 项目分类
+     */
+    public static final String PROJECT = "project/tree/json";
 }

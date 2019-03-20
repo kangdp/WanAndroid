@@ -2,6 +2,7 @@ package com.kdp.wanandroidclient.ui.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
 import com.kdp.wanandroidclient.ui.core.view.IView;
@@ -11,7 +12,7 @@ import com.kdp.wanandroidclient.ui.core.view.IView;
  * date: 2018/2/11
  */
 
-public abstract class BasePresenterFragment<P extends BasePresenter<V>, V extends IView> extends BaseFragment implements IView{
+public abstract class BasePresenterFragment<P extends BasePresenter> extends BaseFragment implements IView{
 
     protected P mPresenter;
     @Override
@@ -23,11 +24,22 @@ public abstract class BasePresenterFragment<P extends BasePresenter<V>, V extend
     }
 
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         //解除关联
         detachView();
+    }
+
+    @Override
+    protected void initViews(View view) {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return 0;
     }
 
     private void detachView() {
@@ -40,10 +52,35 @@ public abstract class BasePresenterFragment<P extends BasePresenter<V>, V extend
 
     private void attachView() {
         if (mPresenter != null) {
-            mPresenter.attachView((V) this);
+            mPresenter.attachView(this);
         }
     }
 
     protected abstract P createPresenter();
 
+
+    @Override
+    public void showLoading(String msg) {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showFail(String msg) {
+
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void showEmpty() {
+
+    }
 }

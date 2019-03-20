@@ -94,28 +94,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         RxEvent.getInstance().unRegisterEvent(registerEvent(), mSubject, mDisposableObserver);
     }
 
-    protected void receiveEvent(Object object){
-    }
-
-    protected String registerEvent(){
-        return null;
-    }
-
-    protected void onNavigationClick() {
-        finish();
-    }
-
-    protected abstract int getLayoutId();
-
-    protected boolean initToolbar(){
-        return true;
-    }
-
-    protected void getIntent(Intent intent){
-    }
-
-    protected abstract void initViews();
-
     private void initContent(int layoutId) {
         if (layoutId != 0) {
             View contentView = LayoutInflater.from(this).inflate(layoutId, mContainerLayout, false);
@@ -164,5 +142,25 @@ public abstract class BaseActivity extends AppCompatActivity {
             loadingDialog.dismiss();
         }
     }
+
+    protected void receiveEvent(Object object){ }
+
+    protected String registerEvent(){
+        return null;
+    }
+
+    protected void onNavigationClick() {
+        finish();
+    }
+
+    protected abstract int getLayoutId();
+
+    protected boolean initToolbar(){
+        return false;
+    }
+
+    protected void getIntent(Intent intent){ }
+
+    protected abstract void initViews();
 
 }

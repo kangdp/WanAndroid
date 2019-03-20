@@ -1,46 +1,59 @@
 package com.kdp.wanandroidclient.ui.project;
-
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
-import com.kdp.wanandroidclient.ui.base.BaseAbListFragment;
-import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
+import com.kdp.wanandroidclient.R;
+import com.kdp.wanandroidclient.bean.ProjectCate;
+import com.kdp.wanandroidclient.ui.base.BasePresenterFragment;
+import com.kdp.wanandroidclient.utils.ToastUtils;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectFragment extends BaseAbListFragment {
+public class ProjectFragment extends BasePresenterFragment<ProjectCatePresenter> implements ProjectCateContract.IProjectCateView{
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private List<ProjectCate> cateList = new ArrayList<>();
+
     @Override
-    protected boolean isCanLoadMore() {
-        return false;
+    protected int getLayoutId() {
+        return R.layout.base_tab_layout;
     }
 
     @Override
-    protected View initHeaderView() {
-        return null;
+    protected void initViews(View view) {
+        tabLayout = view.findViewById(R.id.tabLayout);
+        viewPager = view.findViewById(R.id.viewPager);
     }
 
     @Override
-    protected void loadDatas() {
-
+    protected ProjectCatePresenter createPresenter() {
+        return new ProjectCatePresenter();
     }
 
     @Override
-    protected BaseListAdapter getListAdapter() {
-        return null;
+    public void setData(List<ProjectCate> data) {
+        cateList.clear();
+        cateList.addAll(data);
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    public List<ProjectCate> getData() {
+        return cateList;
     }
 
     @Override
-    public void setData(List data) {
-
+    public void showContent() {
+        ToastUtils.showToast(getActivity(),"请求成功");
     }
 
     @Override
-    public int getArticleId() {
-        return 0;
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mPresenter.getProjectCate();
     }
 }

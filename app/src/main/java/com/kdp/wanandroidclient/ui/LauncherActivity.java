@@ -8,7 +8,7 @@ import android.view.KeyEvent;
 import android.view.View;
 
 import com.kdp.wanandroidclient.R;
-import com.kdp.wanandroidclient.bean.UserBean;
+import com.kdp.wanandroidclient.bean.User;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.base.BasePresenterActivity;
 import com.kdp.wanandroidclient.ui.logon.LogonContract;
@@ -23,8 +23,8 @@ import java.lang.ref.WeakReference;
  * Created by 康栋普 on 2018/1/31.
  */
 
-public class LauncherActivity extends BasePresenterActivity<LogonPresenter, LogonContract.ILoginRegisterView> implements LogonContract.ILoginRegisterView {
-    private UserBean userBean;
+public class LauncherActivity extends BasePresenterActivity<LogonPresenter> implements LogonContract.ILoginRegisterView {
+    private User user;
     private Handler mHandler;
     private DelayRunnable mRunnable;
 
@@ -63,8 +63,8 @@ public class LauncherActivity extends BasePresenterActivity<LogonPresenter, Logo
     private void autoLogin() {
         if (UserInfoManager.isLogin()) {
             //自动登录
-            userBean = UserInfoManager.getUserInfo();
-            if (userBean != null)
+            user = UserInfoManager.getUserInfo();
+            if (user != null)
                 mPresenter.login();
         }
         startToActivity();
@@ -105,12 +105,12 @@ public class LauncherActivity extends BasePresenterActivity<LogonPresenter, Logo
 
     @Override
     public String getUserName() {
-        return userBean.getUsername();
+        return user.getUsername();
     }
 
     @Override
     public String getPassWord() {
-        return userBean.getPassword();
+        return user.getPassword();
     }
 
 

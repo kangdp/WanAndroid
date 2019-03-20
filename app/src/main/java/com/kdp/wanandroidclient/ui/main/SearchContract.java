@@ -1,9 +1,9 @@
 package com.kdp.wanandroidclient.ui.main;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.bean.FriendBean;
-import com.kdp.wanandroidclient.bean.HotwordBean;
-import com.kdp.wanandroidclient.ui.core.view.IListDataView;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.bean.Friend;
+import com.kdp.wanandroidclient.bean.Hotword;
+import com.kdp.wanandroidclient.ui.core.view.IPageLoadDataView;
 
 import java.util.List;
 
@@ -21,16 +21,20 @@ public class SearchContract {
 
         void getFriend();
 
-        void collectInsideArticle();
+        void collectArticle();
 
         void unCollectArticle();
     }
 
-    interface ISearchView extends IListDataView<ArticleBean> {
+    interface ISearchView extends IPageLoadDataView<Article> {
+        int getArticleId();//文章id
+
         String getKeyword();
 
-        void setHotwordData(List<HotwordBean> mHotwordDatas);
+        void setHotwordData(List<Hotword> mHotwordDatas);
 
-        void setFriendData(List<FriendBean> mFriendListDatas);
+        void setFriendData(List<Friend> mFriendListDatas);
+
+        void collect(boolean isCollect,String result);
     }
 }

@@ -18,7 +18,7 @@ import com.kdp.wanandroidclient.utils.ToastUtils;
  * Created by 康栋普 on 2018/2/1.
  */
 
-public class LogonActivity extends BasePresenterActivity<LogonPresenter, LogonContract.ILoginRegisterView> implements LogonContract.ILoginRegisterView {
+public class LogonActivity extends BasePresenterActivity<LogonPresenter> implements LogonContract.ILoginRegisterView {
     private EditText et_username, et_password;
 
     @Override
@@ -51,11 +51,6 @@ public class LogonActivity extends BasePresenterActivity<LogonPresenter, LogonCo
     @Override
     protected int getLayoutId() {
         return R.layout.activity_login;
-    }
-
-    @Override
-    protected boolean initToolbar() {
-        return false;
     }
 
 

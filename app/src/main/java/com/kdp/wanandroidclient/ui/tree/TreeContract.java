@@ -1,7 +1,7 @@
 package com.kdp.wanandroidclient.ui.tree;
 
-import com.kdp.wanandroidclient.bean.TreeBean;
-import com.kdp.wanandroidclient.ui.core.view.IListDataView;
+import com.kdp.wanandroidclient.bean.Tree;
+import com.kdp.wanandroidclient.ui.core.view.IPageLoadDataView;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public interface TreeContract {
         void loadTree();
     }
 
-    interface ITreeView extends IListDataView<TreeBean>{
-        void setData(List<TreeBean> tree);
+    interface ITreeView extends IPageLoadDataView<Tree> {
+        void setData(List<Tree> tree);
     }
 }

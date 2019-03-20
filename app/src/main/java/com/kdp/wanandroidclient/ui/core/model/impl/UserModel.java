@@ -1,7 +1,7 @@
 package com.kdp.wanandroidclient.ui.core.model.impl;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.bean.PageListDataBean;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.bean.PageListData;
 import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
@@ -14,10 +14,10 @@ import com.kdp.wanandroidclient.ui.core.model.IUserModel;
 
 public class UserModel extends CommonModel implements IUserModel {
     @Override
-    public void getCollectArticleList(int page, RxPageListObserver<ArticleBean> rxObserver) {
+    public void getCollectArticleList(int page, RxPageListObserver<Article> rxObserver) {
         doRxRequest()
                 .getCollectArticleList(page)
-                .compose(RxSchedulers.<PageListDataBean<ArticleBean>>io_main())
+                .compose(RxSchedulers.<PageListData<Article>>io_main())
                 .subscribe(rxObserver);
     }
 

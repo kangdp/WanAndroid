@@ -1,6 +1,6 @@
 package com.kdp.wanandroidclient.ui.tree;
 
-import com.kdp.wanandroidclient.bean.TreeBean;
+import com.kdp.wanandroidclient.bean.Tree;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.ui.core.model.impl.TreeModel;
 import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
@@ -18,7 +18,7 @@ public class TreePresenter extends BasePresenter<TreeContract.ITreeView> impleme
     private TreeModel mTreeModel;
     private TreeContract.ITreeView mSystemView;
 
-    public TreePresenter() {
+    TreePresenter() {
         mTreeModel = new TreeModel();
     }
 
@@ -28,9 +28,9 @@ public class TreePresenter extends BasePresenter<TreeContract.ITreeView> impleme
     @Override
     public void loadTree() {
         mSystemView = getView();
-        RxObserver<List<TreeBean>> mTreeRxObserver = new RxObserver<List<TreeBean>>(this) {
+        RxObserver<List<Tree>> mTreeRxObserver = new RxObserver<List<Tree>>(this) {
             @Override
-            protected void onSuccess(List<TreeBean> data) {
+            protected void onSuccess(List<Tree> data) {
                 mSystemView.setData(data);
                 if (mSystemView.getData().size() == 0) {
                     mSystemView.showEmpty();

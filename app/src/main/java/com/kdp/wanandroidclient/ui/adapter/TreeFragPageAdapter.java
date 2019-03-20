@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.kdp.wanandroidclient.bean.TreeBean;
+import com.kdp.wanandroidclient.bean.Tree;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.ui.tree.TreeListFragment;
 
@@ -17,11 +17,11 @@ import java.util.List;
  */
 
 public class TreeFragPageAdapter extends FragmentPagerAdapter {
-    private List<TreeBean.ChildrenBean> mTreeDatas;
+    private List<Tree.ChildrenBean> mTreeDatas;
     private int mAction, mChapterId;
     private String mChapterName;
 
-    public TreeFragPageAdapter(FragmentManager fm, int mAction, List<TreeBean.ChildrenBean> mTreeDatas) {
+    public TreeFragPageAdapter(FragmentManager fm, int mAction, List<Tree.ChildrenBean> mTreeDatas) {
         super(fm);
         this.mAction = mAction;
         this.mTreeDatas = mTreeDatas;

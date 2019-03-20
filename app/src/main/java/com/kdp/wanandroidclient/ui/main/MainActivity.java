@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.application.AppContext;
-import com.kdp.wanandroidclient.bean.UserBean;
+import com.kdp.wanandroidclient.bean.User;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
 import com.kdp.wanandroidclient.event.RxEvent;
@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             mToolbar.setTitle(R.string.app_name);
         else if (currentPosition == 1)
             mToolbar.setTitle(R.string.system);
-        else
+        else if(currentPosition == 2)
             mToolbar.setTitle(R.string.project);
     }
 
@@ -126,10 +126,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void setUserData() {
         if (UserInfoManager.isLogin()) {
-            UserBean userBean = UserInfoManager.getUserInfo();
-            if (userBean != null) {
-                mNameView.setText(userBean.getUsername());
-                GlideLoaderManager.loadImage(userBean.getIcon(), mAvatarView, Const.IMAGE_LOADER.HEAD_IMG);
+            User user = UserInfoManager.getUserInfo();
+            if (user != null) {
+                mNameView.setText(user.getUsername());
+                GlideLoaderManager.loadImage(user.getIcon(), mAvatarView, Const.IMAGE_LOADER.HEAD_IMG);
             }
         } else {
             mNameView.setText("未登录");

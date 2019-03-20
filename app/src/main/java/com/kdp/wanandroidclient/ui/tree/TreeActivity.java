@@ -2,15 +2,11 @@ package com.kdp.wanandroidclient.ui.tree;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 
-import com.kdp.wanandroidclient.R;
-import com.kdp.wanandroidclient.bean.TreeBean;
+import com.kdp.wanandroidclient.bean.Tree;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.ui.adapter.TreeFragPageAdapter;
-import com.kdp.wanandroidclient.ui.base.BaseActivity;
 import com.kdp.wanandroidclient.ui.base.BaseTabActivity;
 
 import java.util.ArrayList;
@@ -24,7 +20,7 @@ import java.util.List;
 
 public class TreeActivity extends BaseTabActivity {
     private String mTitle;
-    private List<TreeBean.ChildrenBean> mTreeDatas = new ArrayList<>();
+    private List<Tree.ChildrenBean> mTreeDatas = new ArrayList<>();
     private int mAction, mChapterId;
     private String mChapterName;
     @Override
@@ -38,13 +34,13 @@ public class TreeActivity extends BaseTabActivity {
         mAction = intent.getIntExtra(Const.BUNDLE_KEY.INTENT_ACTION_TYPE, 0);
         if (mAction == Const.BUNDLE_KEY.INTENT_ACTION_TREE) {
             Bundle bundle = intent.getExtras();
-            TreeBean mTreeBean = null;
+            Tree mTree = null;
             if (bundle != null) {
-                mTreeBean = (TreeBean) bundle.getSerializable(Const.BUNDLE_KEY.OBJ);
+                mTree = (Tree) bundle.getSerializable(Const.BUNDLE_KEY.OBJ);
             }
-            if (mTreeBean != null) {
-                mTitle = mTreeBean.getName();
-                mTreeDatas = mTreeBean.getChildren();
+            if (mTree != null) {
+                mTitle = mTree.getName();
+                mTreeDatas = mTree.getChildren();
             }
         } else {
             mChapterId = intent.getIntExtra(Const.BUNDLE_KEY.CHAPTER_ID, 0);

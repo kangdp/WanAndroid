@@ -1,7 +1,7 @@
 package com.kdp.wanandroidclient.ui.user;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.ui.core.view.IListDataView;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.ui.core.view.IPageLoadDataView;
 
 /**
  * 用户协约类
@@ -15,9 +15,9 @@ public interface UserContract {
         void deleteCollectArticle();
     }
 
-    interface IUserView extends IListDataView<ArticleBean> {
+    interface IUserView extends IPageLoadDataView<Article> {
         int getOriginId();
-
+        int getArticleId();//文章id
         void deleteCollect();
     }
 }

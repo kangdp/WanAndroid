@@ -8,7 +8,7 @@ import java.io.Serializable;
  * date: 2018/2/12
  */
 
-public class ArticleBean implements Serializable {
+public class Article implements Serializable {
     /**
      * apkLink :
      * author : 小编
@@ -196,8 +196,8 @@ public class ArticleBean implements Serializable {
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
-        if (obj instanceof ArticleBean) {
-            return this.id == ((ArticleBean) obj).id;
+        if (obj instanceof Article) {
+            return this.id == ((Article) obj).id;
         }
         return false;
     }

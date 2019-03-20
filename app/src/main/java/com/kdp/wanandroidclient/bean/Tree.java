@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 知识体系
+ * 知识体系分类
  * author: 康栋普
  * date: 2018/2/24
  */
 
-public class TreeBean implements Serializable{
+public class Tree implements Serializable{
 
 
     /**

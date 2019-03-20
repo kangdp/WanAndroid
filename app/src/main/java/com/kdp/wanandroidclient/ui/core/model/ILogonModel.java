@@ -1,6 +1,6 @@
 package com.kdp.wanandroidclient.ui.core.model;
 
-import com.kdp.wanandroidclient.bean.UserBean;
+import com.kdp.wanandroidclient.bean.User;
 import com.kdp.wanandroidclient.inter.VerifyAccountCallback;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 
@@ -16,7 +16,7 @@ public interface ILogonModel {
      * @param username 用户名
      * @param password 密码
      */
-    void login(String username, String password,RxObserver<UserBean> callback);
+    void login(String username, String password,RxObserver<User> callback);
 
 
     /**
@@ -30,9 +30,9 @@ public interface ILogonModel {
 
     /**
      * 保存用户信息
-     * @param userBean
+     * @param user
      */
-    void saveUserInfo(UserBean userBean);
+    void saveUserInfo(User user);
 
     /**
      * 检验帐号

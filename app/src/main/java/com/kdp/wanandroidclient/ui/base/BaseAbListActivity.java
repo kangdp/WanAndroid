@@ -9,7 +9,7 @@ import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
-import com.kdp.wanandroidclient.ui.core.view.IListDataView;
+import com.kdp.wanandroidclient.ui.core.view.IPageLoadDataView;
 import com.kdp.wanandroidclient.ui.core.view.IView;
 import com.kdp.wanandroidclient.widget.StatusLayout;
 import com.kdp.wanandroidclient.widget.LMRecyclerView;
@@ -23,13 +23,13 @@ import java.util.List;
  * Created by 康栋普 on 2018/2/1.
  */
 
-public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends IView, T> extends BasePresenterActivity<P, V> implements LMRecyclerView.OnFooterAutoLoadMoreListener, IListDataView<T> {
+public abstract class BaseAbListActivity<P extends BasePresenter, T> extends BasePresenterActivity<P> implements LMRecyclerView.OnFooterAutoLoadMoreListener, IPageLoadDataView<T> {
 
 
     protected StatusLayout mStatusLayout;
     protected SwipeRefreshLayout mRefreshLayout;
     protected LMRecyclerView mRecyclerView;
-    protected BaseListAdapter mListAdapter;
+    protected BaseListAdapter<T> mListAdapter;
     protected int page;
     protected int state = -1;
     protected boolean isAutoLoadMore = true;//是否显示自动加载
@@ -57,9 +57,9 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
      */
     @Override
     protected void initViews() {
-        mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refreshLayout);
-        mStatusLayout = (StatusLayout) findViewById(R.id.containerLayout);
-        mRecyclerView = (LMRecyclerView) findViewById(R.id.recyclerView);
+        mRefreshLayout = findViewById(R.id.refreshLayout);
+        mStatusLayout =  findViewById(R.id.containerLayout);
+        mRecyclerView =  findViewById(R.id.recyclerView);
     }
 
     /**
@@ -70,12 +70,6 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
     protected int getLayoutId() {
         return R.layout.include_recycler_list;
     }
-
-    /**
-     * 是否允许自动加载更多
-     * @return
-     */
-    protected abstract boolean isCanLoadMore();
 
     @Override
     public List<T> getData() {
@@ -234,10 +228,19 @@ public abstract class BaseAbListActivity<P extends BasePresenter<V>, V extends I
         }, 100);
     }
 
+    /**
+     * 是否允许自动加载更多
+     * @return
+     */
+    protected boolean isCanLoadMore(){
+        return false;
+    }
 
-    protected abstract View initHeaderView();
+    protected View initHeaderView(){
+        return null;
+    }
 
     protected abstract void loadDatas();
 
-    protected abstract BaseListAdapter getListAdapter();
+    protected abstract BaseListAdapter<T>getListAdapter();
 }

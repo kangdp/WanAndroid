@@ -1,7 +1,7 @@
 package com.kdp.wanandroidclient.ui.core.model;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.bean.BannerBean;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.bean.Banner;
 import com.kdp.wanandroidclient.net.callback.RxConsumer;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 
@@ -20,6 +20,6 @@ public interface IHomeModel {
      * @param consumer
      * @param rxObserver
      */
-    void getHomeData(int page, RxConsumer<List<BannerBean>> consumer, RxPageListObserver<ArticleBean> rxObserver);
+    void getHomeData(int page, RxConsumer<List<Banner>> consumer, RxPageListObserver<Article> rxObserver);
 
 }

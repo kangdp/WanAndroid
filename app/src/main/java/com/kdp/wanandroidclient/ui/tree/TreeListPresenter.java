@@ -1,9 +1,13 @@
 package com.kdp.wanandroidclient.ui.tree;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
+import com.kdp.wanandroidclient.R;
+import com.kdp.wanandroidclient.application.AppContext;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
+import com.kdp.wanandroidclient.ui.core.model.impl.CommonModel;
 import com.kdp.wanandroidclient.ui.core.model.impl.TreeListModel;
-import com.kdp.wanandroidclient.ui.core.presenter.CommonPresenter;
+import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
 
 import java.util.List;
 
@@ -13,14 +17,15 @@ import java.util.List;
  * date: 2018/3/20
  */
 
-public class TreeListPresenter extends CommonPresenter<TreeListContract.ITreeListView> implements TreeListContract.ITreePresenter {
+public class TreeListPresenter extends BasePresenter<TreeListContract.ITreeListView> implements TreeListContract.ITreePresenter {
 
-    private TreeListModel mTreeListModel;
-
-    private TreeListContract.ITreeListView mTreeListView;
+    private TreeListModel treeListModel;
+    private CommonModel commonModel;
+    private TreeListContract.ITreeListView treeListView;
 
     TreeListPresenter() {
-        mTreeListModel = new TreeListModel();
+        treeListModel = new TreeListModel();
+        commonModel = new CommonModel();
     }
 
     /**
@@ -28,34 +33,67 @@ public class TreeListPresenter extends CommonPresenter<TreeListContract.ITreeLis
      */
     @Override
     public void loadTreeList() {
-        mTreeListView = getView();
-        RxPageListObserver<ArticleBean> mTreeListRxPageListObserver = new RxPageListObserver<ArticleBean>(this) {
+        treeListView = getView();
+        RxPageListObserver<Article> mTreeListRxPageListObserver = new RxPageListObserver<Article>(this) {
             @Override
-            public void onSuccess(List<ArticleBean> mData) {
-                mTreeListView.setData(mData);
-                if (mTreeListView.getData().size() == 0)
-                    mTreeListView.showEmpty();
+            public void onSuccess(List<Article> mData) {
+                treeListView.setData(mData);
+                if (treeListView.getData().size() == 0)
+                    treeListView.showEmpty();
                 else
-                    mTreeListView.showContent();
+                    treeListView.showContent();
             }
 
             @Override
             public void onFail(int errorCode, String errorMsg) {
-                mTreeListView.showFail(errorMsg);
+                treeListView.showFail(errorMsg);
             }
         };
-        mTreeListModel.getTreeList(mTreeListView.getPage(), mTreeListView.getCid(), mTreeListRxPageListObserver);
+        treeListModel.getTreeList(treeListView.getPage(), treeListView.getCid(), mTreeListRxPageListObserver);
         addDisposable(mTreeListRxPageListObserver);
 
     }
 
     @Override
     public void collectArticle() {
-        collectArticle(mTreeListView.getArticleId(),mTreeListView);
+        treeListView = getView();
+        RxObserver<String> mCollectRxObserver = new RxObserver<String>(this) {
+            @Override
+            protected void onStart() {
+            }
+            @Override
+            protected void onSuccess(String data) {
+                treeListView.collect(true, AppContext.getContext().getString(R.string.collect_success));
+            }
+            @Override
+            protected void onFail(int errorCode, String errorMsg) {
+                view.showFail(errorMsg);
+            }
+
+        };
+        commonModel.collectArticle(treeListView.getArticleId(), mCollectRxObserver);
+        addDisposable(mCollectRxObserver);
     }
 
     @Override
     public void unCollectArticle() {
-        unCollectArticle(mTreeListView.getArticleId(),mTreeListView);
+        treeListView = getView();
+        RxObserver<String> unCollectRxObserver = new RxObserver<String>(this) {
+
+            @Override
+            protected void onStart() {
+            }
+            @Override
+            protected void onSuccess(String data) {
+                treeListView.collect(false, AppContext.getContext().getString(R.string.uncollect_success));
+            }
+
+            @Override
+            protected void onFail(int errorCode, String errorMsg) {
+                view.showFail(errorMsg);
+            }
+        };
+        commonModel.unCollectArticle(treeListView.getArticleId(), unCollectRxObserver);
+        addDisposable(unCollectRxObserver);
     }
 }

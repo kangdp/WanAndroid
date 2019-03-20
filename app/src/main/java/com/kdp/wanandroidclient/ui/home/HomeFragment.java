@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.kdp.wanandroidclient.R;
-import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.bean.BannerBean;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.bean.Banner;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
 import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
@@ -33,10 +33,10 @@ import java.util.List;
  * date: 2018/2/12
  */
 
-public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract.IHomeView, ArticleBean> implements HomeContract.IHomeView, OnArticleListItemClickListener {
+public class HomeFragment extends BaseAbListFragment<HomePresenter,Article> implements HomeContract.IHomeView, OnArticleListItemClickListener {
     private int id;//文章id
     private int position;
-    private List<BannerBean> mBannerList = new ArrayList<>();
+    private List<Banner> mBannerList = new ArrayList<>();
     private BannerViewPager mViewPager;
     private BannerAdapter mBannerAdapter;
 
@@ -54,7 +54,7 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
     @Override
     protected View initHeaderView() {
         View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.main_header_banner, mRecyclerView, false);
-        mViewPager = (BannerViewPager) headerView.findViewById(R.id.viewPager);
+        mViewPager = headerView.findViewById(R.id.viewPager);
         return headerView;
     }
 
@@ -71,20 +71,20 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
     }
 
     @Override
-    protected BaseListAdapter getListAdapter() {
+    protected BaseListAdapter<Article> getListAdapter() {
         return new ArticleListAdapter(this, Const.LIST_TYPE.HOME);
     }
 
     //Banner数据
     @Override
-    public void setBannerData(List<BannerBean> banner) {
+    public void setBannerData(List<Banner> banner) {
         mBannerList.clear();
         mBannerList.addAll(banner);
     }
 
     //列表数据
     @Override
-    public void setData(List<ArticleBean> data) {
+    public void setData(List<Article> data) {
         mListData.addAll(data);
     }
 
@@ -130,7 +130,7 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
 
     //进入详情
     @Override
-    public void onItemClick(ArticleBean bean) {
+    public void onItemClick(int position,Article bean) {
         Intent intent = new Intent(getActivity(), WebViewActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
@@ -141,7 +141,6 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
 
     @Override
     public void onDeleteCollectClick(int position, int id, int originId) {
-
     }
 
     //收藏click
@@ -193,7 +192,7 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter, HomeContract
     protected void receiveEvent(Object object) {
         Event mEvent = (Event) object;
         if (mEvent.type == Event.Type.ITEM) {
-            ArticleBean bean = (ArticleBean) mEvent.object;
+            Article bean = (Article) mEvent.object;
             for (int i = 0; i < mListData.size(); i++) {
                 if (bean.equals(mListData.get(i))) {
                     position = i;

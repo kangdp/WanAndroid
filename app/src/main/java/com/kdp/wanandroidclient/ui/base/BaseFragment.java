@@ -50,10 +50,6 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    protected abstract void receiveEvent(Object object);
-
-    protected abstract String registerEvent();
-
 
     @Override
     public void onDestroy() {
@@ -61,8 +57,6 @@ public abstract class BaseFragment extends Fragment {
         //注销事件
         RxEvent.getInstance().unRegisterEvent(registerEvent(), mSubject, mDisposableObserver);
     }
-
-    protected abstract void getBundle(Bundle bundle);
 
 
     @Nullable
@@ -80,6 +74,12 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void initViews(View view);
 
     protected abstract int getLayoutId();
+
+    protected void receiveEvent(Object object){}
+
+    protected String registerEvent(){ return null; }
+
+    protected void getBundle(Bundle bundle){}
 
 
 }

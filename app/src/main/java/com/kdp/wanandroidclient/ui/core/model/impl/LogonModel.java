@@ -4,19 +4,12 @@ import android.text.TextUtils;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.application.AppContext;
-import com.kdp.wanandroidclient.bean.BaseBean;
-import com.kdp.wanandroidclient.bean.UserBean;
+import com.kdp.wanandroidclient.bean.User;
 import com.kdp.wanandroidclient.inter.VerifyAccountCallback;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.ui.core.model.ILogonModel;
-
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.ObservableTransformer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 康栋普 on 2018/2/1.
@@ -25,10 +18,10 @@ import io.reactivex.schedulers.Schedulers;
 public class LogonModel extends BaseModel implements ILogonModel {
 
     @Override
-    public void login(String username, String password, RxObserver<UserBean> callback) {
+    public void login(String username, String password, RxObserver<User> callback) {
         doRxRequest()
                 .login(username, password)
-                .compose(RxSchedulers.<UserBean>io_main())
+                .compose(RxSchedulers.<User>io_main())
                 .subscribe(callback);
 
 
@@ -43,9 +36,9 @@ public class LogonModel extends BaseModel implements ILogonModel {
     }
 
     @Override
-    public void saveUserInfo(UserBean userBean) {
+    public void saveUserInfo(User user) {
         //加密保存用户信息和密钥
-        UserInfoManager.saveUserInfo(userBean);
+        UserInfoManager.saveUserInfo(user);
         UserInfoManager.saveIsLogin(true);
     }
 

@@ -9,7 +9,7 @@ import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
-import com.kdp.wanandroidclient.ui.core.view.IListDataView;
+import com.kdp.wanandroidclient.ui.core.view.IPageLoadDataView;
 import com.kdp.wanandroidclient.ui.core.view.IView;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 import com.kdp.wanandroidclient.widget.StatusLayout;
@@ -24,12 +24,12 @@ import java.util.List;
  * date: 2018/2/11
  */
 
-public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends IView, T> extends BasePresenterFragment<P, V> implements LMRecyclerView.OnFooterAutoLoadMoreListener, IListDataView<T> {
+public abstract class BaseAbListFragment<P extends BasePresenter, T> extends BasePresenterFragment<P> implements LMRecyclerView.OnFooterAutoLoadMoreListener, IPageLoadDataView<T> {
 
     protected StatusLayout mStatusLayout;
     protected SwipeRefreshLayout mRefreshLayout;
     protected LMRecyclerView mRecyclerView;
-    protected BaseListAdapter mListAdapter;
+    protected BaseListAdapter<T> mListAdapter;
     protected int page;
     protected int state = -1;
     protected boolean isAutoLoadMore = true;//是否开启自动加载
@@ -62,17 +62,10 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
         mListAdapter.notifyAllDatas(mListData, mRecyclerView);
     }
 
-    @Override
-    public void collect(boolean isCollect, String result) {
-    }
 
     @Override
     protected int getLayoutId() {
         return R.layout.include_recycler_list;
-    }
-
-    @Override
-    protected void getBundle(Bundle bundle) {
     }
 
     @Override
@@ -95,11 +88,6 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
                 loadDatas();
             }
         }
-    }
-
-    //是否开启懒加载
-    protected boolean isEnableLazy() {
-        return false;
     }
 
     private void lazyLoad() {
@@ -128,13 +116,6 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
             isVisible = false;
         }
     }
-
-    /**
-     * 是否允许自动加载更多
-     *
-     * @return
-     */
-    protected abstract boolean isCanLoadMore();
 
     /**
      * 下拉刷新监听
@@ -267,18 +248,29 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
 
     }
 
+    /**
+     * 是否开启懒加载
+     * @return
+     */
+    protected boolean isEnableLazy() {
+        return false;
+    }
+    /**
+     * 是否允许自动加载更多
+     * @return
+     */
+    protected boolean isCanLoadMore(){
+        return false;
+    }
     @Override
-    protected void receiveEvent(Object object) {
+    protected void getBundle(Bundle bundle) {
     }
 
-    @Override
-    protected String registerEvent() {
+    protected View initHeaderView(){
         return null;
     }
 
-    protected abstract View initHeaderView();
-
     protected abstract void loadDatas();
 
-    protected abstract BaseListAdapter getListAdapter();
+    protected abstract BaseListAdapter<T> getListAdapter();
 }

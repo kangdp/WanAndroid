@@ -36,7 +36,6 @@ public interface IView{
      */
     void showEmpty();//没有数据
 
-    void collect(boolean isCollect,String result); //收藏Result
 
 
 }

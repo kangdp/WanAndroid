@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.kdp.wanandroidclient.R;
-import com.kdp.wanandroidclient.bean.ArticleBean;
+import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
 import com.kdp.wanandroidclient.ui.adapter.ArticleListAdapter;
@@ -22,7 +22,7 @@ import java.util.List;
  * date: 2018/3/21
  */
 
-public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, UserContract.IUserView, ArticleBean> implements UserContract.IUserView, OnArticleListItemClickListener {
+public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Article> implements UserContract.IUserView, OnArticleListItemClickListener {
 
     private int id;//文章id
     private int originId;//首页列表的文章id
@@ -51,9 +51,10 @@ public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Us
     }
 
     @Override
-    protected BaseListAdapter getListAdapter() {
+    protected BaseListAdapter<Article> getListAdapter() {
         return new ArticleListAdapter(this, Const.LIST_TYPE.COLLECT);
     }
+
 
     @Override
     protected UserPresenter createPresenter() {
@@ -61,13 +62,13 @@ public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Us
     }
 
     @Override
-    public void setData(List<ArticleBean> data) {
+    public void setData(List<Article> data) {
         mListData.addAll(data);
     }
 
 
     @Override
-    public void onItemClick(ArticleBean bean) {
+    public void onItemClick(int position,Article bean) {
         Intent intent = new Intent(this, WebViewActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
@@ -78,10 +79,6 @@ public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Us
     @Override
     public int getArticleId() {
         return id;
-    }
-
-    @Override
-    public void collect(boolean isCollect, String result) {
     }
 
     @Override
@@ -96,7 +93,6 @@ public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Us
     public void onCollectClick(int position, int id) {
 
     }
-
 
     @Override
     public void onTreeClick(int chapterId, String chapterName) {

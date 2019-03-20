@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.application.AppContext;
-import com.kdp.wanandroidclient.bean.ArticleBean;
+import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.common.ListDataHolder;
 import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
@@ -25,7 +25,7 @@ import com.kdp.wanandroidclient.utils.DateUtils;
  * date: 2018/2/12
  */
 
-public class ArticleListAdapter extends BaseListAdapter<ArticleBean> {
+public class ArticleListAdapter extends BaseListAdapter<Article> {
 
     private int Type;
     private OnArticleListItemClickListener listener;
@@ -41,7 +41,7 @@ public class ArticleListAdapter extends BaseListAdapter<ArticleBean> {
     }
 
     @Override
-    public void bindDatas(ListDataHolder holder, final ArticleBean bean, int itemType, final int position) {
+    public void bindDatas(ListDataHolder holder, final Article bean, int itemType, final int position) {
         TextView tv_author = holder.getView(R.id.tv_author);
         TextView tv_title = holder.getView(R.id.tv_title);
         TextView tv_time = holder.getView(R.id.tv_time);
@@ -105,7 +105,7 @@ public class ArticleListAdapter extends BaseListAdapter<ArticleBean> {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    listener.onItemClick(bean);
+                    listener.onItemClick(position,bean);
                 }
             }
         });

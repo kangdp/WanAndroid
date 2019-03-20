@@ -1,11 +1,15 @@
 package com.kdp.wanandroidclient.ui.home;
-
-import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.bean.BannerBean;
+import com.kdp.wanandroidclient.R;
+import com.kdp.wanandroidclient.application.AppContext;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.bean.Banner;
 import com.kdp.wanandroidclient.net.callback.RxConsumer;
+import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
+import com.kdp.wanandroidclient.ui.core.model.impl.CommonModel;
 import com.kdp.wanandroidclient.ui.core.model.impl.HomeModel;
-import com.kdp.wanandroidclient.ui.core.presenter.CommonPresenter;
+import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
+
 
 import java.util.List;
 
@@ -15,12 +19,14 @@ import java.util.List;
  * date: 2018/2/11
  */
 
-public class HomePresenter extends CommonPresenter<HomeContract.IHomeView> implements HomeContract.IHomePresenter {
-    private HomeModel mHomeModel;
+public class HomePresenter extends BasePresenter<HomeContract.IHomeView> implements HomeContract.IHomePresenter {
+    private HomeModel homeModel;
+    private CommonModel commonModel;
     private HomeContract.IHomeView homeView;
 
     HomePresenter() {
-        this.mHomeModel = new HomeModel();
+        this.homeModel = new HomeModel();
+        this.commonModel = new CommonModel();
     }
 
     /**
@@ -29,10 +35,10 @@ public class HomePresenter extends CommonPresenter<HomeContract.IHomeView> imple
     @Override
     public void getHomeList() {
         homeView = getView();
-        RxPageListObserver<ArticleBean> mHomeRxPageListObserver = new RxPageListObserver<ArticleBean>(this) {
+        RxPageListObserver<Article> mHomeRxPageListObserver = new RxPageListObserver<Article>(this) {
 
             @Override
-            public void onSuccess(List<ArticleBean> mData) {
+            public void onSuccess(List<Article> mData) {
                 homeView.setData(mData);
                 if (homeView.getData().size() == 0)
                     homeView.showEmpty();
@@ -45,14 +51,14 @@ public class HomePresenter extends CommonPresenter<HomeContract.IHomeView> imple
                 homeView.showFail(errorMsg);
             }
         };
-        mHomeModel.getHomeData(homeView.getPage(), new RxConsumer<List<BannerBean>>() {
+        homeModel.getHomeData(homeView.getPage(), new RxConsumer<List<Banner>>() {
             @Override
             protected void onFail(String errorMsg) {
                 homeView.showFail(errorMsg);
             }
 
             @Override
-            protected void onSuccess(List<BannerBean> data) {
+            protected void onSuccess(List<Banner> data) {
                 homeView.setBannerData(data);
             }
         }, mHomeRxPageListObserver);
@@ -63,11 +69,44 @@ public class HomePresenter extends CommonPresenter<HomeContract.IHomeView> imple
 
     @Override
     public void collectArticle() {
-        collectArticle(homeView.getArticleId(),homeView);
+        RxObserver<String> mCollectRxObserver = new RxObserver<String>(this) {
+            @Override
+            protected void onStart() {
+            }
+            @Override
+            protected void onSuccess(String data) {
+                homeView.collect(true, AppContext.getContext().getString(R.string.collect_success));
+            }
+            @Override
+            protected void onFail(int errorCode, String errorMsg) {
+                view.showFail(errorMsg);
+            }
+
+        };
+        commonModel.collectArticle(homeView.getArticleId(), mCollectRxObserver);
+        addDisposable(mCollectRxObserver);
     }
 
     @Override
     public void unCollectArticle() {
-        unCollectArticle(homeView.getArticleId(),homeView);
+        RxObserver<String> unCollectRxObserver = new RxObserver<String>(this) {
+
+            @Override
+            protected void onStart() {
+            }
+
+            @Override
+            protected void onSuccess(String data) {
+                homeView.collect(false, AppContext.getContext().getString(R.string.uncollect_success));
+            }
+
+            @Override
+            protected void onFail(int errorCode, String errorMsg) {
+                view.showFail(errorMsg);
+            }
+        };
+        commonModel.unCollectArticle(homeView.getArticleId(), unCollectRxObserver);
+        addDisposable(unCollectRxObserver);
     }
+
 }
