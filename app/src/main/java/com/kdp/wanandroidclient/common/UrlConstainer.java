@@ -78,5 +78,10 @@ public class UrlConstainer {
     /**
      * 项目分类
      */
-    public static final String PROJECT = "project/tree/json";
+    public static final String PROJECT_CATE = "project/tree/json";
+
+    /**
+     * 项目
+     */
+    public static final String PROJECT = "project/list/{page}/json";
 }

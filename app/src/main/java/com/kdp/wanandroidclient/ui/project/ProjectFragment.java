@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.bean.ProjectCate;
+import com.kdp.wanandroidclient.ui.adapter.ProjectFragPagerAdapter;
 import com.kdp.wanandroidclient.ui.base.BasePresenterFragment;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 
@@ -48,7 +49,10 @@ public class ProjectFragment extends BasePresenterFragment<ProjectCatePresenter>
 
     @Override
     public void showContent() {
-        ToastUtils.showToast(getActivity(),"请求成功");
+        ProjectFragPagerAdapter adapter = new ProjectFragPagerAdapter(getChildFragmentManager(),cateList);
+        viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(2);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override

@@ -53,11 +53,6 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Arti
     }
 
     @Override
-    protected View initHeaderView() {
-        return null;
-    }
-
-    @Override
     protected void getBundle(Bundle bundle) {
         cid = bundle.getInt(Const.BUNDLE_KEY.ID);
     }

@@ -176,6 +176,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter, T> extends Bas
         isAutoLoadMore = true;
     }
 
+
     /**
      * 底部加载没有更多数据时显示
      */

@@ -21,12 +21,10 @@ import java.util.List;
 
 public class SearchPresenter extends BasePresenter<SearchContract.ISearchView> implements SearchContract.ISearchPresenter {
     private SearchModel searchModel;
-    private CommonModel commonModel;
     private SearchContract.ISearchView searchView;
 
     SearchPresenter() {
         this.searchModel = new SearchModel();
-        this.commonModel = new CommonModel();
     }
     /**
      * 搜索文章
@@ -118,7 +116,7 @@ public class SearchPresenter extends BasePresenter<SearchContract.ISearchView> i
             }
 
         };
-        commonModel.collectArticle(searchView.getArticleId(), collectRxObserver);
+        searchModel.collectArticle(searchView.getArticleId(), collectRxObserver);
         addDisposable(collectRxObserver);
     }
 
@@ -139,7 +137,7 @@ public class SearchPresenter extends BasePresenter<SearchContract.ISearchView> i
                 view.showFail(errorMsg);
             }
         };
-        commonModel.unCollectArticle(searchView.getArticleId(), unCollectRxObserver);
+        searchModel.unCollectArticle(searchView.getArticleId(), unCollectRxObserver);
         addDisposable(unCollectRxObserver);
     }
 }

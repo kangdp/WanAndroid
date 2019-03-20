@@ -6,6 +6,7 @@ import com.kdp.wanandroidclient.bean.BaseBean;
 import com.kdp.wanandroidclient.bean.Friend;
 import com.kdp.wanandroidclient.bean.Hotword;
 import com.kdp.wanandroidclient.bean.PageListData;
+import com.kdp.wanandroidclient.bean.Project;
 import com.kdp.wanandroidclient.bean.ProjectCate;
 import com.kdp.wanandroidclient.bean.Tree;
 import com.kdp.wanandroidclient.bean.User;
@@ -166,7 +167,16 @@ public interface ApiServer {
      * 项目分类
      * @return
      */
-    @GET(UrlConstainer.PROJECT)
+    @GET(UrlConstainer.PROJECT_CATE)
     Observable<BaseBean<List<ProjectCate>>> getProjectCate();
+
+    /**
+     * 项目列表
+     * @param page
+     * @param cid
+     * @return
+     */
+    @GET(UrlConstainer.PROJECT)
+    Observable<BaseBean<PageListData<Project>>> getProjectList(@Path("page") int page,@Query("cid") int cid);
 
 }

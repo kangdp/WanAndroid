@@ -1,5 +1,4 @@
 package com.kdp.wanandroidclient.ui.project;
-
 import com.kdp.wanandroidclient.bean.ProjectCate;
 import com.kdp.wanandroidclient.ui.core.view.IListDataView;
 
@@ -13,7 +12,6 @@ public interface ProjectCateContract {
     interface IProjectCatePresenter {
         void getProjectCate();
     }
-
     interface IProjectCateView extends IListDataView<ProjectCate>{
     }
 }

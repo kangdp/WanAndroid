@@ -43,7 +43,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:layout_below="@+id/tv_author"
-        android:textColor="@color/black"
+        android:textColor="@color/_2e3135"
         android:text="Android App安全策略"/>
 
         <TextView

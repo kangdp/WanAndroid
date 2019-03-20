@@ -21,12 +21,10 @@ import java.util.List;
 
 public class HomePresenter extends BasePresenter<HomeContract.IHomeView> implements HomeContract.IHomePresenter {
     private HomeModel homeModel;
-    private CommonModel commonModel;
     private HomeContract.IHomeView homeView;
 
     HomePresenter() {
         this.homeModel = new HomeModel();
-        this.commonModel = new CommonModel();
     }
 
     /**
@@ -83,7 +81,7 @@ public class HomePresenter extends BasePresenter<HomeContract.IHomeView> impleme
             }
 
         };
-        commonModel.collectArticle(homeView.getArticleId(), mCollectRxObserver);
+        homeModel.collectArticle(homeView.getArticleId(), mCollectRxObserver);
         addDisposable(mCollectRxObserver);
     }
 
@@ -105,7 +103,7 @@ public class HomePresenter extends BasePresenter<HomeContract.IHomeView> impleme
                 view.showFail(errorMsg);
             }
         };
-        commonModel.unCollectArticle(homeView.getArticleId(), unCollectRxObserver);
+        homeModel.unCollectArticle(homeView.getArticleId(), unCollectRxObserver);
         addDisposable(unCollectRxObserver);
     }
 

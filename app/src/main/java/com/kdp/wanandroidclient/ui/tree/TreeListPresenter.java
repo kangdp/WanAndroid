@@ -20,12 +20,10 @@ import java.util.List;
 public class TreeListPresenter extends BasePresenter<TreeListContract.ITreeListView> implements TreeListContract.ITreePresenter {
 
     private TreeListModel treeListModel;
-    private CommonModel commonModel;
     private TreeListContract.ITreeListView treeListView;
 
     TreeListPresenter() {
         treeListModel = new TreeListModel();
-        commonModel = new CommonModel();
     }
 
     /**
@@ -71,7 +69,7 @@ public class TreeListPresenter extends BasePresenter<TreeListContract.ITreeListV
             }
 
         };
-        commonModel.collectArticle(treeListView.getArticleId(), mCollectRxObserver);
+        treeListModel.collectArticle(treeListView.getArticleId(), mCollectRxObserver);
         addDisposable(mCollectRxObserver);
     }
 
@@ -93,7 +91,7 @@ public class TreeListPresenter extends BasePresenter<TreeListContract.ITreeListV
                 view.showFail(errorMsg);
             }
         };
-        commonModel.unCollectArticle(treeListView.getArticleId(), unCollectRxObserver);
+        treeListModel.unCollectArticle(treeListView.getArticleId(), unCollectRxObserver);
         addDisposable(unCollectRxObserver);
     }
 }
