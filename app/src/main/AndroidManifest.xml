@@ -27,11 +27,6 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <data android:scheme="app"
-                    android:host="www.baidu.com"
-                    android:port="1080"></data>
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.logon.LogonActivity"
