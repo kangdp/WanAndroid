@@ -102,7 +102,7 @@ public abstract class BaseAbListActivity<P extends BasePresenter, T> extends Bas
     public void refreshData() {
         state = Const.PAGE_STATE.STATE_REFRESH;
         isAutoLoadMore = true;
-        page = 0;
+        page = getFirstPage();
         loadDatas();
     }
 
@@ -226,6 +226,11 @@ public abstract class BaseAbListActivity<P extends BasePresenter, T> extends Bas
                 mRefreshLayout.setRefreshing(isRefrshing);
             }
         }, 100);
+    }
+
+    @Override
+    public int getFirstPage() {
+        return 0;
     }
 
     /**

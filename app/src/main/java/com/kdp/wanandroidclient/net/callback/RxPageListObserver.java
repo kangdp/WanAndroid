@@ -28,7 +28,7 @@ public abstract class RxPageListObserver<T> extends RxBaseObserver<PageListData<
         if (baseBean.errorCode == NetConfig.REQUEST_SUCCESS) {
 
             PageListData<T> mListData = baseBean.data;
-            if (mListDataView.getPage() == 0) {
+            if (mListDataView.getPage() == mListDataView.getFirstPage()) {
                 mListDataView.clearListData();
             }
             if (mListData.isOver()) {

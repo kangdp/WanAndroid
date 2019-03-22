@@ -61,4 +61,9 @@ public class ProjectListFragment extends BaseAbListFragment<ProjectPresenter, Pr
     public void setData(List<Project> data) {
         mListData.addAll(data);
     }
+
+    @Override
+    public int getFirstPage() {
+        return 1;
+    }
 }

@@ -10,7 +10,6 @@ import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
 import com.kdp.wanandroidclient.ui.core.view.IPageLoadDataView;
-import com.kdp.wanandroidclient.ui.core.view.IView;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 import com.kdp.wanandroidclient.widget.StatusLayout;
 import com.kdp.wanandroidclient.widget.LMRecyclerView;
@@ -30,7 +29,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter, T> extends Bas
     protected SwipeRefreshLayout mRefreshLayout;
     protected LMRecyclerView mRecyclerView;
     protected BaseListAdapter<T> mListAdapter;
-    protected int page;
+    protected int page = getFirstPage();
     protected int state = -1;
     protected boolean isAutoLoadMore = true;//是否开启自动加载
     private boolean isPreload; //是否已经预加载完成
@@ -134,7 +133,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter, T> extends Bas
     public void refreshData() {
         state = Const.PAGE_STATE.STATE_REFRESH;
         isAutoLoadMore = true;
-        page = 0;
+        page = getFirstPage();
         loadDatas();
     }
 
@@ -247,6 +246,11 @@ public abstract class BaseAbListFragment<P extends BasePresenter, T> extends Bas
             }
         }, 100);
 
+    }
+
+    @Override
+    public int getFirstPage() {
+        return 0;
     }
 
     /**

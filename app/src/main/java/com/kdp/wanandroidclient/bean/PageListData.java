@@ -28,7 +28,6 @@ public class PageListData<T>{
     }
 
     public int getCurPage() {
-
         return curPage;
     }
 

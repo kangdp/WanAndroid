@@ -9,6 +9,7 @@ package com.kdp.wanandroidclient.ui.core.view;
 
 public interface IPageLoadDataView<T> extends IListDataView<T>{
 
+    int getFirstPage();
     int getPage();
     void autoLoadMore();//自动加载
     void clearListData();//清空所有数据

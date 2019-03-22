@@ -10,6 +10,7 @@ import com.kdp.wanandroidclient.bean.ProjectCate;
 import com.kdp.wanandroidclient.ui.adapter.ProjectFragPagerAdapter;
 import com.kdp.wanandroidclient.ui.base.BasePresenterFragment;
 import com.kdp.wanandroidclient.utils.ToastUtils;
+import com.kdp.wanandroidclient.widget.StatusLayout;
 
 
 import java.util.ArrayList;
@@ -58,6 +59,7 @@ public class ProjectFragment extends BasePresenterFragment<ProjectCatePresenter>
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         mPresenter.getProjectCate();
     }
 }
