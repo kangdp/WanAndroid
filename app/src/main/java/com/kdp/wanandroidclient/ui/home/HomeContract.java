@@ -22,7 +22,7 @@ public interface HomeContract {
     }
 
     interface IHomeView extends IPageLoadDataView<Article> {
-        int getArticleId();//文章id
+        int getArticleId();
         void setBannerData(List<Banner> banner);
         void collect(boolean isCollect,String result);
     }

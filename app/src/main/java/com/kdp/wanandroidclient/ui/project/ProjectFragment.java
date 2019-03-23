@@ -52,7 +52,7 @@ public class ProjectFragment extends BasePresenterFragment<ProjectCatePresenter>
     public void showContent() {
         ProjectFragPagerAdapter adapter = new ProjectFragPagerAdapter(getChildFragmentManager(),cateList);
         viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(2);
+        viewPager.setOffscreenPageLimit(cateList.size());
         tabLayout.setupWithViewPager(viewPager);
     }
 

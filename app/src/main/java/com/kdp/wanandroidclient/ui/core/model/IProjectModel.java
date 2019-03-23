@@ -1,6 +1,6 @@
 package com.kdp.wanandroidclient.ui.core.model;
 
-import com.kdp.wanandroidclient.bean.Project;
+import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 
 public interface IProjectModel {
@@ -11,5 +11,5 @@ public interface IProjectModel {
      * @param cid
      * @param rxPageListObserver
      */
-    void getProjectList(int page, int cid, RxPageListObserver<Project> rxPageListObserver);
+    void getProjectList(int page, int cid, RxPageListObserver<Article> rxPageListObserver);
 }

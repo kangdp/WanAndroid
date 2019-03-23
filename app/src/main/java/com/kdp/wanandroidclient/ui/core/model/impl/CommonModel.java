@@ -19,13 +19,13 @@ public class CommonModel extends BaseModel implements ICommonModel {
 
     }
 
-    @Override
-    public void collectInSideArticle(int id, RxObserver<String> callback) {
-        doRxRequest().
-                collectInsideArticle(id)
-                .compose(RxSchedulers.<String>io_main())
-                .subscribe(callback);
-    }
+//    @Override
+//    public void collectInSideArticle(int id, RxObserver<String> callback) {
+//        doRxRequest().
+//                collectInsideArticle(id)
+//                .compose(RxSchedulers.<String>io_main())
+//                .subscribe(callback);
+//    }
 
     @Override
     public void unCollectArticle(int id, RxObserver<String> callback) {

@@ -27,10 +27,7 @@ public class Const {
         public static final String OBJ = "obj";
         public static final String CHAPTER_ID = "chapter_id";
         public static final String CHAPTER_NAME = "chapter_name";
-        public static final String INTENT_ACTION_TYPE = "intent_action_type";
         public static final String COLLECT_TYPE = "collect_type";//1收藏列表文章 2收藏站内文章
-        public static final int INTENT_ACTION_TREE = 1;
-        public static final int INTENT_ACTION_LIST = 2;
     }
 
 

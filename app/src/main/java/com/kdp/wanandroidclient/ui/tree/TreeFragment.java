@@ -48,7 +48,6 @@ public class TreeFragment extends BaseAbListFragment<TreePresenter, Tree> implem
     @Override
     public void onItemClick(int position,Tree mTree) {
         Intent intent = new Intent(getActivity(), TreeActivity.class);
-        intent.putExtra(Const.BUNDLE_KEY.INTENT_ACTION_TYPE,Const.BUNDLE_KEY.INTENT_ACTION_TREE);
         Bundle b = new Bundle();
         b.putSerializable(Const.BUNDLE_KEY.OBJ, mTree);
         intent.putExtras(b);

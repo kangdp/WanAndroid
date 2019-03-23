@@ -31,6 +31,7 @@ import com.kdp.wanandroidclient.ui.project.ProjectFragment;
 import com.kdp.wanandroidclient.ui.tree.TreeFragment;
 import com.kdp.wanandroidclient.ui.user.AboutUsActivity;
 import com.kdp.wanandroidclient.ui.user.CollectArticleActivity;
+import com.kdp.wanandroidclient.utils.IntentUtils;
 import com.kdp.wanandroidclient.utils.PreUtils;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 
@@ -151,7 +152,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             switch (item.getItemId()) {
                 case R.id.menu_favorite_article: {
                     if (!UserInfoManager.isLogin()) {
-                        startActivity(new Intent(MainActivity.this, LogonActivity.class));
+                        IntentUtils.goLogin(MainActivity.this);
                     } else {
                         startActivity(new Intent(MainActivity.this, CollectArticleActivity.class));
                     }
@@ -194,7 +195,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //刷新首页数据
         if (UserInfoManager.isLogin())
             RxEvent.getInstance().postEvent(Const.EVENT_ACTION.REFRESH_DATA, new Event(Event.Type.LIST, null));
-        startActivity(new Intent(MainActivity.this, LogonActivity.class));
+        IntentUtils.goLogin(this);
         PreUtils.clearAll();
     }
 

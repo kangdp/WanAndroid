@@ -29,6 +29,7 @@ import com.kdp.wanandroidclient.ui.base.BaseAbListActivity;
 import com.kdp.wanandroidclient.ui.logon.LogonActivity;
 import com.kdp.wanandroidclient.ui.tree.TreeActivity;
 import com.kdp.wanandroidclient.ui.web.WebViewActivity;
+import com.kdp.wanandroidclient.utils.IntentUtils;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
@@ -301,22 +302,13 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, Article>
     @Override
     public void onCollectClick(int position, int id) {
         if (!UserInfoManager.isLogin())
-            startActivity(new Intent(this, LogonActivity.class));
+            IntentUtils.goLogin(this);
         this.position = position;
         this.id = id;
         if (mListData.get(this.position).isCollect())
             mPresenter.unCollectArticle();
         else
             mPresenter.collectArticle();
-    }
-
-    @Override
-    public void onTreeClick(int chapterId, String chapterName) {
-        Intent intent = new Intent(this, TreeActivity.class);
-        intent.putExtra(Const.BUNDLE_KEY.INTENT_ACTION_TYPE, Const.BUNDLE_KEY.INTENT_ACTION_LIST);
-        intent.putExtra(Const.BUNDLE_KEY.CHAPTER_ID, chapterId);
-        intent.putExtra(Const.BUNDLE_KEY.CHAPTER_NAME, chapterName);
-        startActivity(intent);
     }
 
     @Override

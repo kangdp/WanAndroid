@@ -6,7 +6,6 @@ import com.kdp.wanandroidclient.bean.BaseBean;
 import com.kdp.wanandroidclient.bean.Friend;
 import com.kdp.wanandroidclient.bean.Hotword;
 import com.kdp.wanandroidclient.bean.PageListData;
-import com.kdp.wanandroidclient.bean.Project;
 import com.kdp.wanandroidclient.bean.ProjectCate;
 import com.kdp.wanandroidclient.bean.Tree;
 import com.kdp.wanandroidclient.bean.User;
@@ -85,8 +84,8 @@ public interface ApiServer {
      * @param id
      * @return
      */
-    @POST(UrlConstainer.COLLECT_INSIDE_ARTICLE)
-    Observable<BaseBean<String>> collectInsideArticle(@Path("id") int id);
+//    @POST(UrlConstainer.COLLECT_INSIDE_ARTICLE)
+//    Observable<BaseBean<String>> collectInsideArticle(@Path("id") int id);
 
     /**
      * 取消收藏文章
@@ -177,6 +176,6 @@ public interface ApiServer {
      * @return
      */
     @GET(UrlConstainer.PROJECT)
-    Observable<BaseBean<PageListData<Project>>> getProjectList(@Path("page") int page,@Query("cid") int cid);
+    Observable<BaseBean<PageListData<Article>>> getProjectList(@Path("page") int page,@Query("cid") int cid);
 
 }

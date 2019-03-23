@@ -18,42 +18,24 @@ import java.util.List;
 
 public class TreeFragPagerAdapter extends FragmentPagerAdapter {
     private List<Tree.ChildrenBean> mTreeDatas;
-    private int mAction, mChapterId;
-    private String mChapterName;
 
-    public TreeFragPagerAdapter(FragmentManager fm, int mAction, List<Tree.ChildrenBean> mTreeDatas) {
+    public TreeFragPagerAdapter(FragmentManager fm, List<Tree.ChildrenBean> mTreeDatas) {
         super(fm);
-        this.mAction = mAction;
         this.mTreeDatas = mTreeDatas;
-    }
-
-    public TreeFragPagerAdapter(FragmentManager fm, int mAction, int mChapterId, String mChapterName) {
-        super(fm);
-        this.mAction = mAction;
-        this.mChapterId = mChapterId;
-        this.mChapterName = mChapterName;
     }
 
     @Override
     public Fragment getItem(int position) {
-        if (Const.BUNDLE_KEY.INTENT_ACTION_TREE == mAction)
-            return TreeListFragment.instantiate(mTreeDatas.get(position).getId());
-        else if (Const.BUNDLE_KEY.INTENT_ACTION_LIST == mAction)
-            return TreeListFragment.instantiate(mChapterId);
-        return null;
+          return TreeListFragment.instantiate(mTreeDatas.get(position).getId());
     }
 
     @Override
     public int getCount() {
-        if (Const.BUNDLE_KEY.INTENT_ACTION_TREE == mAction)
-            return mTreeDatas != null ? mTreeDatas.size() : 0;
-        return 1;
+        return mTreeDatas != null ? mTreeDatas.size() : 0;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if (Const.BUNDLE_KEY.INTENT_ACTION_TREE == mAction)
-            return mTreeDatas.get(position).getName();
-        return mChapterName;
+        return mTreeDatas.get(position).getName();
     }
 }

@@ -11,7 +11,6 @@ import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
 import com.kdp.wanandroidclient.ui.adapter.ArticleListAdapter;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.base.BaseAbListActivity;
-import com.kdp.wanandroidclient.ui.tree.TreeActivity;
 import com.kdp.wanandroidclient.ui.web.WebViewActivity;
 
 import java.util.List;
@@ -93,16 +92,6 @@ public class CollectArticleActivity extends BaseAbListActivity<UserPresenter, Ar
     public void onCollectClick(int position, int id) {
 
     }
-
-    @Override
-    public void onTreeClick(int chapterId, String chapterName) {
-        Intent intent = new Intent(this, TreeActivity.class);
-        intent.putExtra(Const.BUNDLE_KEY.INTENT_ACTION_TYPE, Const.BUNDLE_KEY.INTENT_ACTION_LIST);
-        intent.putExtra(Const.BUNDLE_KEY.CHAPTER_ID, chapterId);
-        intent.putExtra(Const.BUNDLE_KEY.CHAPTER_NAME, chapterName);
-        startActivity(intent);
-    }
-
 
     @Override
     public int getOriginId() {

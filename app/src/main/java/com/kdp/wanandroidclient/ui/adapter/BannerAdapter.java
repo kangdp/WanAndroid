@@ -2,6 +2,7 @@ package com.kdp.wanandroidclient.ui.adapter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -48,8 +49,9 @@ public class BannerAdapter extends PagerAdapter {
         return mBannerDatas.size() <= 1 ? mBannerDatas.size() : Integer.MAX_VALUE;
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(final ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull final ViewGroup container, int position) {
 
         View view = mViews.get(position);
         if (view == null) {

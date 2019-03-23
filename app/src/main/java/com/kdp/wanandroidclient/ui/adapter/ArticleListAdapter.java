@@ -47,18 +47,15 @@ public class ArticleListAdapter extends BaseListAdapter<Article> {
         TextView tv_time = holder.getView(R.id.tv_time);
         TextView tv_type = holder.getView(R.id.tv_type);
         ImageView img_collect = holder.getView(R.id.img_collect);
-        tv_author.setText("");
-        tv_author.append("作者: ");
-        tv_author.append(getSpanText(bean.getAuthor()));
-        tv_time.setText(DateUtils.parseTime(bean.getPublishTime()));
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             tv_title.setText(Html.fromHtml(bean.getTitle(), Html.FROM_HTML_MODE_LEGACY));
         } else {
             tv_title.setText(Html.fromHtml(bean.getTitle()));
         }
-        tv_type.setText("");
-        tv_type.append("分类: ");
-        tv_type.append(getSpanText(bean.getChapterName()));
+        tv_author.setText(bean.getAuthor());
+        tv_time.setText(DateUtils.parseTime(bean.getPublishTime()));
+        tv_type.setText(String.format("%1$s / %2$s",bean.getSuperChapterName(), bean.getChapterName()));
 
         switch (Type) {
             case Const.LIST_TYPE.TREE:
@@ -67,14 +64,14 @@ public class ArticleListAdapter extends BaseListAdapter<Article> {
             case Const.LIST_TYPE.SEARCH:
                 img_collect.setImageResource(bean.isCollect() ? R.drawable.ic_favorite_light_24dp : R.drawable.ic_favorite_gray_24dp);
 
-                tv_type.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (listener != null) {
-                            listener.onTreeClick(bean.getChapterId(), bean.getChapterName());
-                        }
-                    }
-                });
+//                tv_type.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (listener != null) {
+//                            listener.onTreeClick(bean.getChapterId(), bean.getChapterName());
+//                        }
+//                    }
+//                });
 
                 img_collect.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -111,9 +108,4 @@ public class ArticleListAdapter extends BaseListAdapter<Article> {
         });
     }
 
-    private CharSequence getSpanText(String source) {
-        Spannable mSpan = new SpannableString(source);
-        mSpan.setSpan(new ForegroundColorSpan(ContextCompat.getColor(AppContext.getContext(), R.color._0091ea)), 0, source.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-        return mSpan;
-    }
 }

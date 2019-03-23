@@ -19,6 +19,7 @@ import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.base.BasePresenterActivity;
 import com.kdp.wanandroidclient.ui.logon.LogonActivity;
+import com.kdp.wanandroidclient.utils.IntentUtils;
 
 import java.lang.reflect.Method;
 
@@ -154,13 +155,9 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter> imp
     //收藏
     private void collect() {
         if (!UserInfoManager.isLogin())
-            startActivity(new Intent(this, LogonActivity.class));
+            IntentUtils.goLogin(this);
         if (bean.isCollect()) return;
-        if (type == 1) {
-            mPresenter.collectArticle();
-        }else {
-            mPresenter.collectArticle();
-        }
+        mPresenter.collectArticle();
     }
 
     //打开浏览器

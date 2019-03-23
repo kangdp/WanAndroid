@@ -21,8 +21,6 @@ import java.util.List;
 public class TreeActivity extends BaseTabActivity {
     private String mTitle;
     private List<Tree.ChildrenBean> mTreeDatas = new ArrayList<>();
-    private int mAction, mChapterId;
-    private String mChapterName;
     @Override
     protected boolean initToolbar() {
         mToolbar.setTitle(mTitle);
@@ -31,8 +29,6 @@ public class TreeActivity extends BaseTabActivity {
 
     @Override
     protected void getIntent(Intent intent) {
-        mAction = intent.getIntExtra(Const.BUNDLE_KEY.INTENT_ACTION_TYPE, 0);
-        if (mAction == Const.BUNDLE_KEY.INTENT_ACTION_TREE) {
             Bundle bundle = intent.getExtras();
             Tree mTree = null;
             if (bundle != null) {
@@ -42,24 +38,12 @@ public class TreeActivity extends BaseTabActivity {
                 mTitle = mTree.getName();
                 mTreeDatas = mTree.getChildren();
             }
-        } else {
-            mChapterId = intent.getIntExtra(Const.BUNDLE_KEY.CHAPTER_ID, 0);
-            mChapterName = intent.getStringExtra(Const.BUNDLE_KEY.CHAPTER_NAME);
-            mTitle = mChapterName;
-        }
-
-
     }
 
     @Override
     protected FragmentPagerAdapter createFragPagerAdapter() {
-        TreeFragPagerAdapter mAdapter;
-        if (mAction == Const.BUNDLE_KEY.INTENT_ACTION_TREE) {
-            mAdapter = new TreeFragPagerAdapter(getSupportFragmentManager(), mAction, mTreeDatas);
-        } else {
-            mAdapter = new TreeFragPagerAdapter(getSupportFragmentManager(), mAction, mChapterId, mChapterName);
-        }
-        return mAdapter;
+        viewPager.setOffscreenPageLimit(mTreeDatas.size());
+        return new TreeFragPagerAdapter(getSupportFragmentManager(), mTreeDatas);
     }
 
 }

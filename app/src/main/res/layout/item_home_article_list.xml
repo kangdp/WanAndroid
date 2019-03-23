@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:layout_marginTop="10dp"
@@ -12,8 +13,7 @@
     android:focusable="true"
     app:contentPadding="10dp"
     app:cardElevation="1dp"
-    app:cardCornerRadius="2dp"
-    >
+    app:cardCornerRadius="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,15 +24,17 @@
         android:id="@+id/tv_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="13sp"
-        android:text="作者 : 依然范特西"/>
+        android:textSize="12sp"
+        android:textColor="@color/_484848"
+        tools:text="依然范特西"/>
 
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="13sp"
-        android:text="2018-01-22"
+        android:textSize="12sp"
+        android:textColor="@color/_999999"
+        tools:text="2018-01-22"
         android:layout_alignParentRight="true"/>
 
     <TextView
@@ -42,17 +44,21 @@
         android:textSize="16sp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
+        android:gravity="center_vertical|left"
         android:layout_below="@+id/tv_author"
         android:textColor="@color/_2e3135"
-        android:text="Android App安全策略"/>
+        tools:text="Android App安全策略"/>
 
         <TextView
             android:id="@+id/tv_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title"
-            android:textSize="13sp"
-            android:text="分类 : 混淆"/>
+            android:layout_alignTop="@+id/img_collect"
+            android:layout_alignBottom="@+id/img_collect"
+            android:textSize="12sp"
+            android:textColor="@color/_484848"
+            android:gravity="center"
+            tools:text="混淆"/>
 
         <ImageView
             android:id="@+id/img_collect"

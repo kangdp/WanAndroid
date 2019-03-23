@@ -18,6 +18,7 @@ import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.base.BaseAbListFragment;
 import com.kdp.wanandroidclient.ui.logon.LogonActivity;
 import com.kdp.wanandroidclient.ui.web.WebViewActivity;
+import com.kdp.wanandroidclient.utils.IntentUtils;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 
 import java.util.List;
@@ -122,7 +123,7 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Arti
     @Override
     public void onCollectClick(int position, int id) {
         if (!UserInfoManager.isLogin())
-            startActivity(new Intent(getActivity(), LogonActivity.class));
+            IntentUtils.goLogin(getActivity());
         this.position = position;
         this.id = id;
         if (mListData.get(this.position).isCollect())
@@ -131,9 +132,6 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Arti
             mPresenter.collectArticle();
     }
 
-    @Override
-    public void onTreeClick(int chapterId, String chapterName) {
-    }
 
     @Override
     protected void receiveEvent(Object object) {

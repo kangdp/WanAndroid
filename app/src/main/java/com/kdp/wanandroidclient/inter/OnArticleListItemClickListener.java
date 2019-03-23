@@ -11,5 +11,4 @@ import com.kdp.wanandroidclient.bean.Article;
 public interface OnArticleListItemClickListener extends OnItemClickListener<Article>{
     void onDeleteCollectClick(int position,int id,int originId);
     void onCollectClick(int position,int id);
-    void onTreeClick(int chapterId,String chapterName);
 }

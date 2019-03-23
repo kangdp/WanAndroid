@@ -15,7 +15,7 @@ import com.kdp.wanandroidclient.R;
 public abstract class BaseTabActivity extends BaseActivity{
 
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+    protected ViewPager viewPager;
 
     @Override
     protected int getLayoutId() {
@@ -34,7 +34,7 @@ public abstract class BaseTabActivity extends BaseActivity{
         FragmentPagerAdapter fragPagerAdapter = createFragPagerAdapter();
         if (fragPagerAdapter != null){
             viewPager.setAdapter(fragPagerAdapter);
-            viewPager.setOffscreenPageLimit(2);
+//            viewPager.setOffscreenPageLimit(10);
             tabLayout.setupWithViewPager(viewPager);
         }
     }

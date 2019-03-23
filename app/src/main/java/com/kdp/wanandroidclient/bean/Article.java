@@ -1,6 +1,7 @@
 package com.kdp.wanandroidclient.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 文章
@@ -9,23 +10,30 @@ import java.io.Serializable;
  */
 
 public class Article implements Serializable {
+
+
     /**
      * apkLink :
-     * author : 小编
-     * chapterId : 292
-     * chapterName : pdf电子书
+     * author : 鸡汤程序员
+     * chapterId : 267
+     * chapterName : handler
      * collect : false
      * courseId : 13
      * desc :
      * envelopePic :
-     * id : 2247
-     * link : http://www.wanandroid.com/blog/show/2035
-     * niceDate : 2018-02-01
+     * fresh : true
+     * id : 8113
+     * link : https://www.jianshu.com/p/13c8a66d3b5c
+     * niceDate : 11分钟前
      * origin :
-     * originId : 2693
      * projectLink :
-     * publishTime : 1517448292000
-     * title : Qcon领略Kotlin的力量 张涛 pdf
+     * publishTime : 1553329456000
+     * superChapterId : 10
+     * superChapterName : 四大组件
+     * tags : []
+     * title : Handler全家桶之 &mdash;&mdash; Handler 源码解析
+     * type : 0
+     * userId : -1
      * visible : 1
      * zan : 0
      */
@@ -38,16 +46,31 @@ public class Article implements Serializable {
     private int courseId;
     private String desc;
     private String envelopePic;
+    private boolean fresh;
     private int id;
     private String link;
     private String niceDate;
     private String origin;
-    private int originId;
     private String projectLink;
     private long publishTime;
+    private int superChapterId;
+    private String superChapterName;
     private String title;
+    private int type;
+    private int userId;
     private int visible;
     private int zan;
+    private List<?> tags;
+    private int originId;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj instanceof Article) {
+            return this.id == ((Article) obj).id;
+        }
+        return false;
+    }
 
     public String getApkLink() {
         return apkLink;
@@ -113,6 +136,14 @@ public class Article implements Serializable {
         this.envelopePic = envelopePic;
     }
 
+    public boolean isFresh() {
+        return fresh;
+    }
+
+    public void setFresh(boolean fresh) {
+        this.fresh = fresh;
+    }
+
     public int getId() {
         return id;
     }
@@ -145,14 +176,6 @@ public class Article implements Serializable {
         this.origin = origin;
     }
 
-    public int getOriginId() {
-        return originId;
-    }
-
-    public void setOriginId(int originId) {
-        this.originId = originId;
-    }
-
     public String getProjectLink() {
         return projectLink;
     }
@@ -169,12 +192,44 @@ public class Article implements Serializable {
         this.publishTime = publishTime;
     }
 
+    public int getSuperChapterId() {
+        return superChapterId;
+    }
+
+    public void setSuperChapterId(int superChapterId) {
+        this.superChapterId = superChapterId;
+    }
+
+    public String getSuperChapterName() {
+        return superChapterName;
+    }
+
+    public void setSuperChapterName(String superChapterName) {
+        this.superChapterName = superChapterName;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getVisible() {
@@ -193,12 +248,19 @@ public class Article implements Serializable {
         this.zan = zan;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
-        if (obj instanceof Article) {
-            return this.id == ((Article) obj).id;
-        }
-        return false;
+    public List<?> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<?> tags) {
+        this.tags = tags;
+    }
+
+    public int getOriginId() {
+        return originId;
+    }
+
+    public void setOriginId(int originId) {
+        this.originId = originId;
     }
 }

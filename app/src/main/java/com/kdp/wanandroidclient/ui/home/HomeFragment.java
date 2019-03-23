@@ -19,12 +19,14 @@ import com.kdp.wanandroidclient.ui.base.BaseAbListFragment;
 import com.kdp.wanandroidclient.ui.logon.LogonActivity;
 import com.kdp.wanandroidclient.ui.tree.TreeActivity;
 import com.kdp.wanandroidclient.ui.web.WebViewActivity;
+import com.kdp.wanandroidclient.utils.IntentUtils;
 import com.kdp.wanandroidclient.utils.LogUtils;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 import com.kdp.wanandroidclient.widget.BannerViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 
 /**
@@ -146,25 +148,14 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter,Article> impl
     //收藏click
     @Override
     public void onCollectClick(int position, int id) {
-        LogUtils.e(id + "");
         if (!UserInfoManager.isLogin())
-            startActivity(new Intent(getActivity(), LogonActivity.class));
+            IntentUtils.goLogin(getActivity());
         this.position = position;
         this.id = id;
         if (mListData.get(this.position).isCollect())
             mPresenter.unCollectArticle();
         else
             mPresenter.collectArticle();
-    }
-
-    //分类click
-    @Override
-    public void onTreeClick(int chapterId, String chapterName) {
-        Intent intent = new Intent(getActivity(), TreeActivity.class);
-        intent.putExtra(Const.BUNDLE_KEY.INTENT_ACTION_TYPE, Const.BUNDLE_KEY.INTENT_ACTION_LIST);
-        intent.putExtra(Const.BUNDLE_KEY.CHAPTER_ID, chapterId);
-        intent.putExtra(Const.BUNDLE_KEY.CHAPTER_NAME, chapterName);
-        startActivity(intent);
     }
 
     @Override
