@@ -19,6 +19,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+<LinearLayout
+    android:id="@+id/ll_author"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/_009a61"
+        android:background="@drawable/article_tag_shape"
+        android:layout_marginRight="6dp"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        tools:text="项目"/>
 
     <TextView
         android:id="@+id/tv_author"
@@ -27,6 +44,8 @@
         android:textSize="12sp"
         android:textColor="@color/_484848"
         tools:text="依然范特西"/>
+</LinearLayout>
+
 
     <TextView
         android:id="@+id/tv_time"
@@ -45,20 +64,20 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:gravity="center_vertical|left"
-        android:layout_below="@+id/tv_author"
+        android:layout_below="@+id/ll_author"
         android:textColor="@color/_2e3135"
         tools:text="Android App安全策略"/>
 
-        <TextView
-            android:id="@+id/tv_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/img_collect"
-            android:layout_alignBottom="@+id/img_collect"
-            android:textSize="12sp"
-            android:textColor="@color/_484848"
-            android:gravity="center"
-            tools:text="混淆"/>
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/_484848"
+                android:layout_alignTop="@+id/img_collect"
+                android:layout_alignBottom="@+id/img_collect"
+                android:gravity="center"
+                tools:text="混淆"/>
 
         <ImageView
             android:id="@+id/img_collect"

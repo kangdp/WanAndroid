@@ -62,12 +62,19 @@ public interface ApiServer {
     Observable<BaseBean<List<Banner>>> getBanner();
 
     /**
+     * 首页置顶列表
+     * @return
+     */
+    @GET(UrlConstainer.HOME_TOP_LIST)
+    Observable<BaseBean<List<Article>>> getHomeTopList();
+
+    /**
      * 首页文章列表
      *
      * @return
      */
     @GET(UrlConstainer.HOME_LIST)
-    Observable<BaseBean<PageListData<Article>>> getArticleList(@Path("page") int page);
+    Observable<BaseBean<PageListData<Article>>> getHomeList(@Path("page") int page);
 
     /**
      * 收藏文章

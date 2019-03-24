@@ -12,26 +12,29 @@ import java.util.List;
 public class Article implements Serializable {
 
 
+
+
     /**
      * apkLink :
-     * author : 鸡汤程序员
-     * chapterId : 267
-     * chapterName : handler
+     * author : 承香墨影
+     * chapterId : 411
+     * chapterName : 承香墨影
      * collect : false
      * courseId : 13
      * desc :
      * envelopePic :
-     * fresh : true
-     * id : 8113
-     * link : https://www.jianshu.com/p/13c8a66d3b5c
-     * niceDate : 11分钟前
+     * fresh : false
+     * top: false
+     * id : 8109
+     * link : https://mp.weixin.qq.com/s/Qo7R9NGo7sQYnlUeaDeDYw
+     * niceDate : 2019-03-20
      * origin :
      * projectLink :
-     * publishTime : 1553329456000
-     * superChapterId : 10
-     * superChapterName : 四大组件
-     * tags : []
-     * title : Handler全家桶之 &mdash;&mdash; Handler 源码解析
+     * publishTime : 1553011200000
+     * superChapterId : 408
+     * superChapterName : 公众号
+     * tags : [{"name":"公众号","url":"/wxarticle/list/411/1"}]
+     * title : DNS 支持 TCP 和 UDP 双协议，但为何偏偏只钟情 UDP？
      * type : 0
      * userId : -1
      * visible : 1
@@ -47,6 +50,7 @@ public class Article implements Serializable {
     private String desc;
     private String envelopePic;
     private boolean fresh;
+    private boolean top;
     private int id;
     private String link;
     private String niceDate;
@@ -60,16 +64,15 @@ public class Article implements Serializable {
     private int userId;
     private int visible;
     private int zan;
-    private List<?> tags;
+    private List<TagsBean> tags;
     private int originId;
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
-        if (obj instanceof Article) {
-            return this.id == ((Article) obj).id;
-        }
-        return false;
+    public int getOriginId() {
+        return originId;
+    }
+
+    public void setOriginId(int originId) {
+        this.originId = originId;
     }
 
     public String getApkLink() {
@@ -142,6 +145,14 @@ public class Article implements Serializable {
 
     public void setFresh(boolean fresh) {
         this.fresh = fresh;
+    }
+
+    public boolean isTop() {
+        return top;
+    }
+
+    public void setTop(boolean top) {
+        this.top = top;
     }
 
     public int getId() {
@@ -248,19 +259,47 @@ public class Article implements Serializable {
         this.zan = zan;
     }
 
-    public List<?> getTags() {
+    public List<TagsBean> getTags() {
         return tags;
     }
 
-    public void setTags(List<?> tags) {
+    public void setTags(List<TagsBean> tags) {
         this.tags = tags;
     }
 
-    public int getOriginId() {
-        return originId;
+    public static class TagsBean {
+        /**
+         * name : 公众号
+         * url : /wxarticle/list/411/1
+         */
+
+        private String name;
+        private String url;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
     }
 
-    public void setOriginId(int originId) {
-        this.originId = originId;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj instanceof Article) {
+            return this.id == ((Article) obj).id;
+        }
+        return false;
     }
 }

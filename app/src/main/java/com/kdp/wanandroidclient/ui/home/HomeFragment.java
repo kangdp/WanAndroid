@@ -2,6 +2,7 @@ package com.kdp.wanandroidclient.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -69,7 +70,13 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter,Article> impl
     //加载列表数据
     @Override
     protected void loadDatas() {
-        mPresenter.getHomeList();
+        if (page == getFirstPage()){
+            //刷新
+            mPresenter.getHomeData();
+        }else {
+            //加载更多
+            mPresenter.getMoreArticleList();
+        }
     }
 
     @Override

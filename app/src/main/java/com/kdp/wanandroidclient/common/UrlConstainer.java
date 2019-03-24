@@ -16,6 +16,11 @@ public class UrlConstainer {
     public static final String REGISTER = "user/register";
 
     /**
+     * 首页置顶列表
+     */
+    public static final String HOME_TOP_LIST = "article/top/json";
+
+    /**
      * 首页文章列表
      */
     public static final String HOME_LIST = "article/list/{page}/json";
@@ -29,11 +34,6 @@ public class UrlConstainer {
      * 收藏文章
      */
     public static final String COLLECT_ARTICLE = "lg/collect/{id}/json";
-
-    /**
-     * 收藏站内文章
-     */
-    public static final String COLLECT_INSIDE_ARTICLE = "lg/collect/{id}/json";
 
     /**
      * 取消收藏的文章
@@ -54,7 +54,7 @@ public class UrlConstainer {
     /**
      * 知识体系文章列表
      */
-    public static final String TREE_LIST = "article/list/{page}/json?";
+    public static final String TREE_LIST = "article/list/{page}/json";
     /**
      * 收藏的文章列表
      */

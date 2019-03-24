@@ -14,7 +14,8 @@ import java.util.List;
 
 public interface HomeContract {
     interface IHomePresenter {
-        void getHomeList();
+        void getHomeData();
+        void getMoreArticleList();
 
         void collectArticle();
 
