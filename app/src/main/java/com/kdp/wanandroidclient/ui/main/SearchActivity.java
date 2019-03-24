@@ -16,9 +16,9 @@ import android.widget.TextView;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.application.AppContext;
-import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.bean.FriendBean;
-import com.kdp.wanandroidclient.bean.HotwordBean;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.bean.Friend;
+import com.kdp.wanandroidclient.bean.Hotword;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
 import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
@@ -29,6 +29,7 @@ import com.kdp.wanandroidclient.ui.base.BaseAbListActivity;
 import com.kdp.wanandroidclient.ui.logon.LogonActivity;
 import com.kdp.wanandroidclient.ui.tree.TreeActivity;
 import com.kdp.wanandroidclient.ui.web.WebViewActivity;
+import com.kdp.wanandroidclient.utils.IntentUtils;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
@@ -45,7 +46,7 @@ import java.util.Random;
  * date: 2018/4/5
  */
 
-public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchContract.ISearchView, ArticleBean> implements SearchContract.ISearchView, OnArticleListItemClickListener {
+public class SearchActivity extends BaseAbListActivity<SearchPresenter, Article> implements SearchContract.ISearchView, OnArticleListItemClickListener {
     private SearchView mSearchView;
     private SearchView.SearchAutoComplete searchAutoComplete;
     private View mHeaderView;
@@ -53,8 +54,8 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
     private int position;
     private int id;
     private String keyword = "";
-    private List<HotwordBean> mHotwordDatas = new ArrayList<>();
-    private List<FriendBean> mFriendDatas = new ArrayList<>();
+    private List<Hotword> mHotwordDatas = new ArrayList<>();
+    private List<Friend> mFriendDatas = new ArrayList<>();
 
     @Override
     protected boolean initToolbar() {
@@ -72,7 +73,7 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
 
     //设置搜索的数据
     @Override
-    public void setData(List<ArticleBean> data) {
+    public void setData(List<Article> data) {
         mRecyclerView.removeHeaderView();
         setRefreshEnable(true);
         setCanLoadMore(true);
@@ -101,14 +102,14 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
 
     //热搜关键词
     @Override
-    public void setHotwordData(final List<HotwordBean> mHotListDatas) {
+    public void setHotwordData(final List<Hotword> mHotListDatas) {
         mHotwordDatas.clear();
         mHotwordDatas.addAll(mHotListDatas);
-        mKeywordTagLayout.setAdapter(new TagAdapter<HotwordBean>(mHotListDatas) {
+        mKeywordTagLayout.setAdapter(new TagAdapter<Hotword>(mHotListDatas) {
             @Override
-            public View getView(FlowLayout parent, int position, HotwordBean hotwordBean) {
+            public View getView(FlowLayout parent, int position, Hotword hotword) {
                 TextView tagView = (TextView) LayoutInflater.from(SearchActivity.this).inflate(R.layout.item_search_tag, mKeywordTagLayout, false);
-                tagView.setText(hotwordBean.getName());
+                tagView.setText(hotword.getName());
                 setTagTextColor(tagView);
                 return tagView;
             }
@@ -127,14 +128,14 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
 
     //历史网站
     @Override
-    public void setFriendData(final List<FriendBean> mFriendListDatas) {
+    public void setFriendData(final List<Friend> mFriendListDatas) {
         mFriendDatas.clear();
         mFriendDatas.addAll(mFriendListDatas);
-        mFriendTagLayout.setAdapter(new TagAdapter<FriendBean>(mFriendDatas) {
+        mFriendTagLayout.setAdapter(new TagAdapter<Friend>(mFriendDatas) {
             @Override
-            public View getView(FlowLayout parent, int position, FriendBean friendBean) {
+            public View getView(FlowLayout parent, int position, Friend friend) {
                 TextView tagView = (TextView) LayoutInflater.from(SearchActivity.this).inflate(R.layout.item_search_tag, mFriendTagLayout, false);
-                tagView.setText(friendBean.getName());
+                tagView.setText(friend.getName());
                 setTagTextColor(tagView);
                 return tagView;
             }
@@ -144,10 +145,10 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
                 new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
-                FriendBean mFriendBean = mFriendListDatas.get(position);
-                ArticleBean bean = new ArticleBean();
-                bean.setTitle(mFriendBean.getName());
-                bean.setLink(mFriendBean.getLink());
+                Friend mFriend = mFriendListDatas.get(position);
+                Article bean = new Article();
+                bean.setTitle(mFriend.getName());
+                bean.setLink(mFriend.getLink());
                 Intent intent = new Intent(SearchActivity.this, WebViewActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
@@ -264,16 +265,16 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
     }
 
     @Override
-    protected BaseListAdapter getListAdapter() {
+    protected BaseListAdapter<Article> getListAdapter() {
         return new ArticleListAdapter(this, Const.LIST_TYPE.SEARCH);
     }
 
     @Override
-    public void onItemClick(ArticleBean bean) {
+    public void onItemClick(int position,Article bean) {
         Intent intent = new Intent(this, WebViewActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
-        bundle.putInt(Const.BUNDLE_KEY.COLLECT_TYPE, 2);
+        bundle.putInt(Const.BUNDLE_KEY.COLLECT_TYPE, 1);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -301,22 +302,13 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
     @Override
     public void onCollectClick(int position, int id) {
         if (!UserInfoManager.isLogin())
-            startActivity(new Intent(this, LogonActivity.class));
+            IntentUtils.goLogin(this);
         this.position = position;
         this.id = id;
         if (mListData.get(this.position).isCollect())
             mPresenter.unCollectArticle();
         else
-            mPresenter.collectInsideArticle();
-    }
-
-    @Override
-    public void onTreeClick(int chapterId, String chapterName) {
-        Intent intent = new Intent(this, TreeActivity.class);
-        intent.putExtra(Const.BUNDLE_KEY.INTENT_ACTION_TYPE, Const.BUNDLE_KEY.INTENT_ACTION_LIST);
-        intent.putExtra(Const.BUNDLE_KEY.CHAPTER_ID, chapterId);
-        intent.putExtra(Const.BUNDLE_KEY.CHAPTER_NAME, chapterName);
-        startActivity(intent);
+            mPresenter.collectArticle();
     }
 
     @Override
@@ -328,7 +320,7 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, SearchCo
     protected void receiveEvent(Object object) {
         Event mEvent = (Event) object;
         if (mEvent.type == Event.Type.ITEM) {
-            ArticleBean bean = (ArticleBean) mEvent.object;
+            Article bean = (Article) mEvent.object;
             for (int i = 0; i < mListData.size(); i++) {
                 if (bean.equals(mListData.get(i))) {
                     position = i;

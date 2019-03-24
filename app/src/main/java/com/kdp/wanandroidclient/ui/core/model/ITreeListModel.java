@@ -1,6 +1,6 @@
 package com.kdp.wanandroidclient.ui.core.model;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
+import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 
 /**
@@ -19,6 +19,6 @@ public interface ITreeListModel {
      * @param cid
      * @param rxObserver
      */
-    void getTreeList(int page, int cid, RxPageListObserver<ArticleBean> rxObserver);
+    void getTreeList(int page, int cid, RxPageListObserver<Article> rxObserver);
 
 }

@@ -1,6 +1,6 @@
 package com.kdp.wanandroidclient.inter;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
+import com.kdp.wanandroidclient.bean.Article;
 
 /**
  * 文章列表接口
@@ -8,12 +8,7 @@ import com.kdp.wanandroidclient.bean.ArticleBean;
  * date: 2018/2/27
  */
 
-public interface OnArticleListItemClickListener {
-
-    void onItemClick(ArticleBean bean);
-
+public interface OnArticleListItemClickListener extends OnItemClickListener<Article>{
     void onDeleteCollectClick(int position,int id,int originId);
     void onCollectClick(int position,int id);
-
-    void onTreeClick(int chapterId,String chapterName);
 }

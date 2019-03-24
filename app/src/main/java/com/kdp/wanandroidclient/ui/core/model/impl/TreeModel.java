@@ -1,6 +1,6 @@
 package com.kdp.wanandroidclient.ui.core.model.impl;
 
-import com.kdp.wanandroidclient.bean.TreeBean;
+import com.kdp.wanandroidclient.bean.Tree;
 import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.ui.core.model.ITreeModel;
@@ -15,10 +15,10 @@ import java.util.List;
 public class TreeModel extends BaseModel implements ITreeModel {
 
     @Override
-    public void getTree(RxObserver<List<TreeBean>> callback) {
+    public void getTree(RxObserver<List<Tree>> callback) {
         doRxRequest()
                 .getTree()
-                .compose(RxSchedulers.<List<TreeBean>>io_main())
+                .compose(RxSchedulers.<List<Tree>>io_main())
                 .subscribe(callback);
     }
 

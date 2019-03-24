@@ -3,6 +3,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -16,19 +17,14 @@ import com.kdp.wanandroidclient.R;
  */
 
 public class StatusLayout extends FrameLayout {
-
-    private Context mContext;
-    private LayoutInflater mInflater;
     private View mLoadingView;
     private View mErrorView;
     private View mEmptyView;
     private View mContentView;
 
-
     public StatusLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.mContext = context;
-        this.mInflater = LayoutInflater.from(mContext);
+        LayoutInflater mInflater = LayoutInflater.from(context);
         mLoadingView = mInflater.inflate(R.layout.loading_layout, this, false);
         mErrorView = mInflater.inflate(R.layout.error_layout, this, false);
         mEmptyView = mInflater.inflate(R.layout.empty_layout, this, false);
@@ -41,20 +37,11 @@ public class StatusLayout extends FrameLayout {
     }
 
     @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-    }
-
-    @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         if (changed) {
             int count = getChildCount();
-            for (int i = 0; i < count; i++) {
-                mContentView = getChildAt(i);
-                if (mContentView instanceof RecyclerView)
-                    break;
-            }
+            mContentView = getChildAt(count - 1);
         }
     }
 

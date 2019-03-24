@@ -5,8 +5,8 @@ import android.widget.TextView;
 
 import com.kdp.wanandroidclient.common.ListDataHolder;
 import com.kdp.wanandroidclient.R;
-import com.kdp.wanandroidclient.bean.TreeBean;
-import com.kdp.wanandroidclient.inter.OnTreeItemClickListener;
+import com.kdp.wanandroidclient.bean.Tree;
+import com.kdp.wanandroidclient.inter.OnItemClickListener;
 
 /**
  * 知识体系
@@ -14,10 +14,10 @@ import com.kdp.wanandroidclient.inter.OnTreeItemClickListener;
  * date: 2018/2/24
  */
 
-public class TreeAdapter extends BaseListAdapter<TreeBean> {
-    private OnTreeItemClickListener listener;
+public class TreeAdapter extends BaseListAdapter<Tree> {
+    private OnItemClickListener<Tree> listener;
 
-    public TreeAdapter(OnTreeItemClickListener listener) {
+    public TreeAdapter(OnItemClickListener<Tree> listener) {
         this.listener = listener;
     }
 
@@ -27,13 +27,13 @@ public class TreeAdapter extends BaseListAdapter<TreeBean> {
     }
 
     @Override
-    public void bindDatas(ListDataHolder holder, final TreeBean bean, int itemType, int position) {
+    public void bindDatas(ListDataHolder holder, final Tree bean, int itemType, final int position) {
 
         TextView tv_title = holder.getView(R.id.tv_title);
         TextView tv_content = holder.getView(R.id.tv_content);
         tv_title.setText(bean.getName());
         tv_content.setText("");
-        for (TreeBean.ChildrenBean child : bean.getChildren()) {
+        for (Tree.ChildrenBean child : bean.getChildren()) {
             tv_content.append(child.getName() + "     ");
         }
 
@@ -41,7 +41,7 @@ public class TreeAdapter extends BaseListAdapter<TreeBean> {
             @Override
             public void onClick(View v) {
                 if (listener!=null)
-                    listener.onItemClick(bean);
+                    listener.onItemClick(position,bean);
             }
         });
 

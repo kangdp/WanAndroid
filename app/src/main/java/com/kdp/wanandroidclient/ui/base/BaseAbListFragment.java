@@ -3,14 +3,14 @@ package com.kdp.wanandroidclient.ui.base;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
-import com.kdp.wanandroidclient.ui.core.view.IListDataView;
-import com.kdp.wanandroidclient.ui.core.view.IView;
+import com.kdp.wanandroidclient.ui.core.view.IPageLoadDataView;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 import com.kdp.wanandroidclient.widget.StatusLayout;
 import com.kdp.wanandroidclient.widget.LMRecyclerView;
@@ -24,13 +24,13 @@ import java.util.List;
  * date: 2018/2/11
  */
 
-public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends IView, T> extends BasePresenterFragment<P, V> implements LMRecyclerView.OnFooterAutoLoadMoreListener, IListDataView<T> {
+public abstract class BaseAbListFragment<P extends BasePresenter, T> extends BasePresenterFragment<P> implements LMRecyclerView.OnFooterAutoLoadMoreListener, IPageLoadDataView<T> {
 
     protected StatusLayout mStatusLayout;
     protected SwipeRefreshLayout mRefreshLayout;
     protected LMRecyclerView mRecyclerView;
-    protected BaseListAdapter mListAdapter;
-    protected int page;
+    protected BaseListAdapter<T> mListAdapter;
+    protected int page = getFirstPage();
     protected int state = -1;
     protected boolean isAutoLoadMore = true;//是否开启自动加载
     private boolean isPreload; //是否已经预加载完成
@@ -62,17 +62,10 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
         mListAdapter.notifyAllDatas(mListData, mRecyclerView);
     }
 
-    @Override
-    public void collect(boolean isCollect, String result) {
-    }
 
     @Override
     protected int getLayoutId() {
         return R.layout.include_recycler_list;
-    }
-
-    @Override
-    protected void getBundle(Bundle bundle) {
     }
 
     @Override
@@ -95,11 +88,6 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
                 loadDatas();
             }
         }
-    }
-
-    //是否开启懒加载
-    protected boolean isEnableLazy() {
-        return false;
     }
 
     private void lazyLoad() {
@@ -130,13 +118,6 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
     }
 
     /**
-     * 是否允许自动加载更多
-     *
-     * @return
-     */
-    protected abstract boolean isCanLoadMore();
-
-    /**
      * 下拉刷新监听
      */
     private SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
@@ -153,7 +134,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
     public void refreshData() {
         state = Const.PAGE_STATE.STATE_REFRESH;
         isAutoLoadMore = true;
-        page = 0;
+        page = getFirstPage();
         loadDatas();
     }
 
@@ -194,6 +175,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
         page++;
         isAutoLoadMore = true;
     }
+
 
     /**
      * 底部加载没有更多数据时显示
@@ -268,17 +250,33 @@ public abstract class BaseAbListFragment<P extends BasePresenter<V>, V extends I
     }
 
     @Override
-    protected void receiveEvent(Object object) {
+    public int getFirstPage() {
+        return 0;
     }
 
+    /**
+     * 是否开启懒加载
+     * @return
+     */
+    protected boolean isEnableLazy() {
+        return false;
+    }
+    /**
+     * 是否允许自动加载更多
+     * @return
+     */
+    protected boolean isCanLoadMore(){
+        return false;
+    }
     @Override
-    protected String registerEvent() {
+    protected void getBundle(Bundle bundle) {
+    }
+
+    protected View initHeaderView(){
         return null;
     }
 
-    protected abstract View initHeaderView();
-
     protected abstract void loadDatas();
 
-    protected abstract BaseListAdapter getListAdapter();
+    protected abstract BaseListAdapter<T> getListAdapter();
 }

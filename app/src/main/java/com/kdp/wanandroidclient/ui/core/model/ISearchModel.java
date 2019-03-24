@@ -1,8 +1,8 @@
 package com.kdp.wanandroidclient.ui.core.model;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.bean.FriendBean;
-import com.kdp.wanandroidclient.bean.HotwordBean;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.bean.Friend;
+import com.kdp.wanandroidclient.bean.Hotword;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 
@@ -23,19 +23,19 @@ public interface ISearchModel {
      * @param keyword            关键词
      * @param rxPageListObserver
      */
-    void searchArticle(int page, String keyword, RxPageListObserver<ArticleBean> rxPageListObserver);
+    void searchArticle(int page, String keyword, RxPageListObserver<Article> rxPageListObserver);
 
     /**
      * 搜索热词
      *
      * @param rxObserver
      */
-    void getHotWord(RxObserver<List<HotwordBean>> rxObserver);
+    void getHotWord(RxObserver<List<Hotword>> rxObserver);
 
     /**
      * 常用网站
      *
      * @param rxObserver
      */
-    void getFriend(RxObserver<List<FriendBean>> rxObserver);
+    void getFriend(RxObserver<List<Friend>> rxObserver);
 }

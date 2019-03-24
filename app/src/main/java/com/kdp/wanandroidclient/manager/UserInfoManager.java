@@ -3,16 +3,13 @@ package com.kdp.wanandroidclient.manager;
 import android.text.TextUtils;
 import android.util.Base64;
 
-import com.bumptech.glide.load.Encoder;
+import com.kdp.wanandroidclient.bean.User;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.utils.AesEncryptionUtils;
-import com.google.gson.Gson;
 import com.kdp.wanandroidclient.utils.PreUtils;
-import com.kdp.wanandroidclient.bean.UserBean;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -31,7 +28,7 @@ public class UserInfoManager {
      * 获取用户信息
      * @return
      */
-    public static UserBean getUserInfo() {
+    public static User getUserInfo() {
         SecretKeySpec keySpec = getAesKey();
         String userInfo = AesEncryptionUtils.decrypt(keySpec, (String) PreUtils.get(Const.USERINFO_KEY.USER_INFO, ""));
         if (TextUtils.isEmpty(userInfo)) return null;
@@ -47,11 +44,11 @@ public class UserInfoManager {
 
     /**
      * 保存用户信息
-     * @param userBean
+     * @param user
      */
-    public static void saveUserInfo(UserBean userBean){
+    public static void saveUserInfo(User user){
         try {
-            String  userInfo = translateUserInfoTOString(userBean);
+            String  userInfo = translateUserInfoTOString(user);
             SecretKeySpec key = AesEncryptionUtils.createKey();
             String aesContent = AesEncryptionUtils.encrypt(key, userInfo);
             //保存用户信息
@@ -82,30 +79,30 @@ public class UserInfoManager {
     }
 
     /**
-     * UserBean 转 String
-     * @param userBean
+     * User 转 String
+     * @param user
      * @return
      * @throws IOException
      */
-    private static String translateUserInfoTOString(UserBean userBean) throws IOException{
+    private static String translateUserInfoTOString(User user) throws IOException{
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bos);
-        oos.writeObject(userBean);
+        oos.writeObject(user);
         return Base64.encodeToString(bos.toByteArray(), Base64.DEFAULT);
     }
 
     /**
-     * String 转 UserBean
+     * String 转 User
      * @param userStr
      * @return
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    private static UserBean translateStringTOUserInfo(String userStr) throws IOException, ClassNotFoundException {
+    private static User translateStringTOUserInfo(String userStr) throws IOException, ClassNotFoundException {
         if (userStr == null) return null;
         byte[] base64Bytes = Base64.decode(userStr,Base64.DEFAULT);
         ByteArrayInputStream bis = new ByteArrayInputStream(base64Bytes);
         ObjectInputStream ois = new ObjectInputStream(bis);
-        return (UserBean) ois.readObject();
+        return (User) ois.readObject();
     }
 }

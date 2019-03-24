@@ -1,6 +1,6 @@
 package com.kdp.wanandroidclient.inter;
 
-import com.kdp.wanandroidclient.bean.TreeBean;
+import com.kdp.wanandroidclient.bean.Tree;
 
 /**
  * 知识体系接口
@@ -10,6 +10,6 @@ import com.kdp.wanandroidclient.bean.TreeBean;
 
 public interface OnTreeItemClickListener {
 
-    void onItemClick(TreeBean mTreeBean);
+    void onItemClick(Tree mTree);
 
 }

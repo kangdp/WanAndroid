@@ -18,7 +18,6 @@ public class RxEvent {
 
     private static RxEvent mInstance;
     private Map<String, List<PublishSubject>> mSubjectMaps = new HashMap<>();
-    private PublishSubject mSubject;
 
     public static RxEvent getInstance() {
         if (mInstance == null) {
@@ -43,7 +42,7 @@ public class RxEvent {
             mSubjectList = new ArrayList<>();
         }
         mSubjectMaps.put(mAction, mSubjectList);
-        mSubject = PublishSubject.create();
+        PublishSubject mSubject = PublishSubject.create();
         mSubjectList.add(mSubject);
         return mSubject;
     }

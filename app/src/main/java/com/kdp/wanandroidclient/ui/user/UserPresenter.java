@@ -1,6 +1,6 @@
 package com.kdp.wanandroidclient.ui.user;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
+import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 import com.kdp.wanandroidclient.ui.core.model.impl.UserModel;
@@ -18,7 +18,7 @@ public class UserPresenter extends BasePresenter<UserContract.IUserView> impleme
     private UserContract.IUserView mUserView;
     private UserModel mUserModel;
 
-    public UserPresenter() {
+    UserPresenter() {
         this.mUserModel = new UserModel();
     }
 
@@ -53,9 +53,9 @@ public class UserPresenter extends BasePresenter<UserContract.IUserView> impleme
     @Override
     public void loadCollectList() {
         mUserView = getView();
-        RxPageListObserver<ArticleBean> mCollectRxPageListObserver = new RxPageListObserver<ArticleBean>(this) {
+        RxPageListObserver<Article> mCollectRxPageListObserver = new RxPageListObserver<Article>(this) {
             @Override
-            public void onSuccess(List<ArticleBean> mData) {
+            public void onSuccess(List<Article> mData) {
                 mUserView.setData(mData);
                 if (mUserView.getData().size() == 0)
                     mUserView.showEmpty();

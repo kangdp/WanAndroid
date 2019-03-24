@@ -9,7 +9,7 @@ import java.util.List;
  * date: 2018/3/13
  */
 
-public class PageListDataBean<T>{
+public class PageListData<T>{
 
     private int curPage;
     private int offset;
@@ -28,7 +28,6 @@ public class PageListDataBean<T>{
     }
 
     public int getCurPage() {
-
         return curPage;
     }
 

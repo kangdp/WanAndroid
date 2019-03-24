@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.kdp.wanandroidclient.bean.TreeBean;
+import com.kdp.wanandroidclient.bean.Tree;
 import com.kdp.wanandroidclient.common.Const;
-import com.kdp.wanandroidclient.inter.OnTreeItemClickListener;
+import com.kdp.wanandroidclient.inter.OnItemClickListener;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.adapter.TreeAdapter;
 import com.kdp.wanandroidclient.ui.base.BaseAbListFragment;
@@ -19,7 +19,7 @@ import java.util.List;
  * date: 2018/2/22
  */
 
-public class TreeFragment extends BaseAbListFragment<TreePresenter, TreeContract.ITreeView, TreeBean> implements TreeContract.ITreeView, OnTreeItemClickListener {
+public class TreeFragment extends BaseAbListFragment<TreePresenter, Tree> implements TreeContract.ITreeView, OnItemClickListener<Tree> {
 
     @Override
     protected TreePresenter createPresenter() {
@@ -33,39 +33,23 @@ public class TreeFragment extends BaseAbListFragment<TreePresenter, TreeContract
     }
 
     @Override
-    protected BaseListAdapter getListAdapter() {
+    protected BaseListAdapter<Tree> getListAdapter() {
         return new TreeAdapter(this);
     }
 
-
     @Override
-    protected boolean isCanLoadMore() {
-        return false;
-    }
-
-    @Override
-    protected View initHeaderView() {
-        return null;
-    }
-
-    @Override
-    public void setData(List<TreeBean> data) {
+    public void setData(List<Tree> data) {
         mListData.clear();
         mListData.addAll(data);
     }
 
-    @Override
-    public int getArticleId() {
-        return 0;
-    }
 
     //进入子分类页面
     @Override
-    public void onItemClick(TreeBean mTreeBean) {
+    public void onItemClick(int position,Tree mTree) {
         Intent intent = new Intent(getActivity(), TreeActivity.class);
-        intent.putExtra(Const.BUNDLE_KEY.INTENT_ACTION_TYPE,Const.BUNDLE_KEY.INTENT_ACTION_TREE);
         Bundle b = new Bundle();
-        b.putSerializable(Const.BUNDLE_KEY.OBJ, mTreeBean);
+        b.putSerializable(Const.BUNDLE_KEY.OBJ, mTree);
         intent.putExtras(b);
         startActivity(intent);
     }

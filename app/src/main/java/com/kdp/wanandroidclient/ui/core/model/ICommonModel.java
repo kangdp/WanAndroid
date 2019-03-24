@@ -24,7 +24,7 @@ public interface ICommonModel {
      * @param id       文章id
      * @param callback
      */
-    void collectInSideArticle(int id, RxObserver<String> callback);
+//    void collectInSideArticle(int id, RxObserver<String> callback);
 
     /**
      * 取消收藏文章

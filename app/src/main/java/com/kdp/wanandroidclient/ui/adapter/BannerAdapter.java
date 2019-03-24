@@ -2,6 +2,7 @@ package com.kdp.wanandroidclient.ui.adapter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -12,8 +13,8 @@ import android.widget.TextView;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.application.AppContext;
-import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.bean.BannerBean;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.bean.Banner;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.manager.GlideLoaderManager;
 import com.kdp.wanandroidclient.ui.web.WebViewActivity;
@@ -29,15 +30,15 @@ import java.util.List;
 public class BannerAdapter extends PagerAdapter {
 
     private SparseArray<View> mViews;
-    private List<BannerBean> mBannerDatas;
+    private List<Banner> mBannerDatas;
 
 
-    public BannerAdapter(List<BannerBean> mBannerDatas) {
+    public BannerAdapter(List<Banner> mBannerDatas) {
         this.mBannerDatas = mBannerDatas;
         mViews = new SparseArray<>();
     }
 
-    public void notifyDatas(List<BannerBean> mBannerDatas) {
+    public void notifyDatas(List<Banner> mBannerDatas) {
         this.mBannerDatas = mBannerDatas;
         notifyDataSetChanged();
     }
@@ -48,27 +49,28 @@ public class BannerAdapter extends PagerAdapter {
         return mBannerDatas.size() <= 1 ? mBannerDatas.size() : Integer.MAX_VALUE;
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(final ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull final ViewGroup container, int position) {
 
         View view = mViews.get(position);
         if (view == null) {
             position %= mBannerDatas.size();
-            final BannerBean bean = mBannerDatas.get(position);
+            final Banner bean = mBannerDatas.get(position);
             view = LayoutInflater.from(AppContext.getContext()).inflate(R.layout.item_banner, container, false);
-            ImageView imageView = (ImageView) view.findViewById(R.id.img);
-            TextView titleView = (TextView) view.findViewById(R.id.title);
+            ImageView imageView =  view.findViewById(R.id.img);
+            TextView titleView =  view.findViewById(R.id.title);
             GlideLoaderManager.loadImage(bean.getImagePath(), imageView, Const.IMAGE_LOADER.NOMAL_IMG);
             titleView.setText(bean.getTitle());
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(container.getContext(), WebViewActivity.class);
-                    ArticleBean mArticleBean = new ArticleBean();
-                    mArticleBean.setTitle(bean.getTitle());
-                    mArticleBean.setLink(bean.getUrl());
+                    Article mArticle = new Article();
+                    mArticle.setTitle(bean.getTitle());
+                    mArticle.setLink(bean.getUrl());
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable(Const.BUNDLE_KEY.OBJ, mArticleBean);
+                    bundle.putSerializable(Const.BUNDLE_KEY.OBJ, mArticle);
                     intent.putExtras(bundle);
                     container.getContext().startActivity(intent);
                 }

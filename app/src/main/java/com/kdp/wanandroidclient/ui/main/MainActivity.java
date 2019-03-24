@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.application.AppContext;
-import com.kdp.wanandroidclient.bean.UserBean;
+import com.kdp.wanandroidclient.bean.User;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
 import com.kdp.wanandroidclient.event.RxEvent;
@@ -27,9 +27,11 @@ import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.base.BaseActivity;
 import com.kdp.wanandroidclient.ui.home.HomeFragment;
 import com.kdp.wanandroidclient.ui.logon.LogonActivity;
+import com.kdp.wanandroidclient.ui.project.ProjectFragment;
 import com.kdp.wanandroidclient.ui.tree.TreeFragment;
 import com.kdp.wanandroidclient.ui.user.AboutUsActivity;
 import com.kdp.wanandroidclient.ui.user.CollectArticleActivity;
+import com.kdp.wanandroidclient.utils.IntentUtils;
 import com.kdp.wanandroidclient.utils.PreUtils;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 
@@ -65,23 +67,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             mToolbar.setTitle(R.string.app_name);
         else if (currentPosition == 1)
             mToolbar.setTitle(R.string.system);
+        else if(currentPosition == 2)
+            mToolbar.setTitle(R.string.project);
     }
-
-
-    @Override
-    protected void getIntent(Intent intent) {
-    }
-
 
     @Override
     protected void initViews() {
         mDrawerLayout =  findViewById(R.id.drawerLayout);
         mNavigationView =  findViewById(R.id.navigation_view);
-        btns = new Button[2];
+        btns = new Button[3];
         btns[0] =  findViewById(R.id.btn_main);
         btns[1] =  findViewById(R.id.btn_system);
+        btns[2] =  findViewById(R.id.btn_project);
         btns[0].setOnClickListener(this);
         btns[1].setOnClickListener(this);
+        btns[2].setOnClickListener(this);
         btns[0].setSelected(true);
 
 
@@ -127,10 +127,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void setUserData() {
         if (UserInfoManager.isLogin()) {
-            UserBean userBean = UserInfoManager.getUserInfo();
-            if (userBean != null) {
-                mNameView.setText(userBean.getUsername());
-                GlideLoaderManager.loadImage(userBean.getIcon(), mAvatarView, Const.IMAGE_LOADER.HEAD_IMG);
+            User user = UserInfoManager.getUserInfo();
+            if (user != null) {
+                mNameView.setText(user.getUsername());
+                GlideLoaderManager.loadImage(user.getIcon(), mAvatarView, Const.IMAGE_LOADER.HEAD_IMG);
             }
         } else {
             mNameView.setText("未登录");
@@ -139,7 +139,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
     private void initFragments() {
-        fragments = new Fragment[]{new HomeFragment(), new TreeFragment()};
+        fragments = new Fragment[]{new HomeFragment(), new TreeFragment(),new ProjectFragment()};
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.container, fragments[0]).show(fragments[0]).commitAllowingStateLoss();
     }
@@ -152,7 +152,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             switch (item.getItemId()) {
                 case R.id.menu_favorite_article: {
                     if (!UserInfoManager.isLogin()) {
-                        startActivity(new Intent(MainActivity.this, LogonActivity.class));
+                        IntentUtils.goLogin(MainActivity.this);
                     } else {
                         startActivity(new Intent(MainActivity.this, CollectArticleActivity.class));
                     }
@@ -195,7 +195,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //刷新首页数据
         if (UserInfoManager.isLogin())
             RxEvent.getInstance().postEvent(Const.EVENT_ACTION.REFRESH_DATA, new Event(Event.Type.LIST, null));
-        startActivity(new Intent(MainActivity.this, LogonActivity.class));
+        IntentUtils.goLogin(this);
         PreUtils.clearAll();
     }
 
@@ -213,6 +213,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_system:
                 index = 1;
+                break;
+            case R.id.btn_project:
+                index = 2;
                 break;
             default:
         }

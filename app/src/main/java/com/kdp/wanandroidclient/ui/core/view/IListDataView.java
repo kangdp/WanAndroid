@@ -2,28 +2,16 @@ package com.kdp.wanandroidclient.ui.core.view;
 
 import java.util.List;
 
-/**
- * 列表View
- * author: 康栋普
- * date: 2018/3/7
+/***
+ * @author kdp
+ * @date 2019/3/20 13:03
+ * @description
  */
-
-public interface IListDataView<T> extends IView {
-
-    int getPage();
+public interface IListDataView<T> extends IView{
 
     void setData(List<T> data);
 
     List<T> getData();
 
     void showContent(); //显示内容
-
-    void autoLoadMore();//自动加载
-
-    void clearListData();//清空所有数据
-
-    void showNoMore();//没有更多数据
-
-    int getArticleId();//文章id
-
 }

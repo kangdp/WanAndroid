@@ -1,9 +1,9 @@
 package com.kdp.wanandroidclient.ui.core.model.impl;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.bean.FriendBean;
-import com.kdp.wanandroidclient.bean.HotwordBean;
-import com.kdp.wanandroidclient.bean.PageListDataBean;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.bean.Friend;
+import com.kdp.wanandroidclient.bean.Hotword;
+import com.kdp.wanandroidclient.bean.PageListData;
 import com.kdp.wanandroidclient.net.RxSchedulers;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
@@ -19,27 +19,27 @@ import java.util.List;
 
 public class SearchModel extends CommonModel implements ISearchModel {
     @Override
-    public void searchArticle(int page, String keyword, RxPageListObserver<ArticleBean> rxObserver) {
+    public void searchArticle(int page, String keyword, RxPageListObserver<Article> rxObserver) {
         LogUtils.e(page+"");
         doRxRequest()
                 .search(page, keyword)
-                .compose(RxSchedulers.<PageListDataBean<ArticleBean>>io_main())
+                .compose(RxSchedulers.<PageListData<Article>>io_main())
                 .subscribe(rxObserver);
     }
 
     @Override
-    public void getHotWord(RxObserver<List<HotwordBean>> observable) {
+    public void getHotWord(RxObserver<List<Hotword>> observable) {
         doRxRequest()
                 .getHotKeyword()
-                .compose(RxSchedulers.<List<HotwordBean>>io_main())
+                .compose(RxSchedulers.<List<Hotword>>io_main())
                 .subscribe(observable);
     }
 
     @Override
-    public void getFriend(RxObserver<List<FriendBean>> rxObserver) {
+    public void getFriend(RxObserver<List<Friend>> rxObserver) {
         doRxRequest()
                 .getFriend()
-                .compose(RxSchedulers.<List<FriendBean>>io_main())
+                .compose(RxSchedulers.<List<Friend>>io_main())
                 .subscribe(rxObserver);
     }
 }

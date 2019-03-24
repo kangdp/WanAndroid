@@ -1,7 +1,7 @@
 package com.kdp.wanandroidclient.ui.tree;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.ui.core.view.IListDataView;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.ui.core.view.IPageLoadDataView;
 
 /**
  * 知识体系列表协约类
@@ -20,7 +20,9 @@ public interface TreeListContract {
         void unCollectArticle();
     }
 
-    interface ITreeListView extends IListDataView<ArticleBean> {
+    interface ITreeListView extends IPageLoadDataView<Article> {
         int getCid();
+        int getArticleId();//文章id
+        void collect(boolean isCollect,String result);
     }
 }

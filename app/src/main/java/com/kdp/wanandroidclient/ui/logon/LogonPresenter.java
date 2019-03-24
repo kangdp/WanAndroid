@@ -2,7 +2,7 @@ package com.kdp.wanandroidclient.ui.logon;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.application.AppContext;
-import com.kdp.wanandroidclient.bean.UserBean;
+import com.kdp.wanandroidclient.bean.User;
 import com.kdp.wanandroidclient.inter.VerifyAccountCallback;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.ui.core.model.impl.LogonModel;
@@ -29,14 +29,14 @@ public class LogonPresenter extends BasePresenter<LogonContract.ILoginRegisterVi
     @Override
     public void login() {
         if(!verifyAccount()) return;
-        RxObserver<UserBean> mLoginRxObserver = new RxObserver<UserBean>(this) {
+        RxObserver<User> mLoginRxObserver = new RxObserver<User>(this) {
             @Override
             protected void onStart() {
                 mLogonView.showLoading(AppContext.getContext().getString(R.string.isLoging));
             }
 
             @Override
-            protected void onSuccess(UserBean userBean) {
+            protected void onSuccess(User userBean) {
                 userBean.setPassword(password);
                 logonModel.saveUserInfo(userBean);
                 mLogonView.showResult(AppContext.getContext().getString(R.string.login_success));

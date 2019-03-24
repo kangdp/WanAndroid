@@ -6,7 +6,7 @@ package com.kdp.wanandroidclient.bean;
  * date: 2018/3/7
  */
 
-public class BannerBean {
+public class Banner {
 
     /**
      * desc : 一起来做个App吧

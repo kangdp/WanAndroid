@@ -1,6 +1,6 @@
 package com.kdp.wanandroidclient.ui.core.model;
 
-import com.kdp.wanandroidclient.bean.TreeBean;
+import com.kdp.wanandroidclient.bean.Tree;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 
 import java.util.List;
@@ -17,5 +17,5 @@ public interface ITreeModel {
      *
      * @param callback
      */
-    void getTree(RxObserver<List<TreeBean>> callback);
+    void getTree(RxObserver<List<Tree>> callback);
 }

@@ -12,7 +12,7 @@ import com.kdp.wanandroidclient.utils.ToastUtils;
  * Created by 康栋普 on 2018/2/1.
  */
 
-public abstract class BasePresenterActivity<P extends BasePresenter<V>, V extends IView> extends BaseActivity implements IView {
+public abstract class BasePresenterActivity<P extends BasePresenter> extends BaseActivity implements IView {
 
    protected P mPresenter;
 
@@ -21,6 +21,7 @@ public abstract class BasePresenterActivity<P extends BasePresenter<V>, V extend
         super.onCreate(bundle);
         mPresenter = createPresenter();
         attachView();
+
     }
 
     @Override
@@ -46,7 +47,7 @@ public abstract class BasePresenterActivity<P extends BasePresenter<V>, V extend
     //关联View
     private void attachView() {
         if (mPresenter != null) {
-            mPresenter.attachView((V) this);
+            mPresenter.attachView(this);
         }
     }
 
@@ -69,7 +70,6 @@ public abstract class BasePresenterActivity<P extends BasePresenter<V>, V extend
 
     @Override
     protected void initViews() {
-
     }
 
     @Override
@@ -92,10 +92,6 @@ public abstract class BasePresenterActivity<P extends BasePresenter<V>, V extend
     public void showEmpty() {
     }
 
-    @Override
-    public void collect(boolean isCollect, String result) {
-
-    }
 
     @Override
     protected void receiveEvent(Object object) {

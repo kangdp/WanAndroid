@@ -1,13 +1,14 @@
 package com.kdp.wanandroidclient.api;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.bean.BannerBean;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.bean.Banner;
 import com.kdp.wanandroidclient.bean.BaseBean;
-import com.kdp.wanandroidclient.bean.FriendBean;
-import com.kdp.wanandroidclient.bean.HotwordBean;
-import com.kdp.wanandroidclient.bean.PageListDataBean;
-import com.kdp.wanandroidclient.bean.TreeBean;
-import com.kdp.wanandroidclient.bean.UserBean;
+import com.kdp.wanandroidclient.bean.Friend;
+import com.kdp.wanandroidclient.bean.Hotword;
+import com.kdp.wanandroidclient.bean.PageListData;
+import com.kdp.wanandroidclient.bean.ProjectCate;
+import com.kdp.wanandroidclient.bean.Tree;
+import com.kdp.wanandroidclient.bean.User;
 import com.kdp.wanandroidclient.common.UrlConstainer;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public interface ApiServer {
      */
     @FormUrlEncoded
     @POST(UrlConstainer.LOGIN)
-    Observable<BaseBean<UserBean>> login(@Field("username") String username, @Field("password") String password);
+    Observable<BaseBean<User>> login(@Field("username") String username, @Field("password") String password);
 
     /**
      * 注册
@@ -58,7 +59,14 @@ public interface ApiServer {
      * @return
      */
     @GET(UrlConstainer.MAIN_BANNER)
-    Observable<BaseBean<List<BannerBean>>> getBanner();
+    Observable<BaseBean<List<Banner>>> getBanner();
+
+    /**
+     * 首页置顶列表
+     * @return
+     */
+    @GET(UrlConstainer.HOME_TOP_LIST)
+    Observable<BaseBean<List<Article>>> getHomeTopList();
 
     /**
      * 首页文章列表
@@ -66,7 +74,7 @@ public interface ApiServer {
      * @return
      */
     @GET(UrlConstainer.HOME_LIST)
-    Observable<BaseBean<PageListDataBean<ArticleBean>>> getArticleList(@Path("page") int page);
+    Observable<BaseBean<PageListData<Article>>> getHomeList(@Path("page") int page);
 
     /**
      * 收藏文章
@@ -83,8 +91,8 @@ public interface ApiServer {
      * @param id
      * @return
      */
-    @POST(UrlConstainer.COLLECT_INSIDE_ARTICLE)
-    Observable<BaseBean<String>> collectInsideArticle(@Path("id") int id);
+//    @POST(UrlConstainer.COLLECT_INSIDE_ARTICLE)
+//    Observable<BaseBean<String>> collectInsideArticle(@Path("id") int id);
 
     /**
      * 取消收藏文章
@@ -102,7 +110,7 @@ public interface ApiServer {
      * @return
      */
     @GET(UrlConstainer.TREE)
-    Observable<BaseBean<List<TreeBean>>> getTree();
+    Observable<BaseBean<List<Tree>>> getTree();
 
     /**
      * 知识体系列表
@@ -112,7 +120,7 @@ public interface ApiServer {
      * @return
      */
     @GET(UrlConstainer.TREE_LIST)
-    Observable<BaseBean<PageListDataBean<ArticleBean>>> getTreeList(@Path("page") int page, @Query("cid") int cid);
+    Observable<BaseBean<PageListData<Article>>> getTreeList(@Path("page") int page, @Query("cid") int cid);
 
 
     /**
@@ -122,7 +130,7 @@ public interface ApiServer {
      * @return
      */
     @GET(UrlConstainer.COLLECT_ARTICLE_LIST)
-    Observable<BaseBean<PageListDataBean<ArticleBean>>> getCollectArticleList(@Path("page") int page);
+    Observable<BaseBean<PageListData<Article>>> getCollectArticleList(@Path("page") int page);
 
     /**
      * 删除收藏的文章
@@ -143,7 +151,7 @@ public interface ApiServer {
      */
     @FormUrlEncoded
     @POST(UrlConstainer.SEARCH)
-    Observable<BaseBean<PageListDataBean<ArticleBean>>> search(@Path("page") int page, @Field("k") String keyword);
+    Observable<BaseBean<PageListData<Article>>> search(@Path("page") int page, @Field("k") String keyword);
 
     /**
      * 搜索热词
@@ -151,7 +159,7 @@ public interface ApiServer {
      * @return
      */
     @GET(UrlConstainer.HOT_KEYWORD)
-    Observable<BaseBean<List<HotwordBean>>> getHotKeyword();
+    Observable<BaseBean<List<Hotword>>> getHotKeyword();
 
     /**
      * 常用网站
@@ -159,6 +167,22 @@ public interface ApiServer {
      * @return
      */
     @GET(UrlConstainer.FRIEND)
-    Observable<BaseBean<List<FriendBean>>> getFriend();
+    Observable<BaseBean<List<Friend>>> getFriend();
+
+    /**
+     * 项目分类
+     * @return
+     */
+    @GET(UrlConstainer.PROJECT_CATE)
+    Observable<BaseBean<List<ProjectCate>>> getProjectCate();
+
+    /**
+     * 项目列表
+     * @param page
+     * @param cid
+     * @return
+     */
+    @GET(UrlConstainer.PROJECT)
+    Observable<BaseBean<PageListData<Article>>> getProjectList(@Path("page") int page,@Query("cid") int cid);
 
 }

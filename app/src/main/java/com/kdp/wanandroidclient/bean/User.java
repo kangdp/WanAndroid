@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 个人信息
+ * 当前用户信息
  */
-public class UserBean implements Serializable {
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

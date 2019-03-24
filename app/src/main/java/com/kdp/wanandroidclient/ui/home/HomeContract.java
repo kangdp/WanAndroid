@@ -1,8 +1,8 @@
 package com.kdp.wanandroidclient.ui.home;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
-import com.kdp.wanandroidclient.bean.BannerBean;
-import com.kdp.wanandroidclient.ui.core.view.IListDataView;
+import com.kdp.wanandroidclient.bean.Article;
+import com.kdp.wanandroidclient.bean.Banner;
+import com.kdp.wanandroidclient.ui.core.view.IPageLoadDataView;
 
 import java.util.List;
 
@@ -14,16 +14,17 @@ import java.util.List;
 
 public interface HomeContract {
     interface IHomePresenter {
-        void getHomeList();
+        void getHomeData();
+        void getMoreArticleList();
 
         void collectArticle();
 
         void unCollectArticle();
     }
 
-    interface IHomeView extends IListDataView<ArticleBean> {
-
-        void setBannerData(List<BannerBean> banner);
-
+    interface IHomeView extends IPageLoadDataView<Article> {
+        int getArticleId();
+        void setBannerData(List<Banner> banner);
+        void collect(boolean isCollect,String result);
     }
 }

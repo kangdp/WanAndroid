@@ -12,13 +12,14 @@ import android.widget.FrameLayout;
 
 import com.just.agentweb.AgentWeb;
 import com.kdp.wanandroidclient.R;
-import com.kdp.wanandroidclient.bean.ArticleBean;
+import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
 import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.base.BasePresenterActivity;
 import com.kdp.wanandroidclient.ui.logon.LogonActivity;
+import com.kdp.wanandroidclient.utils.IntentUtils;
 
 import java.lang.reflect.Method;
 
@@ -28,10 +29,10 @@ import java.lang.reflect.Method;
  * date: 2018/2/27
  */
 
-public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, WebViewContract.IWebView> implements WebViewContract.IWebView {
+public class WebViewActivity extends BasePresenterActivity<WebViewPresenter> implements WebViewContract.IWebView {
     private FrameLayout mContainer;
     private AgentWeb mAgentWeb;
-    private ArticleBean bean;
+    private Article bean;
     private int type;
     private int id;
     private String title = "";
@@ -52,7 +53,7 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, Web
     protected void getIntent(Intent intent) {
         Bundle bundle = intent.getExtras();
         assert bundle != null;
-        bean = (ArticleBean) bundle.getSerializable(Const.BUNDLE_KEY.OBJ);
+        bean = (Article) bundle.getSerializable(Const.BUNDLE_KEY.OBJ);
         type = intent.getIntExtra(Const.BUNDLE_KEY.COLLECT_TYPE, -1);
         if (bean != null) {
             id = bean.getId();
@@ -154,13 +155,9 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter, Web
     //收藏
     private void collect() {
         if (!UserInfoManager.isLogin())
-            startActivity(new Intent(this, LogonActivity.class));
+            IntentUtils.goLogin(this);
         if (bean.isCollect()) return;
-        if (type == 1) {
-            mPresenter.collectArticle();
-        } else if (type == 2) {
-            mPresenter.collectInsideArticle();
-        }
+        mPresenter.collectArticle();
     }
 
     //打开浏览器

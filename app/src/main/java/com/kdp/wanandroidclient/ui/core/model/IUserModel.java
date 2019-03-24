@@ -1,6 +1,6 @@
 package com.kdp.wanandroidclient.ui.core.model;
 
-import com.kdp.wanandroidclient.bean.ArticleBean;
+import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 
@@ -16,7 +16,7 @@ public interface IUserModel {
      * @param page
      * @param rxObserver
      */
-    void getCollectArticleList(int page, RxPageListObserver<ArticleBean> rxObserver);
+    void getCollectArticleList(int page, RxPageListObserver<Article> rxObserver);
 
 
     /**

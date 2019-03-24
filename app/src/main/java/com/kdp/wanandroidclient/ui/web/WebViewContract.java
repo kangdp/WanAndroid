@@ -11,10 +11,10 @@ import com.kdp.wanandroidclient.ui.core.view.IView;
 public class WebViewContract {
     interface IWebViewPresenter{
         void collectArticle();
-        void collectInsideArticle();
     }
 
     interface IWebView extends IView{
         int getArticleId();
+        void collect(boolean isCollect,String result);
     }
 }
