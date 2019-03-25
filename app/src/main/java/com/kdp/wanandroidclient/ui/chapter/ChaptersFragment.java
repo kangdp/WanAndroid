@@ -1,4 +1,10 @@
 package com.kdp.wanandroidclient.ui.chapter;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.kdp.wanandroidclient.bean.Chapter;
 import com.kdp.wanandroidclient.ui.adapter.ChaptersFragPagerAdapter;
 import com.kdp.wanandroidclient.ui.base.BaseTabFragment;
@@ -35,5 +41,12 @@ public class ChaptersFragment extends BaseTabFragment<ChaptersPresenter> impleme
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(chapterList.size());
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mPresenter.getChapters();
     }
 }

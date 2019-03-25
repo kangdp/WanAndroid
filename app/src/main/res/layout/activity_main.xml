@@ -42,6 +42,8 @@
                     android:text="@string/home"
                     android:textColor="@color/tab_text_color" />
 
+
+
                 <Button
                     android:id="@+id/btn_system"
                     android:layout_width="0dp"
@@ -52,6 +54,18 @@
                     android:drawableTop="@drawable/system_tab_selsctor"
                     android:padding="5dp"
                     android:text="@string/system"
+                    android:textColor="@color/tab_text_color" />
+
+                <Button
+                    android:id="@+id/btn_chapter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:drawablePadding="2dp"
+                    android:drawableTop="@drawable/chapter_tab_selsctor"
+                    android:padding="5dp"
+                    android:text="@string/chapter"
                     android:textColor="@color/tab_text_color" />
 
                 <Button

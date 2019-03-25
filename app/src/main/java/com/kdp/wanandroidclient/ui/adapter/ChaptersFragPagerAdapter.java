@@ -22,7 +22,7 @@ public class ChaptersFragPagerAdapter extends FragmentPagerAdapter {
     }
     @Override
     public Fragment getItem(int positions) {
-        return null;
+        return new Fragment();
     }
 
     @Nullable

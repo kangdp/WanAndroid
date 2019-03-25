@@ -16,7 +16,7 @@ public class ChaptersPresenter extends BasePresenter<ChapterContract.IChaptersVi
     private ChapterModel chapterModel;
     private ChapterContract.IChaptersView chaptersView;
 
-    public ChaptersPresenter() {
+    ChaptersPresenter() {
         this.chapterModel = new ChapterModel();
     }
 

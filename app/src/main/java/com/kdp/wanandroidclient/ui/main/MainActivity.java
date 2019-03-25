@@ -25,6 +25,7 @@ import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.manager.GlideLoaderManager;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.base.BaseActivity;
+import com.kdp.wanandroidclient.ui.chapter.ChaptersFragment;
 import com.kdp.wanandroidclient.ui.home.HomeFragment;
 import com.kdp.wanandroidclient.ui.project.ProjectFragment;
 import com.kdp.wanandroidclient.ui.tree.TreeFragment;
@@ -67,24 +68,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         else if (currentPosition == 1)
             mToolbar.setTitle(R.string.system);
         else if(currentPosition == 2)
+            mToolbar.setTitle(R.string.chapter);
+        else if (currentPosition == 3)
             mToolbar.setTitle(R.string.project);
+
     }
 
     @Override
     protected void initViews() {
         mDrawerLayout =  findViewById(R.id.drawerLayout);
         mNavigationView =  findViewById(R.id.navigation_view);
-        btns = new Button[3];
+        btns = new Button[4];
         btns[0] =  findViewById(R.id.btn_main);
         btns[1] =  findViewById(R.id.btn_system);
-        btns[2] =  findViewById(R.id.btn_project);
-        btns[0].setOnClickListener(this);
-        btns[1].setOnClickListener(this);
-        btns[2].setOnClickListener(this);
+        btns[2] =  findViewById(R.id.btn_chapter);
+        btns[3] =  findViewById(R.id.btn_project);
         btns[0].setSelected(true);
 
-
         for (int i = 0; i < btns.length; i++) {
+            btns[i].setOnClickListener(this);
             if (i != currentPosition) {
                 btns[i].setScaleX(0.9f);
                 btns[i].setScaleY(0.9f);
@@ -138,7 +140,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
     private void initFragments() {
-        fragments = new Fragment[]{new HomeFragment(), new TreeFragment(),new ProjectFragment()};
+        fragments = new Fragment[]{new HomeFragment(), new TreeFragment(),new ChaptersFragment(),new ProjectFragment()};
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.container, fragments[0]).show(fragments[0]).commitAllowingStateLoss();
     }
@@ -213,8 +215,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.btn_system:
                 index = 1;
                 break;
-            case R.id.btn_project:
+            case R.id.btn_chapter:
                 index = 2;
+                break;
+            case R.id.btn_project:
+                index = 3;
                 break;
             default:
         }
