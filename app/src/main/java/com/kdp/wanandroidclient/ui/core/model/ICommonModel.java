@@ -13,23 +13,16 @@ public interface ICommonModel {
     /**
      * 收藏文章
      *
-     * @param id       文章id
+     * @param id 文章id
      * @param callback
      */
     void collectArticle(int id, RxObserver<String> callback);
 
-    /**
-     * 收藏站内文章
-     *
-     * @param id       文章id
-     * @param callback
-     */
-//    void collectInSideArticle(int id, RxObserver<String> callback);
 
     /**
      * 取消收藏文章
      *
-     * @param id       文章id
+     * @param id 文章id
      * @param callback
      */
     void unCollectArticle(int id, RxObserver<String> callback);

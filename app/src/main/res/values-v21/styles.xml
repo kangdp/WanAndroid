@@ -22,4 +22,13 @@
         <item name="android:fitsSystemWindows">false</item>
     </style>
 
+    <style name="LoadingProgressStyle" parent="@style/Widget.AppCompat.ProgressBar">
+        <item name="android:minWidth">20dp</item>
+        <item name="android:maxWidth">20dp</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:maxHeight">20dp</item>
+        <item name="android:indeterminateTintMode">src_atop</item>
+        <item name="android:indeterminateTint">@color/_0091ea</item>
+    </style>
+
 </resources>

@@ -14,6 +14,10 @@ import java.util.List;
 
 public class TreeModel extends BaseModel implements ITreeModel {
 
+    /**
+     * 获取知识体系分类
+     * @param callback
+     */
     @Override
     public void getTree(RxObserver<List<Tree>> callback) {
         doRxRequest()

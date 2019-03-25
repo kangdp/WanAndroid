@@ -4,8 +4,6 @@ import com.kdp.wanandroidclient.api.ApiServer;
 import com.kdp.wanandroidclient.net.RxRetrofit;
 import com.kdp.wanandroidclient.ui.core.model.IModel;
 
-import io.reactivex.Observable;
-
 
 public class BaseModel implements IModel {
 

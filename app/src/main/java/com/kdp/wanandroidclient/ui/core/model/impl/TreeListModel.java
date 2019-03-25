@@ -13,6 +13,12 @@ import com.kdp.wanandroidclient.ui.core.model.ITreeListModel;
 
 public class TreeListModel extends CommonModel implements ITreeListModel {
 
+    /**
+     * 获取知识体系文章列表
+     * @param page 页码
+     * @param cid 知识体系分类id
+     * @param rxObserver
+     */
     @Override
     public void getTreeList(int page,int cid,RxPageListObserver<Article> rxObserver) {
         doRxRequest()

@@ -3,7 +3,6 @@ package com.kdp.wanandroidclient.ui.tree;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
-
 import com.kdp.wanandroidclient.bean.Tree;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.ui.adapter.TreeFragPagerAdapter;

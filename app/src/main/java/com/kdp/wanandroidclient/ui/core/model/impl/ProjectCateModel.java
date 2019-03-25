@@ -13,6 +13,11 @@ import java.util.List;
  * @description
  */
 public class ProjectCateModel extends BaseModel implements IProjectCateModel {
+
+    /**
+     * 获取项目分类
+     * @param rxObserver
+     */
     @Override
     public void getProjectCate(RxObserver<List<ProjectCate>> rxObserver) {
         doRxRequest()

@@ -26,7 +26,6 @@ import com.kdp.wanandroidclient.manager.GlideLoaderManager;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.base.BaseActivity;
 import com.kdp.wanandroidclient.ui.home.HomeFragment;
-import com.kdp.wanandroidclient.ui.logon.LogonActivity;
 import com.kdp.wanandroidclient.ui.project.ProjectFragment;
 import com.kdp.wanandroidclient.ui.tree.TreeFragment;
 import com.kdp.wanandroidclient.ui.user.AboutUsActivity;

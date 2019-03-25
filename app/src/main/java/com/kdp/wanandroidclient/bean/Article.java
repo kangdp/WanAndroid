@@ -267,7 +267,7 @@ public class Article implements Serializable {
         this.tags = tags;
     }
 
-    public static class TagsBean {
+    public static class TagsBean implements Serializable{
         /**
          * name : 公众号
          * url : /wxarticle/list/411/1

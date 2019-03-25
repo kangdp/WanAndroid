@@ -10,7 +10,6 @@ import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
 import com.kdp.wanandroidclient.ui.core.view.IPageLoadDataView;
-import com.kdp.wanandroidclient.ui.core.view.IView;
 import com.kdp.wanandroidclient.widget.StatusLayout;
 import com.kdp.wanandroidclient.widget.LMRecyclerView;
 import com.kdp.wanandroidclient.widget.NoAlphaItemAnimator;

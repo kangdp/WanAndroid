@@ -7,6 +7,12 @@ import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 import com.kdp.wanandroidclient.ui.core.model.IProjectModel;
 
 public class ProjectModel extends CommonModel implements IProjectModel {
+    /**
+     * 获取项目列表
+     * @param page 页码
+     * @param cid 分类id
+     * @param rxPageListObserver
+     */
     @Override
     public void getProjectList(int page, int cid, RxPageListObserver<Article> rxPageListObserver) {
         doRxRequest()

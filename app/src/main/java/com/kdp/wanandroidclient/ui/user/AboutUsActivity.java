@@ -24,8 +24,6 @@ import com.kdp.wanandroidclient.utils.LightStatusbarUtils;
 
 public class AboutUsActivity extends AppCompatActivity {
     private TextView mVersionView, mIntroduceView;
-    private Toolbar mToolbar;
-    private CollapsingToolbarLayout mCollapsingToolbarLayout;
 
 
     @Override
@@ -33,8 +31,8 @@ public class AboutUsActivity extends AppCompatActivity {
         LightStatusbarUtils.setLightStatusBar(this,false);
         super.onCreate(bundle);
         setContentView(R.layout.activity_about_us);
-        mCollapsingToolbarLayout =  findViewById(R.id.collapsingbarlayout);
-        mToolbar =  findViewById(R.id.toolbar);
+        CollapsingToolbarLayout mCollapsingToolbarLayout = findViewById(R.id.collapsingbarlayout);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle(R.string.about_us);
         setSupportActionBar(mToolbar);
 

@@ -10,6 +10,11 @@ import com.kdp.wanandroidclient.net.callback.RxObserver;
  */
 
 public class CommonModel extends BaseModel implements ICommonModel {
+    /**
+     * 收藏
+     * @param id 文章id
+     * @param callback
+     */
     @Override
     public void collectArticle(int id, RxObserver<String> callback) {
         doRxRequest().
@@ -19,14 +24,11 @@ public class CommonModel extends BaseModel implements ICommonModel {
 
     }
 
-//    @Override
-//    public void collectInSideArticle(int id, RxObserver<String> callback) {
-//        doRxRequest().
-//                collectInsideArticle(id)
-//                .compose(RxSchedulers.<String>io_main())
-//                .subscribe(callback);
-//    }
-
+    /**
+     * 取消收藏
+     * @param id 文章id
+     * @param callback
+     */
     @Override
     public void unCollectArticle(int id, RxObserver<String> callback) {
         doRxRequest()

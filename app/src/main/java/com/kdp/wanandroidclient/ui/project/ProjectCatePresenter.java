@@ -15,7 +15,7 @@ public class ProjectCatePresenter extends BasePresenter<ProjectCateContract.IPro
     private ProjectCateModel projectCateModel;
     private ProjectCateContract.IProjectCateView projectCateView;
 
-    public ProjectCatePresenter() {
+    ProjectCatePresenter() {
         this.projectCateModel = new ProjectCateModel();
     }
 

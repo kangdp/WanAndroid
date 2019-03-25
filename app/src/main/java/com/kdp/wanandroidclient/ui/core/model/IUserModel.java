@@ -13,7 +13,7 @@ import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 public interface IUserModel {
     /**
      * 收藏的文章列表
-     * @param page
+     * @param page 页码
      * @param rxObserver
      */
     void getCollectArticleList(int page, RxPageListObserver<Article> rxObserver);

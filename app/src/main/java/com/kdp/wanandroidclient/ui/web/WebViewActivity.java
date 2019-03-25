@@ -9,7 +9,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-
 import com.just.agentweb.AgentWeb;
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.bean.Article;
@@ -18,7 +17,6 @@ import com.kdp.wanandroidclient.event.Event;
 import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.base.BasePresenterActivity;
-import com.kdp.wanandroidclient.ui.logon.LogonActivity;
 import com.kdp.wanandroidclient.utils.IntentUtils;
 
 import java.lang.reflect.Method;

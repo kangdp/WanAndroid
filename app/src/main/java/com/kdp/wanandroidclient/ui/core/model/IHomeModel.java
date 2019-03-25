@@ -5,11 +5,8 @@ import com.kdp.wanandroidclient.bean.Banner;
 import com.kdp.wanandroidclient.bean.BaseBean;
 import com.kdp.wanandroidclient.bean.HomeData;
 import com.kdp.wanandroidclient.bean.PageListData;
-import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
-
 import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.functions.Function3;
 import io.reactivex.observers.DisposableObserver;
@@ -23,18 +20,18 @@ import io.reactivex.observers.DisposableObserver;
 public interface IHomeModel {
     /**
      * 获取首页banner、置顶文章、列表文章
-     * @param page
+     * @param page 页码
      * @param function3
      * @param rxObserver
      */
     void getHomeData(int page, Function3<BaseBean<List<Banner>>, BaseBean<List<Article>>, BaseBean<PageListData<Article>>, HomeData> function3, DisposableObserver<HomeData> rxObserver);
 
     /**
-     * 获取列表文章
-     * @param page
+     * 获取更多文章
+     * @param page 页码
      * @param rxPageListObserver
      */
-    void getHomeList(int page,RxPageListObserver<Article> rxPageListObserver);
+    void getMoreArticleList(int page,RxPageListObserver<Article> rxPageListObserver);
 
 
     Observable<BaseBean<List<Banner>>> getBannerObservable();

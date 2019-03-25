@@ -1,9 +1,6 @@
 package com.kdp.wanandroidclient.ui.tree;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-
 import com.kdp.wanandroidclient.bean.Tree;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.inter.OnItemClickListener;

@@ -1,10 +1,8 @@
 package com.kdp.wanandroidclient.ui.project;
 import android.content.Intent;
 import android.os.Bundle;
-
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.bean.Article;
-
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
 import com.kdp.wanandroidclient.inter.OnProjectListItemClickListener;
@@ -96,10 +94,8 @@ public class ProjectListFragment extends BaseAbListFragment<ProjectPresenter, Ar
     public void onCollectClick(int position, int id) {
         if (!UserInfoManager.isLogin())
             IntentUtils.goLogin(getActivity());
-
         this.id = id;
         this.position = position;
-
         if (mListData.get(this.position).isCollect())
             mPresenter.unCollectArticle();
         else

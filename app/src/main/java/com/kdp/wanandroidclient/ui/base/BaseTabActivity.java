@@ -34,7 +34,6 @@ public abstract class BaseTabActivity extends BaseActivity{
         FragmentPagerAdapter fragPagerAdapter = createFragPagerAdapter();
         if (fragPagerAdapter != null){
             viewPager.setAdapter(fragPagerAdapter);
-//            viewPager.setOffscreenPageLimit(10);
             tabLayout.setupWithViewPager(viewPager);
         }
     }

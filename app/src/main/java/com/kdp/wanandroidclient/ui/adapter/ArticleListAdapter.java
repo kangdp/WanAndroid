@@ -86,14 +86,17 @@ public class ArticleListAdapter extends BaseListAdapter<Article> {
     private void coverToArticleList(TextView tv_type,TextView tv_tag, ImageView img_collect, final int position, final Article bean) {
         tv_type.setText(String.format("%1$s / %2$s",bean.getSuperChapterName(), bean.getChapterName()));
         tv_tag.setVisibility(View.VISIBLE);
-        tv_tag.setActivated(bean.isFresh());
+
         if (bean.isTop()){
+            tv_tag.setActivated(true);
             tv_tag.setText("置顶");
             tv_tag.setTextColor(Color.RED);
         }else if (bean.isFresh()){
             tv_tag.setText("新");
             tv_tag.setTextColor(Color.RED);
+            tv_tag.setActivated(true);
         }else if (bean.getTags().size() > 0){
+            tv_tag.setActivated(false);
             tv_tag.setText(bean.getTags().get(0).getName());
             tv_tag.setTextColor(ContextCompat.getColor(AppContext.getContext(),R.color._009a61));
         }else  {

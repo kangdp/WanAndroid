@@ -71,7 +71,7 @@ public class HomePresenter extends BasePresenter<HomeContract.IHomeView> impleme
     }
 
     /**
-     * 获取更多文章
+     * 加载更多，获取更多文章
      */
     @Override
     public void getMoreArticleList() {
@@ -87,7 +87,7 @@ public class HomePresenter extends BasePresenter<HomeContract.IHomeView> impleme
                 homeView.showFail(errorMsg);
             }
         };
-        homeModel.getHomeList(homeView.getPage(),rxPageListObserver);
+        homeModel.getMoreArticleList(homeView.getPage(),rxPageListObserver);
         addDisposable(rxPageListObserver);
     }
 

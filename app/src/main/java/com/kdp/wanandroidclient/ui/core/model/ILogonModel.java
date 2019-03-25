@@ -30,14 +30,14 @@ public interface ILogonModel {
 
     /**
      * 保存用户信息
-     * @param user
+     * @param user 用户
      */
     void saveUserInfo(User user);
 
     /**
-     * 检验帐号
-     * @param username
-     * @param password
+     * 账号密码判空
+     * @param username 用户名
+     * @param password 密码
      * @return
      */
     boolean verifyAccount(String username, String password, VerifyAccountCallback callback);

@@ -3,7 +3,6 @@ package com.kdp.wanandroidclient.ui.base;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.View;
 
 import com.kdp.wanandroidclient.R;
@@ -167,7 +166,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter, T> extends Bas
     }
 
     /**
-     * 开始自动加载更多
+     * 自动加载更多
      */
     @Override
     public void autoLoadMore() {

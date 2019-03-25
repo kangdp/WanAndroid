@@ -2,21 +2,15 @@ package com.kdp.wanandroidclient.ui.tree;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
 import com.kdp.wanandroidclient.R;
-import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
-import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.adapter.ArticleListAdapter;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.base.BaseAbListFragment;
-import com.kdp.wanandroidclient.ui.logon.LogonActivity;
 import com.kdp.wanandroidclient.ui.web.WebViewActivity;
 import com.kdp.wanandroidclient.utils.IntentUtils;
 import com.kdp.wanandroidclient.utils.ToastUtils;
