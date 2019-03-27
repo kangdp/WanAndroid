@@ -1,16 +1,22 @@
 package com.kdp.wanandroidclient.ui.base;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.common.Const;
+import com.kdp.wanandroidclient.event.Event;
+import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
 import com.kdp.wanandroidclient.ui.core.view.IPageLoadDataView;
-import com.kdp.wanandroidclient.ui.core.view.IView;
+import com.kdp.wanandroidclient.utils.ViewAnimatorHelper;
 import com.kdp.wanandroidclient.widget.StatusLayout;
 import com.kdp.wanandroidclient.widget.LMRecyclerView;
 import com.kdp.wanandroidclient.widget.NoAlphaItemAnimator;
@@ -29,18 +35,26 @@ public abstract class BaseAbListActivity<P extends BasePresenter, T> extends Bas
     protected StatusLayout mStatusLayout;
     protected SwipeRefreshLayout mRefreshLayout;
     protected LMRecyclerView mRecyclerView;
+    private FloatingActionButton btn_scroll_top;
     protected BaseListAdapter<T> mListAdapter;
+    private ViewAnimatorHelper viewAnimatorHelper;
     protected int page;
     protected int state = -1;
     protected boolean isAutoLoadMore = true;//是否显示自动加载
     protected List<T> mListData = new ArrayList<>();
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        btn_scroll_top.setVisibility(View.VISIBLE);
+        btn_scroll_top.setOnClickListener(onScrollTopListener);
+        viewAnimatorHelper = new ViewAnimatorHelper();
+        viewAnimatorHelper.bindView(btn_scroll_top);
         mRefreshLayout.setOnRefreshListener(mOnRefreshListener);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new NoAlphaItemAnimator());
+        mRecyclerView.addOnScrollListener(onScrollListener);
         setCanLoadMore(isCanLoadMore());
         mRecyclerView.addFooterAutoLoadMoreListener(this);
         mListAdapter = getListAdapter();
@@ -60,8 +74,26 @@ public abstract class BaseAbListActivity<P extends BasePresenter, T> extends Bas
         mRefreshLayout = findViewById(R.id.refreshLayout);
         mStatusLayout =  findViewById(R.id.containerLayout);
         mRecyclerView =  findViewById(R.id.recyclerView);
+        btn_scroll_top = findViewById(R.id.btn_scroll_top);
     }
 
+    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            if (dy > 0 && btn_scroll_top.getVisibility() != View.INVISIBLE && !viewAnimatorHelper.isAnimating()){
+                viewAnimatorHelper.hideFloatActionButton();
+            }else if (dy < 0 && btn_scroll_top.getVisibility() != View.VISIBLE){
+                viewAnimatorHelper.showFloatActionButton();
+            }
+        }
+    };
+
+    private View.OnClickListener onScrollTopListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mRecyclerView.smoothScrollToPosition(0);
+        }
+    };
     /**
      * 加载Layout布局
      * @return
@@ -75,6 +107,8 @@ public abstract class BaseAbListActivity<P extends BasePresenter, T> extends Bas
     public List<T> getData() {
         return mListData;
     }
+
+
 
     /**
      * 请求数据成功展示内容

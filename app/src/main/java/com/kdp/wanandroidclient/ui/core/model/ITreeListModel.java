@@ -13,10 +13,10 @@ public interface ITreeListModel {
 
 
     /**
-     * 获取知识体系列表
+     * 获取知识体系文章列表
      *
-     * @param page
-     * @param cid
+     * @param page 页码
+     * @param cid 知识体系分类id
      * @param rxObserver
      */
     void getTreeList(int page, int cid, RxPageListObserver<Article> rxObserver);

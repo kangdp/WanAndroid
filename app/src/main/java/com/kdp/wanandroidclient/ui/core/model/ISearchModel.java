@@ -19,8 +19,8 @@ public interface ISearchModel {
     /**
      * 搜索文章
      *
-     * @param page
-     * @param keyword            关键词
+     * @param page 页码
+     * @param keyword 关键词
      * @param rxPageListObserver
      */
     void searchArticle(int page, String keyword, RxPageListObserver<Article> rxPageListObserver);

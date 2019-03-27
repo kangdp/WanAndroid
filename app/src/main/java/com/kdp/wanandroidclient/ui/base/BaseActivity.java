@@ -1,5 +1,4 @@
 package com.kdp.wanandroidclient.ui.base;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.event.RxEvent;
-
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.subjects.PublishSubject;
 
@@ -24,7 +21,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     private ProgressDialog loadingDialog = null;
     private PublishSubject mSubject;
     private DisposableObserver mDisposableObserver;
-    private RxEvent mRxEvent;
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -60,10 +56,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         //初始化Content
         initContent(getLayoutId());
-
-        mRxEvent = RxEvent.getInstance();
         //注册事件线
-        mSubject = mRxEvent.registerEvent(registerEvent());
+        mSubject = RxEvent.getInstance().registerEvent(registerEvent());
         mDisposableObserver = new ReceiveEvent();
         mSubject.subscribe(mDisposableObserver);
     }
@@ -72,7 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
 
-    private class ReceiveEvent extends DisposableObserver {
+    private class ReceiveEvent extends DisposableObserver{
         @Override
         public void onNext(Object o) {
             receiveEvent(o);

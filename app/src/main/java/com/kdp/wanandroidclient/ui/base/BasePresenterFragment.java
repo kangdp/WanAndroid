@@ -34,7 +34,6 @@ public abstract class BasePresenterFragment<P extends BasePresenter> extends Bas
 
     @Override
     protected void initViews(View view) {
-
     }
 
     @Override
@@ -58,29 +57,23 @@ public abstract class BasePresenterFragment<P extends BasePresenter> extends Bas
 
     protected abstract P createPresenter();
 
-
     @Override
     public void showLoading(String msg) {
-
     }
 
     @Override
     public void hideLoading() {
-
     }
 
     @Override
     public void showFail(String msg) {
-
     }
 
     @Override
     public void showError() {
-
     }
 
     @Override
     public void showEmpty() {
-
     }
 }

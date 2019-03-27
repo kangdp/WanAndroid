@@ -17,6 +17,12 @@ import com.kdp.wanandroidclient.ui.core.model.ILogonModel;
 
 public class LogonModel extends BaseModel implements ILogonModel {
 
+    /**
+     * 登录
+     * @param username 用户名
+     * @param password 密码
+     * @param callback
+     */
     @Override
     public void login(String username, String password, RxObserver<User> callback) {
         doRxRequest()
@@ -27,6 +33,12 @@ public class LogonModel extends BaseModel implements ILogonModel {
 
     }
 
+    /**
+     * 注册
+     * @param username   用户名
+     * @param password   密码
+     * @param callback
+     */
     @Override
     public void register(final String username, final String password,  RxObserver<String> callback) {
         doRxRequest()
@@ -35,6 +47,10 @@ public class LogonModel extends BaseModel implements ILogonModel {
                 .subscribe(callback);
     }
 
+    /**
+     * 保存用户信息
+     * @param user
+     */
     @Override
     public void saveUserInfo(User user) {
         //加密保存用户信息和密钥
@@ -42,6 +58,13 @@ public class LogonModel extends BaseModel implements ILogonModel {
         UserInfoManager.saveIsLogin(true);
     }
 
+    /**
+     * 账号密码判空
+     * @param username
+     * @param password
+     * @param callback
+     * @return
+     */
     @Override
     public boolean verifyAccount(String username, String password, VerifyAccountCallback callback) {
         if (TextUtils.isEmpty(username)) {

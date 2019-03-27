@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 当前用户信息
+ * 当前用户
  */
 public class User implements Serializable {
 

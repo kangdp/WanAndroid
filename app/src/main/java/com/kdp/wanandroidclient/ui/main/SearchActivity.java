@@ -26,8 +26,6 @@ import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.adapter.ArticleListAdapter;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.base.BaseAbListActivity;
-import com.kdp.wanandroidclient.ui.logon.LogonActivity;
-import com.kdp.wanandroidclient.ui.tree.TreeActivity;
 import com.kdp.wanandroidclient.ui.web.WebViewActivity;
 import com.kdp.wanandroidclient.utils.IntentUtils;
 import com.kdp.wanandroidclient.utils.ToastUtils;
@@ -274,7 +272,7 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, Article>
         Intent intent = new Intent(this, WebViewActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
-        bundle.putInt(Const.BUNDLE_KEY.COLLECT_TYPE, 1);
+        bundle.putString(Const.BUNDLE_KEY.TYPE, Const.EVENT_ACTION.SEARCH);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -313,13 +311,13 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, Article>
 
     @Override
     protected String registerEvent() {
-        return Const.EVENT_ACTION.REFRESH_DATA;
+        return Const.EVENT_ACTION.SEARCH;
     }
 
     @Override
     protected void receiveEvent(Object object) {
         Event mEvent = (Event) object;
-        if (mEvent.type == Event.Type.ITEM) {
+        if (mEvent.type == Event.Type.REFRESH_ITEM) {
             Article bean = (Article) mEvent.object;
             for (int i = 0; i < mListData.size(); i++) {
                 if (bean.equals(mListData.get(i))) {
@@ -327,7 +325,7 @@ public class SearchActivity extends BaseAbListActivity<SearchPresenter, Article>
                     notifyItemData(bean.isCollect(), getString(R.string.collect_success));
                 }
             }
-        } else {
+        } else if (mEvent.type == Event.Type.REFRESH_LIST){
             refreshData();
         }
     }

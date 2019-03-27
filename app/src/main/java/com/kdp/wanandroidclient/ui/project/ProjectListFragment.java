@@ -1,12 +1,14 @@
 package com.kdp.wanandroidclient.ui.project;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.bean.Article;
-
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
+import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.inter.OnProjectListItemClickListener;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
@@ -96,10 +98,8 @@ public class ProjectListFragment extends BaseAbListFragment<ProjectPresenter, Ar
     public void onCollectClick(int position, int id) {
         if (!UserInfoManager.isLogin())
             IntentUtils.goLogin(getActivity());
-
         this.id = id;
         this.position = position;
-
         if (mListData.get(this.position).isCollect())
             mPresenter.unCollectArticle();
         else
@@ -109,15 +109,10 @@ public class ProjectListFragment extends BaseAbListFragment<ProjectPresenter, Ar
 
     @Override
     public void onItemClick(int position, Article bean) {
-        Article article = new Article();
-        article.setId(bean.getId());
-        article.setTitle(bean.getTitle());
-        article.setCollect(bean.isCollect());
-        article.setLink(bean.getLink());
         Intent intent = new Intent(getActivity(), WebViewActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Const.BUNDLE_KEY.OBJ, article);
-        bundle.putInt(Const.BUNDLE_KEY.COLLECT_TYPE, 1);
+        bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
+        bundle.putString(Const.BUNDLE_KEY.TYPE, Const.EVENT_ACTION.PROJECT_LIST);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -126,7 +121,7 @@ public class ProjectListFragment extends BaseAbListFragment<ProjectPresenter, Ar
     @Override
     protected void receiveEvent(Object object) {
         Event mEvent = (Event) object;
-        if (mEvent.type == Event.Type.ITEM) {
+        if (mEvent.type == Event.Type.REFRESH_ITEM) {
             Article bean = (Article) mEvent.object;
             for (int i = 0; i < mListData.size(); i++) {
                 if (bean.equals(mListData.get(i))) {
@@ -134,13 +129,30 @@ public class ProjectListFragment extends BaseAbListFragment<ProjectPresenter, Ar
                     notifyItemData(bean.isCollect(), getString(R.string.collect_success));
                 }
             }
-        } else {
+        }else if (mEvent.type == Event.Type.SCROLL_TOP && (int)mEvent.object == cid){
+            mRecyclerView.smoothScrollToPosition(0);
+        }else if (mEvent.type == Event.Type.REFRESH_LIST){
             refreshData();
         }
     }
 
+
     @Override
     protected String registerEvent() {
-        return Const.EVENT_ACTION.REFRESH_DATA;
+        return Const.EVENT_ACTION.PROJECT_LIST;
     }
+
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mRecyclerView.addOnScrollListener(onScrollListener);
+    }
+
+    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            RxEvent.getInstance().postEvent(Const.EVENT_ACTION.MAIN,new Event(Event.Type.SCALE,dy));
+        }
+    };
 }

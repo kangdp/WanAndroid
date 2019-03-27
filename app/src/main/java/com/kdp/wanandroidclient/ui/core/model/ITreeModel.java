@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface ITreeModel {
     /**
-     * 知识体系分类
+     * 获取知识体系分类
      *
      * @param callback
      */

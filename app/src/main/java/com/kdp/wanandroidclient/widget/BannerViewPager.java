@@ -30,34 +30,36 @@ public class BannerViewPager extends ViewPager {
         super(context, attrs);
         instance = this;
         //滚动监听
+        //空闲状态
+        //手指触摸滑动
+        //手指松开,惯性滑动
+        OnPageChangeListener mOnPagerChangeListener = new OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                switch (state) {
+                    case ViewPager.SCROLL_STATE_IDLE: //空闲状态
+                        start();
+                        break;
+                    case ViewPager.SCROLL_STATE_DRAGGING: //手指触摸滑动
+                        stop();
+                        break;
+                    case SCROLL_STATE_SETTLING: //手指松开,惯性滑动
+                        break;
+                }
+            }
+        };
         addOnPageChangeListener(mOnPagerChangeListener);
         //修改ViewPager的滚动速度
         setViewPagerDuration();
     }
-
-    private ViewPager.OnPageChangeListener mOnPagerChangeListener = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-            switch (state) {
-                case ViewPager.SCROLL_STATE_IDLE: //空闲状态
-                    start();
-                    break;
-                case ViewPager.SCROLL_STATE_DRAGGING: //手指触摸滑动
-                    stop();
-                    break;
-                case SCROLL_STATE_SETTLING: //手指松开,惯性滑动
-                    break;
-            }
-        }
-    };
 
     /**
      * 开启任务

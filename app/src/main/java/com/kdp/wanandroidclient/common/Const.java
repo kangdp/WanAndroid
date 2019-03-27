@@ -16,7 +16,16 @@ public class Const {
 
     //事件Action
     public static class EVENT_ACTION {
-        public static final String REFRESH_DATA = "refresh_list_item";
+        public static final String MAIN = "main";
+        public static final String HOME = "home";
+        public static final String SYSTEM = "system";
+        public static final String SYSTEM_LIST = "system_list";
+        public static final String CHAPTER = "chapter";
+        public static final String CHAPTER_LIST = "chapter_list";
+        public static final String PROJECT = "project";
+        public static final String PROJECT_LIST = "project_list";
+        public static final String SEARCH = "search";
+//        public static final String
     }
 
     //Intent传值
@@ -25,6 +34,7 @@ public class Const {
         public static final String TITLE = "title";
         public static final String URL = "url";
         public static final String OBJ = "obj";
+        public static final String TYPE = "type";
         public static final String CHAPTER_ID = "chapter_id";
         public static final String CHAPTER_NAME = "chapter_name";
         public static final String COLLECT_TYPE = "collect_type";//1收藏列表文章 2收藏站内文章
@@ -45,10 +55,11 @@ public class Const {
 
     //列表Type
     public static class LIST_TYPE {
-        public static final int HOME = 0;
-        public static final int TREE = 1;
-        public static final int COLLECT = 2;
-        public static final int SEARCH = 3;
+        public static final int HOME = 0; //首页文章列表
+        public static final int CHAPTER = 0; //公众号文章列表
+        public static final int TREE = 1; //知识体系文章列表
+        public static final int COLLECT = 2; //我的收藏
+        public static final int SEARCH = 3; //搜索
     }
 
 }

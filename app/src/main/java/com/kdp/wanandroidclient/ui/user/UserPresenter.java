@@ -5,7 +5,6 @@ import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
 import com.kdp.wanandroidclient.ui.core.model.impl.UserModel;
 import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
-
 import java.util.List;
 
 /**

@@ -3,6 +3,7 @@ package com.kdp.wanandroidclient.api;
 import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.bean.Banner;
 import com.kdp.wanandroidclient.bean.BaseBean;
+import com.kdp.wanandroidclient.bean.Chapter;
 import com.kdp.wanandroidclient.bean.Friend;
 import com.kdp.wanandroidclient.bean.Hotword;
 import com.kdp.wanandroidclient.bean.PageListData;
@@ -10,9 +11,7 @@ import com.kdp.wanandroidclient.bean.ProjectCate;
 import com.kdp.wanandroidclient.bean.Tree;
 import com.kdp.wanandroidclient.bean.User;
 import com.kdp.wanandroidclient.common.UrlConstainer;
-
 import java.util.List;
-
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -84,15 +83,6 @@ public interface ApiServer {
      */
     @POST(UrlConstainer.COLLECT_ARTICLE)
     Observable<BaseBean<String>> collectArticle(@Path("id") int id);
-
-    /**
-     * 收藏站内文章
-     *
-     * @param id
-     * @return
-     */
-//    @POST(UrlConstainer.COLLECT_INSIDE_ARTICLE)
-//    Observable<BaseBean<String>> collectInsideArticle(@Path("id") int id);
 
     /**
      * 取消收藏文章
@@ -184,5 +174,21 @@ public interface ApiServer {
      */
     @GET(UrlConstainer.PROJECT)
     Observable<BaseBean<PageListData<Article>>> getProjectList(@Path("page") int page,@Query("cid") int cid);
+
+    /**
+     * 获取公众号
+     * @return
+     */
+    @GET(UrlConstainer.CHAPTERS)
+    Observable<BaseBean<List<Chapter>>> getChapters();
+
+    /**
+     * 获取公众号文章列表
+     * @param page
+     * @param id
+     * @return
+     */
+    @GET(UrlConstainer.CHAPTER_LIST)
+    Observable<BaseBean<PageListData<Article>>> getChapterList(@Path("page") int page,@Path("id") int id);
 
 }

@@ -18,15 +18,24 @@ import java.util.List;
  */
 
 public class SearchModel extends CommonModel implements ISearchModel {
+    /**
+     * 搜索文章
+     * @param page 页码
+     * @param keyword 关键词
+     * @param rxObserver
+     */
     @Override
     public void searchArticle(int page, String keyword, RxPageListObserver<Article> rxObserver) {
-        LogUtils.e(page+"");
         doRxRequest()
                 .search(page, keyword)
                 .compose(RxSchedulers.<PageListData<Article>>io_main())
                 .subscribe(rxObserver);
     }
 
+    /**
+     * 搜索热词
+     * @param observable
+     */
     @Override
     public void getHotWord(RxObserver<List<Hotword>> observable) {
         doRxRequest()
@@ -35,6 +44,10 @@ public class SearchModel extends CommonModel implements ISearchModel {
                 .subscribe(observable);
     }
 
+    /**
+     * 常用网站
+     * @param rxObserver
+     */
     @Override
     public void getFriend(RxObserver<List<Friend>> rxObserver) {
         doRxRequest()

@@ -19,7 +19,6 @@ import io.reactivex.subjects.PublishSubject;
 
 public abstract class BaseFragment extends Fragment {
     private PublishSubject mSubject;
-    private RxEvent mRxEvent;
     private DisposableObserver mDisposableObserver;
 
     @Override
@@ -28,10 +27,9 @@ public abstract class BaseFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null)
             getBundle(bundle);
-        mRxEvent = RxEvent.getInstance();
         mDisposableObserver = new ReceiveEvent();
         //注册事件
-        mSubject = mRxEvent.registerEvent(registerEvent());
+        mSubject = RxEvent.getInstance().registerEvent(registerEvent());
         mSubject.subscribe(mDisposableObserver);
     }
 

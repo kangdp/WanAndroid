@@ -13,6 +13,11 @@ import com.kdp.wanandroidclient.ui.core.model.IUserModel;
  */
 
 public class UserModel extends CommonModel implements IUserModel {
+    /**
+     * 收藏的文章列表
+     * @param page 页码
+     * @param rxObserver
+     */
     @Override
     public void getCollectArticleList(int page, RxPageListObserver<Article> rxObserver) {
         doRxRequest()
@@ -21,6 +26,12 @@ public class UserModel extends CommonModel implements IUserModel {
                 .subscribe(rxObserver);
     }
 
+    /**
+     * 删除收藏
+     * @param id       收藏列表的文章id
+     * @param originId 首页列表的文章id
+     * @param callback
+     */
     @Override
     public void deleteCollectArticle(int id, int originId, RxObserver<String> callback) {
         doRxRequest()

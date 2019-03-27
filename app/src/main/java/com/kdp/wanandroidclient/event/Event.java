@@ -8,12 +8,14 @@ package com.kdp.wanandroidclient.event;
 
 public class Event {
     public enum Type {
-        ITEM, LIST
+        REFRESH_ITEM, REFRESH_LIST,  SCROLL_TOP,SCALE
     }
 
     public Type type;
     public Object object;
-
+    public Event(Type type) {
+        this(type,null);
+    }
 
     public Event(Type type, Object object) {
         this.type = type;

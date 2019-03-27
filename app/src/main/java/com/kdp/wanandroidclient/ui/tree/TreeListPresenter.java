@@ -5,7 +5,6 @@ import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.net.callback.RxObserver;
 import com.kdp.wanandroidclient.net.callback.RxPageListObserver;
-import com.kdp.wanandroidclient.ui.core.model.impl.CommonModel;
 import com.kdp.wanandroidclient.ui.core.model.impl.TreeListModel;
 import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
 

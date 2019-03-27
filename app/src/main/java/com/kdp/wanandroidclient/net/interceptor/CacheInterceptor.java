@@ -27,7 +27,7 @@ public class CacheInterceptor implements Interceptor {
                     .build();
         }
         Response response = chain.proceed(request);
-        //设置缓存
+        //设置有网不缓存
         if (NetworkUtils.isAvailable(AppContext.getContext())) {
             //有网络时，设置缓存超时为0
             int maxAge = 0;

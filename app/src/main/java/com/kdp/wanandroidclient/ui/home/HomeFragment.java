@@ -2,6 +2,9 @@ package com.kdp.wanandroidclient.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,23 +14,21 @@ import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.bean.Banner;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
+import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.adapter.ArticleListAdapter;
 import com.kdp.wanandroidclient.ui.adapter.BannerAdapter;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.base.BaseAbListFragment;
-import com.kdp.wanandroidclient.ui.logon.LogonActivity;
+import com.kdp.wanandroidclient.ui.main.MainActivity;
 import com.kdp.wanandroidclient.ui.tree.TreeActivity;
 import com.kdp.wanandroidclient.ui.web.WebViewActivity;
 import com.kdp.wanandroidclient.utils.IntentUtils;
-import com.kdp.wanandroidclient.utils.LogUtils;
 import com.kdp.wanandroidclient.utils.ToastUtils;
 import com.kdp.wanandroidclient.widget.BannerViewPager;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 
 /**
@@ -109,8 +110,7 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter,Article> impl
         if (mBannerAdapter == null) {
             mBannerAdapter = new BannerAdapter(mBannerList);
             mViewPager.setAdapter(mBannerAdapter);
-            //设置预加载两个页面
-            mViewPager.setOffscreenPageLimit(2);
+            mViewPager.setOffscreenPageLimit(mBannerList.size());
             setCurrentItem(1000 * mBannerList.size());
         }
         mBannerAdapter.notifyDatas(mBannerList);
@@ -143,7 +143,7 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter,Article> impl
         Intent intent = new Intent(getActivity(), WebViewActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
-        bundle.putInt(Const.BUNDLE_KEY.COLLECT_TYPE, 1);
+        bundle.putString(Const.BUNDLE_KEY.TYPE, Const.EVENT_ACTION.HOME);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -189,7 +189,7 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter,Article> impl
     @Override
     protected void receiveEvent(Object object) {
         Event mEvent = (Event) object;
-        if (mEvent.type == Event.Type.ITEM) {
+        if (mEvent.type == Event.Type.REFRESH_ITEM) {
             Article bean = (Article) mEvent.object;
             for (int i = 0; i < mListData.size(); i++) {
                 if (bean.equals(mListData.get(i))) {
@@ -197,15 +197,28 @@ public class HomeFragment extends BaseAbListFragment<HomePresenter,Article> impl
                     notifyItemData(bean.isCollect(), getString(R.string.collect_success));
                 }
             }
-        } else {
+        }else if (mEvent.type == Event.Type.SCROLL_TOP){
+            mRecyclerView.smoothScrollToPosition(0);
+        }else if (mEvent.type == Event.Type.REFRESH_LIST){
             refreshData();
         }
     }
 
     @Override
     protected String registerEvent() {
-        return Const.EVENT_ACTION.REFRESH_DATA;
+        return Const.EVENT_ACTION.HOME;
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mRecyclerView.addOnScrollListener(onScrollListener);
+    }
 
+    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            RxEvent.getInstance().postEvent(Const.EVENT_ACTION.MAIN,new Event(Event.Type.SCALE,dy));
+        }
+    };
 }

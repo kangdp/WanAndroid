@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.kdp.wanandroidclient.bean.Tree;
-import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.ui.tree.TreeListFragment;
 
 import java.util.List;

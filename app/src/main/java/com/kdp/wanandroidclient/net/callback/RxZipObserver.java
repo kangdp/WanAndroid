@@ -10,7 +10,7 @@ import io.reactivex.observers.DisposableObserver;
 public abstract class RxZipObserver<T> extends DisposableObserver<T> {
     protected IView view;
 
-    public RxZipObserver(BasePresenter mPresenter) {
+    protected RxZipObserver(BasePresenter mPresenter) {
         this.view = mPresenter.getView();
     }
 

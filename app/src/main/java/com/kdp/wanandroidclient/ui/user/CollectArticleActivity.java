@@ -3,7 +3,6 @@ package com.kdp.wanandroidclient.ui.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.common.Const;
