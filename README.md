@@ -71,6 +71,7 @@ Apk
 -------
 
 <img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/Home.png" width="300"/> <img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/System.png" width="300"/>
+<img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/Chapters.png" width="300"/> <img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/Project.png" width="300"/>
 <img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/Article.png" width="300"/> <img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/Collect.png" width="300"/>
 <img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/Search.png" width="300"/> <img src="https://github.com/kangdongpu/WanAndroid/blob/master/screenshot/SlideMenu.png" width="300"/>
 
