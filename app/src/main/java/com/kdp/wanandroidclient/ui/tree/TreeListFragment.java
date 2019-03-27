@@ -2,10 +2,15 @@ package com.kdp.wanandroidclient.ui.tree;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
+import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.adapter.ArticleListAdapter;
@@ -36,6 +41,7 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Arti
         instance.setArguments(b);
         return instance;
     }
+
 
     @Override
     protected boolean isEnableLazy() {
@@ -104,7 +110,7 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Arti
         Intent intent = new Intent(getActivity(), WebViewActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
-        bundle.putInt(Const.BUNDLE_KEY.COLLECT_TYPE, 1);
+        bundle.putString(Const.BUNDLE_KEY.TYPE, Const.EVENT_ACTION.SYSTEM_LIST);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -130,7 +136,7 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Arti
     @Override
     protected void receiveEvent(Object object) {
         Event mEvent = (Event) object;
-        if (mEvent.type == Event.Type.ITEM) {
+        if (mEvent.type == Event.Type.REFRESH_ITEM) {
             Article bean = (Article) mEvent.object;
             for (int i = 0; i < mListData.size(); i++) {
                 if (bean.equals(mListData.get(i))) {
@@ -138,13 +144,30 @@ public class TreeListFragment extends BaseAbListFragment<TreeListPresenter, Arti
                     notifyItemData(bean.isCollect(), getString(R.string.collect_success));
                 }
             }
-        } else {
+        }else if (mEvent.type == Event.Type.SCROLL_TOP && (int) mEvent.object == cid){
+           mRecyclerView.smoothScrollToPosition(0);
+        }else if (mEvent.type == Event.Type.REFRESH_LIST){
             refreshData();
         }
     }
 
     @Override
-    protected String registerEvent() {
-        return Const.EVENT_ACTION.REFRESH_DATA;
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mRecyclerView.addOnScrollListener(onScrollListener);
     }
+
+    @Override
+    protected String registerEvent() {
+        return Const.EVENT_ACTION.SYSTEM_LIST;
+    }
+
+    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            if (getActivity() == null) return;
+            ((TreeActivity)getActivity()).scroll(dy);
+        }
+    };
+
 }

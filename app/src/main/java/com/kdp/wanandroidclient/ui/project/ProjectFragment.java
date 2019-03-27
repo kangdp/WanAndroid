@@ -1,7 +1,13 @@
 package com.kdp.wanandroidclient.ui.project;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+
 import com.kdp.wanandroidclient.bean.ProjectCate;
+import com.kdp.wanandroidclient.common.Const;
+import com.kdp.wanandroidclient.event.Event;
+import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.ui.adapter.ProjectFragPagerAdapter;
 import com.kdp.wanandroidclient.ui.base.BaseTabFragment;
 
@@ -42,4 +48,11 @@ public class ProjectFragment extends BaseTabFragment<ProjectCatePresenter> imple
         super.onActivityCreated(savedInstanceState);
         mPresenter.getProjectCate();
     }
+
+
+    public void scrollToTop(){
+        int id = cateList.get(viewPager.getCurrentItem()).getId();
+        RxEvent.getInstance().postEvent(Const.EVENT_ACTION.PROJECT_LIST,new Event(Event.Type.SCROLL_TOP,id));
+    }
+
 }

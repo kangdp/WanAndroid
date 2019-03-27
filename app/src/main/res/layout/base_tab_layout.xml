@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/statusLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
@@ -17,6 +23,7 @@
         app:tabSelectedTextColor="@color/white"
         app:tabIndicatorHeight="5dp"
         app:tabGravity="center"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
         />
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
@@ -24,3 +31,18 @@
         android:layout_height="match_parent"
         />
     </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_scroll_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:src="@drawable/ic_arrow_upward_white_24dp"
+        app:backgroundTint="@color/_0091ea"
+        />
+    </FrameLayout>
+

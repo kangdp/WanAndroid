@@ -9,7 +9,7 @@ import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.common.ListDataHolder;
 import com.kdp.wanandroidclient.inter.OnProjectListItemClickListener;
-import com.kdp.wanandroidclient.manager.GlideLoaderManager;
+import com.kdp.wanandroidclient.manager.ImageLoaderManager;
 import com.kdp.wanandroidclient.utils.DateUtils;
 
 public class ProjectListAdapter extends BaseListAdapter<Article> {
@@ -32,7 +32,7 @@ public class ProjectListAdapter extends BaseListAdapter<Article> {
         TextView tv_time = holder.getView(R.id.tv_time);
         TextView tv_name = holder.getView(R.id.tv_name);
 
-        GlideLoaderManager.loadImage(bean.getEnvelopePic(),iv_img, Const.IMAGE_LOADER.NOMAL_IMG);
+        ImageLoaderManager.displayImage(bean.getEnvelopePic(),iv_img, Const.IMAGE_LOADER.NOMAL_IMG);
         tv_title.setText(bean.getTitle());
         tv_desc.setText(bean.getDesc());
         tv_time.setText(DateUtils.parseTime(bean.getPublishTime()));

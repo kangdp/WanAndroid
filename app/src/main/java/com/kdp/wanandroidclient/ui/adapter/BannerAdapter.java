@@ -16,7 +16,7 @@ import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.bean.Banner;
 import com.kdp.wanandroidclient.common.Const;
-import com.kdp.wanandroidclient.manager.GlideLoaderManager;
+import com.kdp.wanandroidclient.manager.ImageLoaderManager;
 import com.kdp.wanandroidclient.ui.web.WebViewActivity;
 
 import java.util.List;
@@ -60,7 +60,7 @@ public class BannerAdapter extends PagerAdapter {
             view = LayoutInflater.from(AppContext.getContext()).inflate(R.layout.item_banner, container, false);
             ImageView imageView =  view.findViewById(R.id.img);
             TextView titleView =  view.findViewById(R.id.title);
-            GlideLoaderManager.loadImage(bean.getImagePath(), imageView, Const.IMAGE_LOADER.NOMAL_IMG);
+            ImageLoaderManager.displayImage(bean.getImagePath(), imageView, Const.IMAGE_LOADER.NOMAL_IMG);
             titleView.setText(bean.getTitle());
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

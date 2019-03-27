@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +32,7 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter> imp
     private FrameLayout mContainer;
     private AgentWeb mAgentWeb;
     private Article bean;
-    private int type;
+    private String actionType;
     private int id;
     private String title = "";
     private String url = "";
@@ -52,7 +53,7 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter> imp
         Bundle bundle = intent.getExtras();
         assert bundle != null;
         bean = (Article) bundle.getSerializable(Const.BUNDLE_KEY.OBJ);
-        type = intent.getIntExtra(Const.BUNDLE_KEY.COLLECT_TYPE, -1);
+        actionType = intent.getStringExtra(Const.BUNDLE_KEY.TYPE);
         if (bean != null) {
             id = bean.getId();
             title = bean.getTitle();
@@ -72,7 +73,7 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter> imp
 
     @Override
     protected void initViews() {
-        mContainer = (FrameLayout) findViewById(R.id.container);
+        mContainer = findViewById(R.id.container);
     }
 
     @Override
@@ -99,7 +100,7 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter> imp
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.content_menu_setting, menu);
-        if (type == -1)
+        if (TextUtils.isEmpty(actionType))
             menu.findItem(R.id.collect).setVisible(false);
         return true;
 
@@ -194,8 +195,8 @@ public class WebViewActivity extends BasePresenterActivity<WebViewPresenter> imp
     public void collect(boolean isCollect, String result) {
         if (!bean.isCollect()) {
             bean.setCollect(isCollect);
-            Event mEvent = new Event(Event.Type.ITEM, bean);
-            RxEvent.getInstance().postEvent(Const.EVENT_ACTION.REFRESH_DATA, mEvent);
+            Event mEvent = new Event(Event.Type.REFRESH_ITEM, bean);
+            RxEvent.getInstance().postEvent(actionType,mEvent);
         }
     }
 }

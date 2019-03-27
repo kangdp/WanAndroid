@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2019/3/25 16:54
  * @description
  */
-public class ChaptersPresenter extends BasePresenter<ChapterContract.IChaptersView> implements ChapterContract.ChaptersPresenter{
+public class ChaptersPresenter extends BasePresenter<ChapterContract.IChaptersView> implements ChapterContract.IChaptersPresenter{
     private ChapterModel chapterModel;
     private ChapterContract.IChaptersView chaptersView;
 

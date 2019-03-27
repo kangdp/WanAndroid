@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.kdp.wanandroidclient.bean.Chapter;
+import com.kdp.wanandroidclient.ui.chapter.ChapterListFragment;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class ChaptersFragPagerAdapter extends FragmentPagerAdapter {
     }
     @Override
     public Fragment getItem(int positions) {
-        return new Fragment();
+        return ChapterListFragment.instantiate(list.get(positions).getId());
     }
 
     @Nullable

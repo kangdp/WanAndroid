@@ -26,7 +26,6 @@ public class SearchModel extends CommonModel implements ISearchModel {
      */
     @Override
     public void searchArticle(int page, String keyword, RxPageListObserver<Article> rxObserver) {
-        LogUtils.e(page+"");
         doRxRequest()
                 .search(page, keyword)
                 .compose(RxSchedulers.<PageListData<Article>>io_main())

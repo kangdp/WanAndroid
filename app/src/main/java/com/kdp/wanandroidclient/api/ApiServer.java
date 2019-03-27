@@ -182,4 +182,13 @@ public interface ApiServer {
     @GET(UrlConstainer.CHAPTERS)
     Observable<BaseBean<List<Chapter>>> getChapters();
 
+    /**
+     * 获取公众号文章列表
+     * @param page
+     * @param id
+     * @return
+     */
+    @GET(UrlConstainer.CHAPTER_LIST)
+    Observable<BaseBean<PageListData<Article>>> getChapterList(@Path("page") int page,@Path("id") int id);
+
 }

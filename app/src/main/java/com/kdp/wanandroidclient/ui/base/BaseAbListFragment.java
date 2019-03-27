@@ -1,12 +1,18 @@
 package com.kdp.wanandroidclient.ui.base;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.common.Const;
+import com.kdp.wanandroidclient.event.Event;
+import com.kdp.wanandroidclient.event.RxEvent;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
 import com.kdp.wanandroidclient.ui.core.presenter.BasePresenter;
 import com.kdp.wanandroidclient.ui.core.view.IPageLoadDataView;
@@ -88,6 +94,7 @@ public abstract class BaseAbListFragment<P extends BasePresenter, T> extends Bas
             }
         }
     }
+
 
     private void lazyLoad() {
         if (!isPreload || !isVisible || !isFirst) {
@@ -278,4 +285,5 @@ public abstract class BaseAbListFragment<P extends BasePresenter, T> extends Bas
     protected abstract void loadDatas();
 
     protected abstract BaseListAdapter<T> getListAdapter();
+
 }

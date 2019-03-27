@@ -34,7 +34,7 @@ public class LogonActivity extends BasePresenterActivity<LogonPresenter> impleme
     @Override
     public void showResult(String msg) {
         ToastUtils.showToast(AppContext.getContext(), msg);
-        RxEvent.getInstance().postEvent(Const.EVENT_ACTION.REFRESH_DATA, new Event(Event.Type.LIST, null));
+        RxEvent.getInstance().postEvent(Const.EVENT_ACTION.HOME, new Event(Event.Type.REFRESH_LIST));
         finish();
     }
 

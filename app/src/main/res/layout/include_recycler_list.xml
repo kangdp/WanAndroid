@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout"
@@ -16,8 +17,22 @@
             <com.kdp.wanandroidclient.widget.LMRecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                />
         </com.kdp.wanandroidclient.widget.StatusLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_scroll_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        android:clickable="true"
+        android:src="@drawable/ic_arrow_upward_white_24dp"
+        app:backgroundTint="@color/_0091ea"/>
 
 </FrameLayout>

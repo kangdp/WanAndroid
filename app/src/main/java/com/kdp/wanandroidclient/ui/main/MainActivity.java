@@ -1,17 +1,23 @@
 package com.kdp.wanandroidclient.ui.main;
 
+import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +28,7 @@ import com.kdp.wanandroidclient.bean.User;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
 import com.kdp.wanandroidclient.event.RxEvent;
-import com.kdp.wanandroidclient.manager.GlideLoaderManager;
+import com.kdp.wanandroidclient.manager.ImageLoaderManager;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
 import com.kdp.wanandroidclient.ui.base.BaseActivity;
 import com.kdp.wanandroidclient.ui.chapter.ChaptersFragment;
@@ -34,6 +40,7 @@ import com.kdp.wanandroidclient.ui.user.CollectArticleActivity;
 import com.kdp.wanandroidclient.utils.IntentUtils;
 import com.kdp.wanandroidclient.utils.PreUtils;
 import com.kdp.wanandroidclient.utils.ToastUtils;
+import com.kdp.wanandroidclient.utils.ViewAnimatorHelper;
 
 /**
  * 管理首页Tab的Activity
@@ -41,12 +48,14 @@ import com.kdp.wanandroidclient.utils.ToastUtils;
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
+    private FloatingActionButton btn_scroll_top;
     private TextView mNameView;
     private ImageView mAvatarView;
     private Button[] btns;
     private Fragment[] fragments;
     private int currentPosition;
     private int index;
+    private ViewAnimatorHelper viewAnimatorHelper;
 
 
     @Override
@@ -78,6 +87,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void initViews() {
         mDrawerLayout =  findViewById(R.id.drawerLayout);
         mNavigationView =  findViewById(R.id.navigation_view);
+        btn_scroll_top = findViewById(R.id.btn_scroll_top);
         btns = new Button[4];
         btns[0] =  findViewById(R.id.btn_main);
         btns[1] =  findViewById(R.id.btn_system);
@@ -92,7 +102,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 btns[i].setScaleY(0.9f);
             }
         }
+
+        btn_scroll_top.setOnClickListener(onScrollTopListener);
     }
+
+    private View.OnClickListener onScrollTopListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String action="";
+            switch (currentPosition) {
+                case 0:
+                    action = Const.EVENT_ACTION.HOME;
+                    break;
+                case 1:
+                    action = Const.EVENT_ACTION.SYSTEM;
+                    break;
+                case 2:
+                    ((ChaptersFragment)fragments[2]).scrollToTop();
+                    return;
+                case 3:
+                    ((ProjectFragment)fragments[3]).scrollToTop();
+                    return;
+
+            }
+            RxEvent.getInstance().postEvent(action,new Event(Event.Type.SCROLL_TOP));
+        }
+    };
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -108,16 +143,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //侧滑菜单
         initNavigationHeaderView();
         initFragments();
+        viewAnimatorHelper = new ViewAnimatorHelper();
+        viewAnimatorHelper.bindView(btn_scroll_top);
     }
 
-    @Override
-    protected void receiveEvent(Object object) {
-    }
-
-    @Override
-    protected String registerEvent() {
-        return null;
-    }
 
 
     private void initNavigationHeaderView() {
@@ -131,7 +160,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             User user = UserInfoManager.getUserInfo();
             if (user != null) {
                 mNameView.setText(user.getUsername());
-                GlideLoaderManager.loadImage(user.getIcon(), mAvatarView, Const.IMAGE_LOADER.HEAD_IMG);
+                ImageLoaderManager.displayImage(user.getIcon(), mAvatarView, Const.IMAGE_LOADER.HEAD_IMG);
             }
         } else {
             mNameView.setText("未登录");
@@ -193,11 +222,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     //退出登录
     private void exitToLogin() {
-        //刷新首页数据
-        if (UserInfoManager.isLogin())
-            RxEvent.getInstance().postEvent(Const.EVENT_ACTION.REFRESH_DATA, new Event(Event.Type.LIST, null));
         IntentUtils.goLogin(this);
         PreUtils.clearAll();
+        //刷新首页数据
+        RxEvent.getInstance().postEvent(Const.EVENT_ACTION.HOME, new Event(Event.Type.REFRESH_LIST));
     }
 
     @Override
@@ -280,4 +308,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    protected void receiveEvent(Object object) {
+        Event event = (Event) object;
+        if (event.type == Event.Type.SCALE){
+            scroll((int) event.object);
+        }
+    }
+
+    public void scroll(int offsetY){
+        if (offsetY > 0 && btn_scroll_top.getVisibility() != View.INVISIBLE && !viewAnimatorHelper.isAnimating()){
+            viewAnimatorHelper.hideFloatActionButton();
+        }else if (offsetY < 0 && btn_scroll_top.getVisibility() != View.VISIBLE){
+            viewAnimatorHelper.showFloatActionButton();
+        }
+    }
+
+    @Override
+    protected String registerEvent() {
+        return Const.EVENT_ACTION.MAIN;
+    }
+
 }

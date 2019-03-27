@@ -10,7 +10,7 @@ import com.kdp.wanandroidclient.ui.core.view.IListDataView;
  */
 public interface ChapterContract {
 
-    interface ChaptersPresenter {
+    interface IChaptersPresenter {
         void getChapters();
     }
 

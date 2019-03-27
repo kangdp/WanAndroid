@@ -1,4 +1,5 @@
-package com.kdp.wanandroidclient.ui.project;
+package com.kdp.wanandroidclient.ui.chapter;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,10 +10,10 @@ import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.common.Const;
 import com.kdp.wanandroidclient.event.Event;
 import com.kdp.wanandroidclient.event.RxEvent;
-import com.kdp.wanandroidclient.inter.OnProjectListItemClickListener;
+import com.kdp.wanandroidclient.inter.OnArticleListItemClickListener;
 import com.kdp.wanandroidclient.manager.UserInfoManager;
+import com.kdp.wanandroidclient.ui.adapter.ArticleListAdapter;
 import com.kdp.wanandroidclient.ui.adapter.BaseListAdapter;
-import com.kdp.wanandroidclient.ui.adapter.ProjectListAdapter;
 import com.kdp.wanandroidclient.ui.base.BaseAbListFragment;
 import com.kdp.wanandroidclient.ui.web.WebViewActivity;
 import com.kdp.wanandroidclient.utils.IntentUtils;
@@ -20,12 +21,19 @@ import com.kdp.wanandroidclient.utils.ToastUtils;
 
 import java.util.List;
 
-public class ProjectListFragment extends BaseAbListFragment<ProjectPresenter, Article> implements ProjectContract.IProjectView,OnProjectListItemClickListener {
+/***
+ * @author kdp
+ * @date 2019/3/27 9:45
+ * @description
+ */
+public class ChapterListFragment extends BaseAbListFragment<ChapterListPresenter,Article> implements ChapterListContract.IChapterListView,OnArticleListItemClickListener {
+
+    private int cid;//公众号id
     private int id;//文章id
     private int position;
-    private int cid;//分类id
-    public static ProjectListFragment instantiate(int cid){
-        ProjectListFragment instance = new ProjectListFragment();
+
+    public static ChapterListFragment instantiate(int cid){
+        ChapterListFragment instance = new ChapterListFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(Const.BUNDLE_KEY.ID,cid);
         instance.setArguments(bundle);
@@ -42,26 +50,33 @@ public class ProjectListFragment extends BaseAbListFragment<ProjectPresenter, Ar
         return true;
     }
 
-
     @Override
     protected void getBundle(Bundle bundle) {
-        cid = bundle.getInt(Const.BUNDLE_KEY.ID);
+        if (bundle !=null){
+            cid = bundle.getInt(Const.BUNDLE_KEY.ID,0);
+        }
     }
 
     @Override
     protected void loadDatas() {
-        mPresenter.getProjectList();
+        mPresenter.getChapterList();
     }
 
     @Override
     protected BaseListAdapter<Article> getListAdapter() {
-        return new ProjectListAdapter(this);
+        return new ArticleListAdapter(this,Const.LIST_TYPE.CHAPTER);
     }
 
     @Override
-    protected ProjectPresenter createPresenter() {
-        return new ProjectPresenter();
+    protected ChapterListPresenter createPresenter() {
+        return new ChapterListPresenter();
     }
+
+    @Override
+    public void setData(List<Article> data) {
+        mListData.addAll(data);
+    }
+
 
     @Override
     public int getCid() {
@@ -75,7 +90,7 @@ public class ProjectListFragment extends BaseAbListFragment<ProjectPresenter, Ar
 
     @Override
     public void collect(boolean isCollect, String result) {
-        notifyItemData(isCollect, result);
+        notifyItemData(isCollect,result);
     }
 
     private void notifyItemData(boolean isCollect, String result) {
@@ -84,14 +99,9 @@ public class ProjectListFragment extends BaseAbListFragment<ProjectPresenter, Ar
         ToastUtils.showToast(getActivity(), result);
     }
 
-    @Override
-    public void setData(List<Article> data) {
-        mListData.addAll(data);
-    }
 
     @Override
-    public int getFirstPage() {
-        return 1;
+    public void onDeleteCollectClick(int position, int id, int originId) {
     }
 
     @Override
@@ -104,7 +114,6 @@ public class ProjectListFragment extends BaseAbListFragment<ProjectPresenter, Ar
             mPresenter.unCollectArticle();
         else
             mPresenter.collectArticle();
-
     }
 
     @Override
@@ -112,11 +121,10 @@ public class ProjectListFragment extends BaseAbListFragment<ProjectPresenter, Ar
         Intent intent = new Intent(getActivity(), WebViewActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(Const.BUNDLE_KEY.OBJ, bean);
-        bundle.putString(Const.BUNDLE_KEY.TYPE, Const.EVENT_ACTION.PROJECT_LIST);
+        bundle.putString(Const.BUNDLE_KEY.TYPE, Const.EVENT_ACTION.CHAPTER_LIST);
         intent.putExtras(bundle);
         startActivity(intent);
     }
-
 
     @Override
     protected void receiveEvent(Object object) {
@@ -131,17 +139,16 @@ public class ProjectListFragment extends BaseAbListFragment<ProjectPresenter, Ar
             }
         }else if (mEvent.type == Event.Type.SCROLL_TOP && (int)mEvent.object == cid){
             mRecyclerView.smoothScrollToPosition(0);
-        }else if (mEvent.type == Event.Type.REFRESH_LIST){
+        }
+        else if (mEvent.type == Event.Type.REFRESH_LIST){
             refreshData();
         }
     }
 
-
     @Override
     protected String registerEvent() {
-        return Const.EVENT_ACTION.PROJECT_LIST;
+        return Const.EVENT_ACTION.CHAPTER_LIST;
     }
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

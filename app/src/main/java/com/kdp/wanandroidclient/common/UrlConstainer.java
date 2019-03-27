@@ -82,6 +82,11 @@ public class UrlConstainer {
     public static final String CHAPTERS = "wxarticle/chapters/json";
 
     /**
+     * 公众号文章列表
+     */
+    public static final String CHAPTER_LIST = "wxarticle/list/{id}/{page}/json";
+
+    /**
      * 项目分类
      */
     public static final String PROJECT_CATE = "project/tree/json";
