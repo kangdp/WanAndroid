@@ -8,7 +8,7 @@
 
 Apk
 ----
-[1.0.4](https://github.com/kangdongpu/WanAndroid/raw/master/release/app-release.apk)
+[1.1](https://github.com/kangdongpu/WanAndroid/raw/master/release/app-release.apk)
 
 接口
 ----
@@ -30,6 +30,8 @@ Apk
 
 版本迭代
 -------
+### V1.1
+- 添加公众号、项目
 ### V1.0.4
 - 更新请求的BaseUrl为https
 ### V1.0.3
