@@ -267,7 +267,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             if (!fragments[index].isAdded()) {
                 ft.add(R.id.container, fragments[index]);
             }
-            ft.show(fragments[index]).commitAllowingStateLoss();
+            ft.show(fragments[index]).commit();
             btns[currentPosition].setSelected(false);
             btns[index].setSelected(true);
             scaleView();
