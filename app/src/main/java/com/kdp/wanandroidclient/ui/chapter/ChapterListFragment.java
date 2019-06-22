@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-
 import com.kdp.wanandroidclient.R;
 import com.kdp.wanandroidclient.bean.Article;
 import com.kdp.wanandroidclient.common.Const;
@@ -77,6 +76,10 @@ public class ChapterListFragment extends BaseAbListFragment<ChapterListPresenter
         mListData.addAll(data);
     }
 
+    @Override
+    public int getFirstPage() {
+        return 1;
+    }
 
     @Override
     public int getCid() {
