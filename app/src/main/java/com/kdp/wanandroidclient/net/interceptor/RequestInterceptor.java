@@ -23,6 +23,8 @@ public class RequestInterceptor implements Interceptor {
         //无网络时从缓存中获取
         if (!NetworkUtils.isAvailable(AppContext.getContext())) {
             //无网络时,设置超时为30天
+            //max-stale:指示客户机可以接收超出max-age时间的响应消息
+            // 在请求设置中有效，在响应设置中无效
             int maxStale = 30 * 24 * 60 * 60;
             request = request.newBuilder()
                     .cacheControl(CacheControl.FORCE_CACHE)

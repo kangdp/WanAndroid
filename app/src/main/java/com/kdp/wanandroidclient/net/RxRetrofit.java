@@ -35,14 +35,14 @@ public class RxRetrofit {
                 .connectTimeout(10, TimeUnit.SECONDS)
                 //读取超时
                 .readTimeout(10, TimeUnit.SECONDS)
-                //缓存
+                //配置缓存
                 .cache(new Cache(context.getExternalFilesDir("http_cache"), 10 << 20))
                 //添加Cookie拦截器
                 .addInterceptor(new SaveCookieInterceptor())
                 .addInterceptor(new LoadCookieInterceptor())
                 //添加缓存拦截器
-                .addInterceptor(new RequestInterceptor())//无网
-                .addNetworkInterceptor(new CacheInterceptor())//有网
+                .addInterceptor(new RequestInterceptor())
+                .addNetworkInterceptor(new CacheInterceptor())
                 .build();
 
         retrofit = new Retrofit.Builder()
