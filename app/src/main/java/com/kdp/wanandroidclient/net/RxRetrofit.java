@@ -35,7 +35,7 @@ public class RxRetrofit {
                 .connectTimeout(10, TimeUnit.SECONDS)
                 //读取超时
                 .readTimeout(10, TimeUnit.SECONDS)
-                //配置缓存
+                //配置缓存,okhttp会自动缓存数据到本地
                 .cache(new Cache(context.getExternalFilesDir("http_cache"), 10 << 20))
                 //添加Cookie拦截器
                 .addInterceptor(new SaveCookieInterceptor())

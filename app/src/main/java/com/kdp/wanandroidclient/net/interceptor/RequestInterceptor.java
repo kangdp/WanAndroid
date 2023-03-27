@@ -4,6 +4,7 @@ import com.kdp.wanandroidclient.application.AppContext;
 import com.kdp.wanandroidclient.utils.NetworkUtils;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
@@ -11,7 +12,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * 设置请求策略
+ * 无网时仅从缓存中获取(缓存时间为Integer.MAX_VALUE秒)
  * author: 康栋普
  * date: 2018/5/24
  */
@@ -22,14 +23,17 @@ public class RequestInterceptor implements Interceptor {
         Request request = chain.request();
         //无网络时从缓存中获取
         if (!NetworkUtils.isAvailable(AppContext.getContext())) {
-            //无网络时,设置超时为30天
-            //max-stale:指示客户机可以接收超出max-age时间的响应消息
-            // 在请求设置中有效，在响应设置中无效
-            int maxStale = 30 * 24 * 60 * 60;
+            //max-stale:指示客户机可以接收超出max-age时间的响应消息,若respond中没有设置max-age,相当于max-age=0
+            //请求的缓存过期时间: max-stale+max-age(response中)
+            //在请求设置中有效，在响应设置中无效
+
+//            CacheControl cacheControl = new CacheControl.Builder()
+//                    .onlyIfCached()
+//                    .maxStale(60*60,TimeUnit.SECONDS)
+//                    .build();
             request = request.newBuilder()
                     .cacheControl(CacheControl.FORCE_CACHE)
-                    .removeHeader("Pragma")
-                    .header("Cache-Control", "only-if-cached,max-stale=" + maxStale)
+//                    .cacheControl(cacheControl)
                     .build();
         }
         return chain.proceed(request);
